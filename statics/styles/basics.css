@@ -1,3 +1,51 @@
-body {
-  /* -ms-text-combine-horizontal: ; */
+/*=FUENTES
+---------------------------------------------*/
+
+@font-face {
+  font-family: "LGeorge";
+  src: url("../fonts/Louis George Cafe.ttf");
+}
+
+@font-face {
+  font-family:"LGeorgeB";
+  src: url("../fonts/Louis George Cafe Bold.ttf");
+}
+
+@font-face {
+  font-family: "LGeorgeI";
+  src: url("../fonts/Louis George Cafe Italic.ttf");
+}
+
+@font-face {
+  font-family: "Ruf";
+  src: url("../fonts/Rufina-Regular.ttf");
+}
+
+@font-face {
+  font-family: "RufB";
+  src: url("../fonts/Rufina-Bold.ttf");
+}
+
+/*=COLORES
+---------------------------------------------*/
+:root{
+  --azul1: #011E45;
+  --azul2: #024296;
+  --azul3: #0256C4;
+  --azul4: #2F7BDE;
+  --gris1: #1E314A;
+}
+
+/*=CUERPO STANDARD
+---------------------------------------------*/
+body{
+  margin: 0;
+}
+
+h1{
+  font-family:"LGeorge";
+}
+
+h2{
+  font-family:"LGeorge";
 }
