@@ -1,3 +1,84 @@
-body {
-  /* -ms-text-combine-horizontal: ; */
+/*=FUENTES
+---------------------------------------------*/
+
+@font-face {
+  font-family: "LGeorge";
+  src: url("../fonts/Louis George Cafe.ttf");
+}
+
+@font-face {
+  font-family:"LGeorgeB";
+  src: url("../fonts/Louis George Cafe Bold.ttf");
+}
+
+@font-face {
+  font-family: "LGeorgeI";
+  src: url("../fonts/Louis George Cafe Italic.ttf");
+}
+
+@font-face {
+  font-family: "Ruf";
+  src: url("../fonts/Rufina-Regular.ttf");
+}
+
+@font-face {
+  font-family: "RufB";
+  src: url("../fonts/Rufina-Bold.ttf");
+}
+
+/*=COLORES
+---------------------------------------------*/
+:root{
+  --azul1: #011E45;
+  --azul2: #024296;
+  --azul3: #0256C4;
+  --azul4: #2F7BDE;
+  --gris1: #1E314A;
+}
+
+/*=CUERPO STANDARD
+---------------------------------------------*/
+body{
+  margin: 0;
+}
+
+h1{
+  font-family:"Ruf";
+}
+
+h2{
+  font-family:"Ruf";
+}
+
+/*=NAVBAR
+------------------------------------*/
+#navbar,.container-fluid{
+  background-color: var(--azul1);
+  padding: 0px;
+  
+}
+#navLogo{
+  width: 68px;
+  height: 68px;
+}
+
+.nav-item>a{
+  padding-right: 0px;
+  padding-bottom: 0px;
+  margin-right: 0px;
+}
+/*=FOOTER
+------------------------------------*/
+
+footer{
+  bottom: 0;
+  width: 100%;
+  height: 43px;
+  text-align: center;
+  font-family: "lGeorge";
+  font-size: 30px;
+
+  background-color: var(--azul1);
+  color: white;
+  position: fixed;
 }

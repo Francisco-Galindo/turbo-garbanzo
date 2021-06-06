@@ -1,0 +1,105 @@
+a{
+    padding: 0px;
+}
+#nav{
+    height: 80px;
+    width: 100%;
+    background-color: var(--azul1);
+}
+#navTitulo{
+    font-size: 60px;
+    color: #dfdfdf;
+    text-align: center;
+    padding-top: 0px;
+}
+#container{
+    display: grid;
+    height: 450px;
+    grid-template-columns:  15% 30% 40% 15%;
+    grid-template-rows:    50% 50% ;
+}
+#text1{
+    grid-column-start: 3;
+    grid-column-end: 3;
+    grid-row-start:1;
+    grid-row-end:1;
+
+    text-align: center;
+    align-self: center;
+
+    font-family:"RufB";
+}
+#text2{
+    grid-column-start: 3;
+    grid-column-end: 3;
+    grid-row-start:2;
+    grid-row-end:2;
+
+
+    text-align: center;
+
+    font-family:"LGeorge";
+}
+#text3{
+    padding-top: 2%;
+    text-align: center;
+    font-family:"LGeorgeI";
+}
+#iniLogo{
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start:1;
+    justify-self: center;
+
+}
+#firstLogo{
+    width: 450px;
+    height: 450px;
+}
+#container2{
+    display: grid;
+    height: 100%;
+    grid-template-columns:  45% 10% 45%;
+    grid-template-rows:    45% 55% ;
+}
+
+#textSes{
+    font-family:"LGeorge";
+    font-size: 60px;
+    padding-top: 25px;
+    text-align: center;
+    color: #dfdfdf;
+
+}
+
+#textCue{
+    font-family:"LGeorge";
+    font-size: 60px;
+    padding-top: 25px;
+    text-align: center;
+    color: #dfdfdf;
+}
+
+#iniSes{
+    grid-column-start: 1;
+    grid-row-start:2;
+
+    background-color: var(--azul2);
+    width: 525px;
+    height: 130px;
+    cursor: pointer;
+    border-radius: 12.25px;
+    justify-self: right;
+}
+#iniCue{
+
+    grid-column-start: 3;
+    grid-row-start:2;
+
+    background-color: #216500;
+    width: 525px;
+    height: 130px;
+    cursor: pointer;
+    border-radius: 12.25px;
+    justify-self: left;
+}

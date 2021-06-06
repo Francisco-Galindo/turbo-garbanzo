@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Asesoría</title>
+</head>
+<body>
+    <h1>Nueva Asesoría</h1>
+    <label for="date">Fecha: </label><br>
+        <input type="date" name="date" required>
+        <br><br>
+        <label for="hora">Horario:</label><br>
+        <input type="time" name="hora" required>
+        <br><br>
+        <label for="duracion">Duración: </label><br>
+        <input type="number" name="duracion" placeholder="Minutos" min="50" max=100> 
+        <br><br>
+        <label for="tema">Tema:</label><br>
+        <input type="text" name="tema" required>
+        <br><br>
+        <label for="materia">Materia:</label><br>
+        <input type="text" name="materia" required>
+        <br><br>
+        <label for="medio">Medio:</label><br>
+        <select name="medio"> 
+            <option value="true">Presencial</option>
+            <option value="false">Virtual</option>
+        </select>
+        <br><br>
+        <label for="lugar">Lugar: </label><br>
+        <input type="text" name="lugar" required placeholder="Lugar o  link"> 
+        <br><br>
+        <button type="submit">Crear Asesoría</button>
+</body>
+</html>
