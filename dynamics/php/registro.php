@@ -1,45 +1,44 @@
 <?php
 
-require_once 'config.php';
-require_once 'cripto.php';
+require 'config.php';
+require 'cripto.php';
 
+$_POST['num_cuenta'] = '320054336';
 $_POST['contrasena'] = 'popo';
 $contrasena = isset($_POST['contrasena']) && $_POST['contrasena'] != '' ?
 	$_POST['contrasena'] : null;
 	
-$_POST['num_cuenta'] = '320054336';
+
 $num_cuenta = floatval($_POST['num_cuenta']) === (float)0 ?
 	null : floatval($_POST['num_cuenta']);
 
 
 
-echo $num_cuenta;
-echo '<br>';
+
 echo $contrasena;
 echo '<br>';
-$pimienta = pimienta();
-$sal = sal();
+$pimienta = obtener_pimienta();
+$sal = obtener_sal();
 $hash = hash('sha256', $contrasena . $pimienta . $sal);
+echo $hash;
+echo '<br>';
 
+echo $num_cuenta;
+echo '<br>';
+$num_cuenta_cifrado = cifrar_cadena($num_cuenta, $contrasena);
+echo $num_cuenta_cifrado;
+echo '<br>';
+echo strlen($num_cuenta_cifrado);
+echo '<br>';
 
-// $intento = 'popo';
-// echo $intento;
-// echo '<br>';
-
-// if (verificar_contrasena_sha256($intento, $sal, $hash)) {
-// 	echo 'Correcto';
-// } else {
-// 	echo "Incorrecto";
-// }
-// echo '<br>';
 
 $conexion = conectar_base();
-$consulta = 'SELECT * FROM materia;';
-$resultado = mysqli_query($conexion, $consulta);
-while ($row = mysqli_fetch_array($resultado)) {
-	echo $row['materia'];
-	echo '<br>';
-}
+// $consulta = 'SELECT * FROM materia;';
+// $resultado = mysqli_query($conexion, $consulta);
+// while ($row = mysqli_fetch_array($resultado)) {
+// 	echo $row['materia'];
+// 	echo '<br>';
+// }
 mysqli_close($conexion);
 
 // EOF

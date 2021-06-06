@@ -236,20 +236,21 @@ DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario` (
-  `id_usuario` bigint(20) NOT NULL,
+  `id_usuario` bigint(20) NOT NULL AUTO_INCREMENT,
   `contrasena` varchar(64) NOT NULL,
   `sal` varchar(23) NOT NULL,
+  `num_cuenta` bigint(20) NOT NULL,
+  `correo` varchar(64) NOT NULL,
+  `grado` enum('cuarto','quinto','sexto') DEFAULT NULL,
   `telefono` varchar(64) NOT NULL,
   `nombre` varchar(32) NOT NULL,
   `prim_ape` varchar(32) NOT NULL,
   `seg_ape` varchar(32) NOT NULL,
   `fecha_nacimiento` date NOT NULL,
+  `foto` text NOT NULL DEFAULT '../../statics/perfiles/foto-perfil.jpg',
   `num_faltas` tinyint(4) NOT NULL DEFAULT 0,
   `es_admin` tinyint(1) NOT NULL DEFAULT 0,
-  `foto` text NOT NULL DEFAULT '../../statics/perfiles/foto-perfil.jpg',
-  `num_cuenta` bigint(20) NOT NULL,
-  `correo` varchar(64) NOT NULL,
-  `grado` enum('cuarto','quinto','sexto') DEFAULT NULL,
+
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `num_cuenta` (`num_cuenta`),
   UNIQUE KEY `correo` (`correo`)
