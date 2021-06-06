@@ -1,7 +1,7 @@
 <?php
-    include('config.php');
-    $conexion = connectdb();
-    $perfil = (isset($_POST['usuario']) && ($_POST['usuario']!=="")?$_POST['usuario']:"No hay usuario";
+    require_once 'config.php';
+    $conexion = conectar_base();
+    $perfil = (isset($_POST['usuario']) && $_POST['usuario']!=="")?$_POST['usuario']:"No hay usuario";
     if($perfil !== "No hay usuario"){
         $consulta = 'SELECT (nombre, prim_ape, seg_ape, fecha nacimiento, es_admin) FROM usuario WHERE nombre='.$perfil;
         $res = mysqli_query($conexion, $consulta);
