@@ -239,8 +239,6 @@ CREATE TABLE `usuario` (
   `id_usuario` bigint(20) NOT NULL,
   `contrasena` varchar(64) NOT NULL,
   `sal` varchar(23) NOT NULL,
-  `num_cuenta` bigint(20) NOT NULL,
-  `correo` varchar(64) NOT NULL,
   `telefono` varchar(64) NOT NULL,
   `nombre` varchar(32) NOT NULL,
   `prim_ape` varchar(32) NOT NULL,
@@ -249,6 +247,9 @@ CREATE TABLE `usuario` (
   `num_faltas` tinyint(4) NOT NULL DEFAULT 0,
   `es_admin` tinyint(1) NOT NULL DEFAULT 0,
   `foto` text NOT NULL DEFAULT '../../statics/perfiles/foto-perfil.jpg',
+  `num_cuenta` bigint(20) NOT NULL,
+  `correo` varchar(64) NOT NULL,
+  `grado` enum('cuarto','quinto','sexto') DEFAULT NULL,
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `num_cuenta` (`num_cuenta`),
   UNIQUE KEY `correo` (`correo`)
@@ -337,4 +338,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-06  0:43:27
+-- Dump completed on 2021-06-06  1:20:29
