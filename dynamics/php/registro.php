@@ -18,39 +18,28 @@ echo '<br>';
 echo $contrasena;
 echo '<br>';
 $pimienta = pimienta();
-echo $pimienta;
-echo '<br>';
 $sal = sal();
-echo $sal;
-echo '<br>';
-
-echo $contrasena . $pimienta . $sal;
-echo '<br>';
-
 $hash = hash('sha256', $contrasena . $pimienta . $sal);
 
-echo $hash;
-echo '<br>';
-echo strlen($hash);
-echo '<br>';
 
-$intento = 'popo';
-echo $intento;
-echo '<br>';
-if (verificar_contrasena_sha256($intento, $sal, $hash)) {
-	echo 'Correcto';
-} else {
-	echo "Incorrecto";
-}
-echo '<br>';
+// $intento = 'popo';
+// echo $intento;
+// echo '<br>';
+
+// if (verificar_contrasena_sha256($intento, $sal, $hash)) {
+// 	echo 'Correcto';
+// } else {
+// 	echo "Incorrecto";
+// }
+// echo '<br>';
 
 $conexion = conectar_base();
-// $consulta = 'SELECT * FROM materia;';
-// $resultado = mysqli_query($conexion, $consulta);
-// while ($row = mysqli_fetch_array($resultado)) {
-// 	echo $row['materia'];
-// 	echo '<br>';
-// }
+$consulta = 'SELECT * FROM materia;';
+$resultado = mysqli_query($conexion, $consulta);
+while ($row = mysqli_fetch_array($resultado)) {
+	echo $row['materia'];
+	echo '<br>';
+}
 mysqli_close($conexion);
 
 // EOF
