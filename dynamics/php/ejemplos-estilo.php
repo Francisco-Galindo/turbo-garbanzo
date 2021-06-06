@@ -58,4 +58,3 @@ switch ($expr) {
 }
 
 // EOF // Este comentario va al final del archivo, después un enter, no se cierra la etiqueda PHP
- 
