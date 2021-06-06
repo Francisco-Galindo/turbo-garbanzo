@@ -43,9 +43,27 @@ body{
 }
 
 h1{
-  font-family:"LGeorge";
+  font-family:"Ruf";
 }
 
 h2{
-  font-family:"LGeorge";
+  font-family:"Ruf";
+}
+
+/*=NAVBAR
+------------------------------------*/
+#navbar,.container-fluid{
+  background-color: var(--azul1);
+  padding: 0px;
+  
+}
+#navLogo{
+  width: 68px;
+  height: 68px;
+}
+
+.nav-item>a{
+  padding-right: 0px;
+  padding-bottom: 0px;
+  margin-right: 0px;
 }
