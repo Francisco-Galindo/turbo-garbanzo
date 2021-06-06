@@ -2,8 +2,9 @@
 
 $todo = 'abcdefghijklm';
 
-function sal() {
-    return uniqid('', true);
+function sal()
+{
+	return uniqid('', true);
 }
 
 // EOF

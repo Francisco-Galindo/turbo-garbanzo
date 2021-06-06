@@ -19,8 +19,8 @@ $conexion = conectar_base();
 $consulta = 'SELECT * FROM materia;';
 $resultado = mysqli_query($conexion, $consulta);
 while ($row = mysqli_fetch_array($resultado)) {
-    echo $row['materia'];
-    echo '<br>';
+	echo $row['materia'];
+	echo '<br>';
 }
 
 // EOF
