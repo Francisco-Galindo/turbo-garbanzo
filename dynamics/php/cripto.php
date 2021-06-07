@@ -2,8 +2,7 @@
 
 define("HASH", "sha256");
 define("METODO", "aes-128-cbc");
-define("IV_LENGTH", $iv_len = openssl_cipher_iv_length(METODO));
-define("IV", $iv = openssl_random_pseudo_bytes($iv_len));
+define("IV_LENGTH", openssl_cipher_iv_length(METODO));
 
 function obtener_sal()
 {
@@ -34,25 +33,29 @@ function verificar_contrasena_sha256($contrasena, $sal, $hash)
 
 function cifrar_cadena($cadena, $llave)
 {
+	$iv = openssl_random_pseudo_bytes(IV_LENGTH);
 	$cifrado = openssl_encrypt(
 		$cadena,
 		METODO,
 		$llave,
-		OPENSSL_RAW_DATA,
-		IV
+		0,
+		$iv
 	);
-
-	return $cifrado;
+	return base64_encode($cifrado . '::' . $iv);
 }
 
 function descifrar_cadena($cadena, $llave)
 {
+	$componentes = explode('::', base64_decode($cadena));
+	$cifrado = $componentes[0];
+	$iv = $componentes[1]; 
+
 	$descifrado = openssl_decrypt(
-		$cadena,
+		$cifrado,
 		METODO,
 		$llave,
-		OPENSSL_RAW_DATA,
-		IV
+		0,
+		$iv
 	);
 
 	return $descifrado;
