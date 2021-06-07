@@ -79,9 +79,8 @@ if ($error[0] === false) {
 
 	$consulta = "SELECT * FROM usuario WHERE correo='$correo';";
 	$resultado = mysqli_query($conexion, $consulta);
-	$row = mysqli_fetch_array($resultado);
 
-	if (!$row) {
+	if (!$resultado) {
 		$pimienta = obtener_pimienta();
 		$sal = obtener_sal();
 		$hash = hash('sha256', $contrasena . $pimienta . $sal);
