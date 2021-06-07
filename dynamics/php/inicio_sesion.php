@@ -42,7 +42,7 @@ if ($error[0] === false) {
 		$error[0] = true;
 		array_push($error, 'No existe tal usuario');
 	} else {
-		$row = mysqli_fetch_array($resultado);
+		$row = mysqli_fetch_assoc($resultado);
 		$hash_bd = $row['contrasena'];
 		$sal = $row['sal'];
 
@@ -56,6 +56,8 @@ if ($error[0] === false) {
 			array_push($error, 'Contraseña incorrecta');
 		}
 	}
+
+	mysqli_close($conexion);
 }
 
 // Enviando la respuesta
