@@ -4,7 +4,7 @@ require 'config.php';
 require 'seguridad_y_cripto.php';
 
 $_POST['num_cuenta'] = '320054336';
-$_POST['contrasena'] = 'popol';
+$_POST['contrasena'] = 'popo';
 
 $conexion = conectar_base();
 // Purgando el arreglo $_POST de posibles ataques

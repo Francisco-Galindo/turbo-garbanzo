@@ -6,7 +6,12 @@ define('DBHOST', 'localhost');
 define('PASSWORD', '');
 define('DB', 'asesorias_p6');
 
-//Funcion para conectar con base de datos
+/**
+ * Realiza la conexión con la base de datos del proyecto.
+ * Trata de conectarse con el usuario creado específicamente para el proyecto.
+ * En caso de no existir, lo creará automáticamente.
+ * Devuelve la conexión.
+ */
 function conectar_base()
 {
 	//Conección con base de datos
