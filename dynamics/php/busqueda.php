@@ -1,6 +1,6 @@
 <?php
     include('config.php');
-    $conexion = connectdb();
+    $conexion = conectar_base();
     date_default_timezone_set("America/Mexico_City");
 |   $busqueda = (isset($_POST['busqueda']) && ($_POST['busqueda']!=="")?$_POST['busqueda']:"No hay búsqueda";
     if($busqueda !== "No hay búsqueda"){
