@@ -76,32 +76,31 @@ if (time() - strtotime($_POST['fecha_nacimiento']) < 0) {
 }
 
 if ($error[0] === false) {
-	$pimienta = obtener_pimienta();
-	$sal = obtener_sal();
-	$hash = hash('sha256', $contrasena . $pimienta . $sal);
-	
-	
-	$num_cuenta_cifrado = cifrar_cadena($num_cuenta, $contrasena);
-	$telefono_cifrado = cifrar_cadena($telefono, $contrasena);
-	
-	
-	$consulta = "INSERT INTO usuario 
-		(contrasena, sal, num_cuenta, correo, grado, telefono, nombre, prim_ape, seg_ape, fecha_nacimiento) VALUES ('$hash', '$sal', '$num_cuenta_cifrado', '$correo', 
-		'$grado', '$telefono_cifrado', '$nombre', '$prim_ape', '$seg_ape', '$fecha_nacimiento');";
-	
-	$resultado = mysqli_query($conexion, $consulta);
-	if ($resultado === false) {
-		echo 'Muerte';
-		echo '<br>';
-	}
-	
+
 	$consulta = "SELECT * FROM usuario WHERE correo='$correo';";
 	$resultado = mysqli_query($conexion, $consulta);
 	$row = mysqli_fetch_array($resultado);
-	
-	echo 'WTF2: ' . descifrar_cadena($row['num_cuenta'], $contrasena) . '<br>';
-	echo 'WTF3: ' . descifrar_cadena($row['telefono'], $contrasena) . '<br>';
-	
+
+	if (!$row) {
+		$pimienta = obtener_pimienta();
+		$sal = obtener_sal();
+		$hash = hash('sha256', $contrasena . $pimienta . $sal);
+		
+		
+		$num_cuenta_cifrado = cifrar_cadena($num_cuenta, $contrasena);
+		$telefono_cifrado = cifrar_cadena($telefono, $contrasena);
+		
+		
+		$consulta = "INSERT INTO usuario 
+			(contrasena, sal, num_cuenta, correo, grado, telefono, nombre, prim_ape, seg_ape, fecha_nacimiento) VALUES ('$hash', '$sal', '$num_cuenta_cifrado', '$correo', 
+			'$grado', '$telefono_cifrado', '$nombre', '$prim_ape', '$seg_ape', '$fecha_nacimiento');";
+		
+		$resultado = mysqli_query($conexion, $consulta);
+		if ($resultado === false) {
+			echo 'Muerte';
+			echo '<br>';
+		}
+	}
 }
 
 mysqli_close($conexion);
