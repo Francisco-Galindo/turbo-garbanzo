@@ -1,0 +1,45 @@
+.dato{
+    font-size: 19px;
+    font-family:"LGeorge";
+    background-color: rgba(0, 183, 255, 0.205);
+}
+#uno{
+    width: 100%;
+    background-color: var(--azul1);
+    text-align: center;
+    color: var(--textwhite);
+    margin-top: 0%;
+}
+h1{
+    margin-top: 0%;
+    text-align: center;
+    display: inline-block;
+}
+
+input, select{
+    background-color: var(--azul2);
+    color: var(--textwhite);
+}
+.container{
+    display:flex;
+    flex-direction: row;
+}
+#col1, #col2{
+    display:flex;
+    flex-direction: row;
+
+    
+}
+.label{
+    display:flex;
+    flex-direction: column;
+     
+}
+.inputs{
+    margin-top: 5px;
+}
+#asesoria{
+    width: 150px;
+    background-color: var(--azul1);
+    color: var(--textwhite);
+}

@@ -34,12 +34,15 @@
   --azul3: #0256C4;
   --azul4: #2F7BDE;
   --gris1: #1E314A;
+  --textwhite: #dfdfdf;
 }
 
 /*=CUERPO STANDARD
 ---------------------------------------------*/
 body{
   margin: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 h1{
