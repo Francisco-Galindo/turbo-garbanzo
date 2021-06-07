@@ -80,12 +80,12 @@ if ($error[0] === false) {
 	$consulta = "SELECT * FROM usuario WHERE correo='$correo';";
 	$resultado = mysqli_query($conexion, $consulta);
 
-	if (!$resultado) {
+	if (mysqli_num_rows($resultado) === 0) {
+		
 		$pimienta = obtener_pimienta();
 		$sal = obtener_sal();
 		$hash = hash('sha256', $contrasena . $pimienta . $sal);
-		
-		
+				
 		$num_cuenta_cifrado = cifrar_cadena($num_cuenta, $contrasena);
 		$telefono_cifrado = cifrar_cadena($telefono, $contrasena);
 		
