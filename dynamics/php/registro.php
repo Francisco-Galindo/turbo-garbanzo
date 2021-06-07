@@ -1,7 +1,7 @@
 <?php
 
 require 'config.php';
-require 'cripto.php';
+require 'seguridad_y_cripto.php';
 
 $_POST['num_cuenta'] = '320054336';
 $_POST['contrasena'] = 'popo';
@@ -14,16 +14,9 @@ $_POST['seg_ape'] = 'Mena';
 $_POST['fecha_nacimiento'] = '2004-09-01';
 $error = [false];
 
-// Limpiando valores
-foreach($_POST as $elemento) {
-	$elemento = htmlspecialchars($elemento);
-}
-
 $conexion = conectar_base();
 
-foreach($_POST as $elemento) {
-	$elemento = mysqli_real_escape_string($conexion, $elemento);
-}
+$_POST = purgar_arreglo($_POST, $conexion);
 
 // Recibiendo datos
 $contrasena = isset($_POST['contrasena']) && $_POST['contrasena'] != '' ?

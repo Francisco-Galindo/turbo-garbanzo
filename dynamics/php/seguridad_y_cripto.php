@@ -14,6 +14,7 @@ function obtener_pimienta()
 	$todo = str_split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()');
 
 	$caracteres = array_rand($todo, 2);
+
 	return $todo[$caracteres[0]] . $todo[$caracteres[1]];
 }
 
@@ -28,6 +29,7 @@ function verificar_contrasena_sha256($contrasena, $sal, $hash)
 			}
 		}
 	}
+
 	return false;
 }
 
@@ -41,6 +43,7 @@ function cifrar_cadena($cadena, $llave)
 		0,
 		$iv
 	);
+
 	return base64_encode($cifrado . '::' . $iv);
 }
 
@@ -48,7 +51,7 @@ function descifrar_cadena($cadena, $llave)
 {
 	$componentes = explode('::', base64_decode($cadena));
 	$cifrado = $componentes[0];
-	$iv = $componentes[1]; 
+	$iv = $componentes[1];
 
 	$descifrado = openssl_decrypt(
 		$cifrado,
@@ -59,6 +62,21 @@ function descifrar_cadena($cadena, $llave)
 	);
 
 	return $descifrado;
+}
+
+function purgar_arreglo($arreglo, $conexion)
+{
+	foreach ($arreglo  as $indice => $elemento) {
+
+		$elemento_purgado = htmlspecialchars($elemento);
+		$elemento_purgado = mysqli_real_escape_string(
+			$conexion,
+			$elemento_purgado);
+			
+		$arreglo[$indice] = $elemento_purgado;
+	}
+
+	return $arreglo;
 }
 
 // EOF
