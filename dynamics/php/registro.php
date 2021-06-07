@@ -6,7 +6,7 @@ require 'cripto.php';
 $_POST['num_cuenta'] = '320054336';
 $_POST['contrasena'] = 'popo';
 $_POST['correo'] = 'paqui10718@gmail.com';
-$_POST['grado'] = 'sexto';
+$_POST['grado'] = '6';
 $_POST['telefono'] = '5522442070';
 $_POST['nombre'] = 'Francisco';
 $_POST['prim_ape'] = 'Galindo';
@@ -14,6 +14,7 @@ $_POST['seg_ape'] = 'Mena';
 $_POST['fecha_nacimiento'] = '2004-09-01';
 $error = [false];
 
+// Limpiando valores
 foreach($_POST as $elemento) {
 	$elemento = htmlspecialchars($elemento);
 }
@@ -24,6 +25,7 @@ foreach($_POST as $elemento) {
 	$elemento = mysqli_real_escape_string($conexion, $elemento);
 }
 
+// Recibiendo datos
 $contrasena = isset($_POST['contrasena']) && $_POST['contrasena'] != '' ?
 	$_POST['contrasena'] : null;
 $num_cuenta = floatval($_POST['num_cuenta']) === (float)0 ?
@@ -54,18 +56,31 @@ if ($num_cuenta === null || strlen($num_cuenta) !== 9) {
 	array_push($error, 'Número de cuenta no válido');
 }
 
+// Regex para validar correo
 $regex = '/^[\w\.\-\ñ]{4,20}(\.([\w\.\-]))*@([\w\.\-]+)(\.[\w\.\-]+)/';
 if (!preg_match($regex, $correo)) {
 	$error[0] = true;
 	array_push($error, 'Correo no válido');
 }
-if (!in_array($_POST['grado'], array('cuarto', 'quinto', 'sexto'))) {
+if (!in_array($_POST['grado'], array('4', '5', '6'))) {
 	$error[0] = true;
 	array_push($error, 'Grado no válido');
 }
-if ($_POST['telefono'] === null|| strlen($_POST['telefono']) !== 10 ) {
+if ($telefono === null|| strlen($telefono) !== 10 ) {
 	$error[0] = true;
 	array_push($error, 'Teléfono no válido');
+}
+if ($nombre === null|| strlen($nombre) > 32 ) {
+	$error[0] = true;
+	array_push($error, 'Nombre demasiado largo');
+}
+if ($prim_ape === null|| strlen($prim_ape) > 32 ) {
+	$error[0] = true;
+	array_push($error, 'Primer apellido demasiado largo');
+}
+if ($seg_ape === null|| strlen($seg_ape) > 32 ) {
+	$error[0] = true;
+	array_push($error, 'Segundo apellido largo');
 }
 if (time() - strtotime($_POST['fecha_nacimiento']) < 0) {
 	$error[0] = true;
@@ -86,32 +101,39 @@ if (isset($_FILES['imagen'])) {
 	unset($arch, $nombre, $ext);
 }
 
-$consulta = "SELECT * FROM usuario WHERE correo='$correo';";
+$id = hash("sha256", $num_cuenta);
+$consulta = "SELECT * FROM usuario WHERE id_usuario='$id' OR correo='$correo';";
 $resultado = mysqli_query($conexion, $consulta);
 if (mysqli_num_rows($resultado) !== 0) {
 	$error[0] = true;
-	array_push($error, 'Usuario existente con ese correo');
+	array_push($error, 'Usuario existente');
 }
 
 if ($error[0] === false) {
-		
+
 	$pimienta = obtener_pimienta();
 	$sal = obtener_sal();
-	$hash = hash('sha256', $contrasena . $pimienta . $sal);		
+	$hash = hash('sha256', $contrasena . $pimienta . $sal);
 	$num_cuenta_cifrado = cifrar_cadena($num_cuenta, $contrasena);
 	$telefono_cifrado = cifrar_cadena($telefono, $contrasena);
-	
+
 	if (isset($rutaImagen)) {
-		$consulta = "INSERT INTO usuario 
-			(contrasena, sal, num_cuenta, correo, grado, telefono, nombre, prim_ape, seg_ape, fecha_nacimiento, foto) VALUES ('$hash', '$sal', '$num_cuenta_cifrado', '$correo', 
-			'$grado', '$telefono_cifrado', '$nombre', '$prim_ape', '$seg_ape', '$fecha_nacimiento', '$rutaImagen');";
+		$consulta = "INSERT INTO usuario
+			(id_usuario, contrasena, sal, num_cuenta, correo, grado,
+			telefono, nombre, prim_ape, seg_ape, fecha_nacimiento, foto)
+			VALUES ('$id', '$hash', '$sal', '$num_cuenta_cifrado',
+			'$correo', '$grado', '$telefono_cifrado', '$nombre',
+			'$prim_ape', '$seg_ape', '$fecha_nacimiento', '$rutaImagen');";
 	} else {
-		$consulta = "INSERT INTO usuario 
-			(contrasena, sal, num_cuenta, correo, grado, telefono, nombre, prim_ape, seg_ape, fecha_nacimiento) VALUES ('$hash', '$sal', '$num_cuenta_cifrado', '$correo', 
-			'$grado', '$telefono_cifrado', '$nombre', '$prim_ape', '$seg_ape', '$fecha_nacimiento');";
+		$consulta = "INSERT INTO usuario
+			(id_usuario, contrasena, sal, num_cuenta, correo, grado,
+			telefono, nombre, prim_ape, seg_ape, fecha_nacimiento)
+			VALUES ('$id', '$hash', '$sal', '$num_cuenta_cifrado',
+			'$correo', '$grado', '$telefono_cifrado', '$nombre',
+			'$prim_ape', '$seg_ape', '$fecha_nacimiento');";
 	}
-	
-	
+
+
 	$resultado = mysqli_query($conexion, $consulta);
 	if ($resultado === false) {
 		$error[0] = true;
@@ -124,8 +146,8 @@ mysqli_close($conexion);
 if ($error[0] === false) {
 	echo 'Exito';
 } else {
-	foreach ($error as $indx => $cadena) {
-		echo $cadena;
+	for ($i = 1; $i < count($error); $i++) {
+		echo $error[$i];
 		echo '|';
 	}
 }
