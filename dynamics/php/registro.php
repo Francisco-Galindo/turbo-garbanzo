@@ -44,7 +44,7 @@ $fecha_nacimiento = isset($_POST['fecha_nacimiento']) && $_POST['fecha_nacimient
 	$_POST['fecha_nacimiento'] : null;
 
 
-
+// Validando los datos recibidos
 if ($contrasena === null) {
 	$error[0] = true;
 	array_push($error, 'Contraseña no válida');
@@ -59,54 +59,76 @@ if (!preg_match($regex, $correo)) {
 	$error[0] = true;
 	array_push($error, 'Correo no válido');
 }
-
 if (!in_array($_POST['grado'], array('cuarto', 'quinto', 'sexto'))) {
 	$error[0] = true;
 	array_push($error, 'Grado no válido');
 }
-
 if ($_POST['telefono'] === null|| strlen($_POST['telefono']) !== 10 ) {
 	$error[0] = true;
 	array_push($error, 'Teléfono no válido');
 }
-
 if (time() - strtotime($_POST['fecha_nacimiento']) < 0) {
 	$error[0] = true;
 	array_push($error, 'Fecha no válida');
 }
+if (isset($_FILES['imagen'])) {
+	$arch = $_FILES['imagen']['tmp_name'];
+	$nombre = $_FILES['imagen']['name'];
+	$ext = pathinfo($nombre, PATHINFO_EXTENSION);
+	if ($ext === 'png' || $ext === 'jpg' || $ext === 'jpeg') {
+		$nombreArchivo = $prim_ape . $seg_ape . $fecha_nacimiento;
+		$rutaImagen = '../../statics/perfiles/' . $nombreArchivo;
+		rename($arch, $rutaImagen);
+	} else {
+		$error[0] = true;
+		array_push($error, 'Archivo no válido');
+	}
+	unset($arch, $nombre, $ext);
+}
+
+$consulta = "SELECT * FROM usuario WHERE correo='$correo';";
+$resultado = mysqli_query($conexion, $consulta);
+if (mysqli_num_rows($resultado) !== 0) {
+	$error[0] = true;
+	array_push($error, 'Usuario existente con ese correo');
+}
 
 if ($error[0] === false) {
-
-	$consulta = "SELECT * FROM usuario WHERE correo='$correo';";
-	$resultado = mysqli_query($conexion, $consulta);
-
-	if (mysqli_num_rows($resultado) === 0) {
 		
-		$pimienta = obtener_pimienta();
-		$sal = obtener_sal();
-		$hash = hash('sha256', $contrasena . $pimienta . $sal);
-				
-		$num_cuenta_cifrado = cifrar_cadena($num_cuenta, $contrasena);
-		$telefono_cifrado = cifrar_cadena($telefono, $contrasena);
-		
-		
+	$pimienta = obtener_pimienta();
+	$sal = obtener_sal();
+	$hash = hash('sha256', $contrasena . $pimienta . $sal);		
+	$num_cuenta_cifrado = cifrar_cadena($num_cuenta, $contrasena);
+	$telefono_cifrado = cifrar_cadena($telefono, $contrasena);
+	
+	if (isset($rutaImagen)) {
+		$consulta = "INSERT INTO usuario 
+			(contrasena, sal, num_cuenta, correo, grado, telefono, nombre, prim_ape, seg_ape, fecha_nacimiento, foto) VALUES ('$hash', '$sal', '$num_cuenta_cifrado', '$correo', 
+			'$grado', '$telefono_cifrado', '$nombre', '$prim_ape', '$seg_ape', '$fecha_nacimiento', '$rutaImagen');";
+	} else {
 		$consulta = "INSERT INTO usuario 
 			(contrasena, sal, num_cuenta, correo, grado, telefono, nombre, prim_ape, seg_ape, fecha_nacimiento) VALUES ('$hash', '$sal', '$num_cuenta_cifrado', '$correo', 
 			'$grado', '$telefono_cifrado', '$nombre', '$prim_ape', '$seg_ape', '$fecha_nacimiento');";
-		
-		$resultado = mysqli_query($conexion, $consulta);
-		if ($resultado === false) {
-			echo 'Muerte';
-			echo '<br>';
-		}
+	}
+	
+	
+	$resultado = mysqli_query($conexion, $consulta);
+	if ($resultado === false) {
+		$error[0] = true;
+		array_push($error, 'Registro fallido');
 	}
 }
 
 mysqli_close($conexion);
 
-foreach ($error as $indx => $cadena) {
-	echo $cadena;
-	echo '<br>';
+if ($error[0] === false) {
+	echo 'Exito';
+} else {
+	foreach ($error as $indx => $cadena) {
+		echo $cadena;
+		echo '|';
+	}
 }
+
 
 // EOF
