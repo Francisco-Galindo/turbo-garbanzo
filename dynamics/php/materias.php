@@ -5,14 +5,20 @@ require 'seguridad_y_cripto.php';
 
 define('ACCIONES', array('mostrar_opciones', 'elegir_materia', 'ver_elegidas'));
 
-function mostrar_opciones($conexion, $row)
+function mostrar_opciones($conexion, $row, $id_usuario)
 {
         $grado = $row['grado'];
         $grado = 6;
-        $consulta = "SELECT materia FROM materia WHERE grado<='$grado';";
+        $consulta = "SELECT id_materia, materia FROM materia 
+                WHERE grado<='$grado';";
         $resultado = mysqli_query($conexion, $consulta);
-        while ($row = $row = mysqli_fetch_assoc($resultado)) {
-                echo $row['materia'];
+
+        while ($row = mysqli_fetch_assoc($resultado)) {
+                echo '<label>' . $row['materia'] .
+                        '<input id=\'' . $row['id_materia'] .
+                        '\' value=\'' . $row['id_materia'] . '\' type="checkbox">
+                </label>';
+
                 echo '<br>';
         }
 
@@ -61,7 +67,7 @@ function ver_materias_del_usuario($conexion, $id_usuario)
 
 
 $_POST['id_usuario'] = '9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07';
-$_POST['accion'] = 'ver_elegidas';
+$_POST['accion'] = 'mostrar_opciones';
 $_POST['materias'] = ['1400', '1412'];
 
 
@@ -92,7 +98,7 @@ if (mysqli_num_rows($resultado) === 0) {
 } else {
         if ($accion === 'mostrar_opciones') {
                 $row = mysqli_fetch_assoc($resultado);
-                $exito = mostrar_opciones($conexion, $row);
+                $exito = mostrar_opciones($conexion, $row, $id_usuario);
         } elseif ($accion === 'elegir_materia' && $materias !== null) {
                 $exito = elegir_materia($conexion, $materias, $id_usuario);
         } elseif ($accion == 'ver_elegidas') {
@@ -109,8 +115,6 @@ if ($error[0] === false) {
 	if ($exito !== true) {
                 echo 'Advertencia: ';
                 echo $exito;
-        } else {
-                echo 'Exito';
         }
 } else {
 	$error[0] = 'Error:';
