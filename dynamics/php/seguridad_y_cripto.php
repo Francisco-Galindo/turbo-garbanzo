@@ -88,19 +88,25 @@ function descifrar_cadena(string $cadena, string $llave)
 
 /**
  * Purga un arreglo de posibles ataques XSS o inyecciones SQL.
- * Itera sobre todo el arreglo dado, se encarga de escapar los caracteres
- * que podrían ser utilizados para realizar un ataque XSS o 
- * inyecciones SQL.
+ * Itera de manera recursiva sobre todo el arreglo dado, 
+ * se encarga de escapar los caracteres que podrían ser utilizados para 
+ * realizar un ataque XSS o inyecciones SQL.
  * Regresa el arreglo purgado.
  */
 function purgar_arreglo(array $arreglo, $conexion)
 {
 	foreach ($arreglo  as $indice => $elemento) {
 
-		$elemento_purgado = htmlspecialchars($elemento);
-		$elemento_purgado = mysqli_real_escape_string(
-			$conexion,
-			$elemento_purgado);
+		if (is_array($arreglo[$indice])) {
+			$elemento_purgado = purgar_arreglo(
+				$arreglo[$indice], $conexion);
+		} else {
+			$elemento_purgado = htmlspecialchars($elemento);
+			$elemento_purgado = mysqli_real_escape_string(
+				$conexion,
+				$elemento_purgado);
+		}
+
 
 		$arreglo[$indice] = $elemento_purgado;
 	}

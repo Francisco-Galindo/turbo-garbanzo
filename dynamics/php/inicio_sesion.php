@@ -21,7 +21,7 @@ $contrasena = isset($_POST['contrasena']) && $_POST['contrasena'] != '' ?
 // Validando los datos recibidos
 if ($contrasena === null) {
 	$error[0] = true;
-	array_push($error, 'Contraseña no inexistente');
+	array_push($error, 'Contraseña inexistente');
 }
 if ($num_cuenta === null || strlen($num_cuenta) !== 9) {
 	$error[0] = true;
@@ -64,7 +64,7 @@ if ($error[0] === false) {
 if ($error[0] === false) {
 	echo 'Exito';
 } else {
-	array_shift($error);
+	$error[0] = 'Error:';
 	foreach ($error as $valor) {
 		echo $valor;
 		echo '|';

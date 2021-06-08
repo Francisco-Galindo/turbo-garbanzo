@@ -5,7 +5,7 @@ $conexion = conectar_base();
 date_default_timezone_set("America/Mexico_City");
 $filFech = (isset($_POST['fecha']))?$_POST['fecha']:null;
 $filMat = (isset($_POST['materia']))?$_POST['fecha']:null;
-$filMod = (isset($_POST['modalidad'])?$_POST['modalidad']:null;
+$filMod = (isset($_POST['modalidad']))?$_POST['modalidad']:null;
 $busqueda = (isset($_POST['busqueda']) && $_POST['busqueda'] !== "") ? $_POST['busqueda'] : "No hay búsqueda";
 
 
