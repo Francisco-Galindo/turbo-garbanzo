@@ -1,7 +1,7 @@
 #cont{
     flex-grow: 1;
     display: grid;
-    grid-template-columns:  2.5% 55.5% 39.5% 2.5%;
+    grid-template-columns:  2.5% 60% 37.5%;
     grid-template-rows:    100% ;
 }
 /*=Bloque de Asesorias
@@ -76,17 +76,103 @@
 ---------------------------------------------*/
 #proxEve{
     grid-column-start:3;
+    display: flex;
+    flex-direction: column;
 }
 
 #txtProx{
+    align-self: center;
 
+    margin-top: 30px;
+    margin-bottom: 22px;
+    padding-top:17px;
+
+    width: 404px;
+    height: 92px;
+
+    background-color: var(--azul2);
+    font-family: "Ruf";
+    font-size: 46px ;
+    text-align: center;
+
+    color: #dfdfdf;
+
+    border-radius: 5px;
 }
 #calendario{
+    align-self: center;
+    background-color: var(--gris1);
+    width: 541px;
+    height: 498px;
+}
+
+#calendario>h1{
+    margin-top: 22px;
+    margin-left: 80px;
+    text-align: center;
+    width: 390px;
+    height: 49px;
+    background-color: var(--azul2);
+    color: #dfdfdf;
+}
+
+#leyenda{
+    display: grid;
+    height: 200px;
+    grid-template-columns:  45% 2.5% 50%;
+    grid-template-rows:    20% 20% 20% 20%;
+}
+#rImp{
+    grid-column-start:1;
+    grid-row-start:2;
+    width: 50px;
+    height: 50px;
+    justify-self: right;
+    background-color: #D88203;
+    border-radius: 5px;
 
 }
-#leyenda{
+#lImp{
+    grid-column-start:3;
+    grid-row-start:2;
+    font-size: 26px;
+    font-family: "LGeorge";
+}
+#rAsis{
+    grid-column-start:1;
+    grid-row-start:4;
+    width: 50px;
+    height: 50px;
+    justify-self: right;
+    background-color: #AF0000;
+    border-radius: 5px;
 
+}
+#lAsis{
+    grid-column-start:3;
+    grid-row-start:4;
+    font-size: 26px;
+    font-family: "LGeorge";
 }
 #btnCNA{
-    
+    display: flex;
+    justify-content: center;
+    margin-top: 42px;
+    margin-bottom: 42px;
 }
+
+#btnCNA>a{
+    width: 405px;
+    height: 110px;
+
+    background-color: var(--azul3);
+    border-radius: 12.25px;
+    padding-top: 17px;
+
+    text-decoration: none;
+    font-family: "Ruf";
+    font-size: 46px ;
+    text-align: center;
+    color: #dfdfdf;
+}
+
