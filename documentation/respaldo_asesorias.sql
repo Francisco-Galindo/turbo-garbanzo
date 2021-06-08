@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `asesoria`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `asesoria` (
   `id_asesoria` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` bigint(20) NOT NULL,
+  `id_usuario` varchar(64) NOT NULL,
   `id_materia` varchar(4) DEFAULT NULL,
   `tema` text NOT NULL,
   `fecha_hora` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -37,7 +37,7 @@ CREATE TABLE `asesoria` (
   KEY `id_materia` (`id_materia`),
   CONSTRAINT `asesoria_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
   CONSTRAINT `asesoria_ibfk_2` FOREIGN KEY (`id_materia`) REFERENCES `materia` (`id_materia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -58,7 +58,7 @@ DROP TABLE IF EXISTS `asesoria_has_usuario`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `asesoria_has_usuario` (
   `id_ahu` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` bigint(20) NOT NULL,
+  `id_usuario` varchar(64) NOT NULL,
   `id_asesoria` int(11) NOT NULL,
   PRIMARY KEY (`id_ahu`),
   KEY `id_usuario` (`id_usuario`),
@@ -134,6 +134,8 @@ DROP TABLE IF EXISTS `materia`;
 CREATE TABLE `materia` (
   `id_materia` varchar(4) NOT NULL,
   `materia` varchar(32) NOT NULL,
+  `abreviacion` varchar(32) NOT NULL,
+  `grado` tinyint(4) NOT NULL,
   PRIMARY KEY (`id_materia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -144,8 +146,40 @@ CREATE TABLE `materia` (
 
 LOCK TABLES `materia` WRITE;
 /*!40000 ALTER TABLE `materia` DISABLE KEYS */;
-INSERT INTO `materia` VALUES ('1401','FISICA III'),('1402','LENGUA ESPAÑOLA'),('1403','HISTORIA UNIVERSAL III'),('1404','LOGICA'),('1405','GEOGRAFIA'),('1406','DIBUJO II'),('1407','LENGUA EXTRAN. INGLES IV'),('1408','LENGUA EXTRAN. FRANCES IV'),('1409','ED. ESTETICA-ARTISTICA IV'),('1410','EDUCACION FISICA IV'),('1411','ORIENTACION EDUCATIVA IV'),('1412','INFORMATICA'),('1500','MATEMATICAS V'),('1501','QUIMICA III'),('1502','BIOLOGIA IV'),('1503','EDUCACION PARA LA SALUD'),('1504','HISTORIA DE MEXICO II'),('1505','ETIMOLOGIAS GRECOLATINAS'),('1506','L. EXTRANJERA INGLES V'),('1507','L. EXTRANJERA FRANCES V'),('1508','L. EXTRANJERA ITALIANO I'),('1509','L. EXTRANJERA ALEMAN I'),('1510','L. EXTRANJERA INGLES I'),('1511','L. EXTRANJERA FRANCES I'),('1512','ETICA'),('1513','EDUCACION FISICA V'),('1514','ED. ESTETICA-ARTISTICA V'),('1515','ORIENTACION EDUCATIVA V'),('1516','LITERATURA UNIVERSAL'),('1600','MATEMATICAS VI AREA I Y II'),('1601','DERECHO'),('1602','LITERATURA MEX. E IB.'),('1603','INGLES VI'),('1604','FRANCES VI'),('1605','ALEMAN II'),('1606','ITALIANO II'),('1607','INGLES II'),('1608','FRANCES II'),('1609','PSICOLOGIA'),('1610','DIBUJO CONSTRUCTIVO II'),('1611','FISICA IV AREA I'),('1612','QUIMICA IV AREA I'),('1613','BIOLOGIA V'),('1614','GEOGRAFIA ECONOMICA'),('1615','INT. AL EST. C. S. Y ECO.'),('1616','PROBS. SOC. Y POL. Y ECO.'),('1617','HISTORIA DE LA CULTURA'),('1618','HISTORIA DE LAS DOC. FIL.'),('1619','MATEMATICAS VI AREA III'),('1620','MATEMATICAS VI AREA IV'),('1621','FISICA IV AREA II'),('1622','QUIMICA IV AREA II'),('1700','HIGIENE MENTAL'),('1703','REVOLUCION MEXICANA'),('1704','CONT. Y GEST. ADMINISTRAT'),('1705','PENS. FILOSOFICO EN MEXIC'),('1706','GEOLOGIA Y MINEROLOGIA'),('1707','GEOGRAFIA POLITICA'),('1708','MODELADO II'),('1709','FISICO-QUIMICA'),('1710','TEMAS SELECTOS DE MATEM.'),('1711','TEMAS SELECTOS DE BIOLOG.'),('1712','ESTADISTICA Y PROBABILID.'),('1713','LATIN'),('1714','GRIEGO'),('1715','COMUNICACION VISUAL'),('1716','TEMAS SEL. MORFOL. Y FIS.'),('1717','ESTETICA'),('1718','HISTORIA DEL ARTE'),('1719','INFORMAT. APLI. C. E IND.'),('1720','SOCIOLOGIA'),('1721','COSMOGRAFÍA'),('1723','ASTRONOMIA'),('2101','O. T. COMPUTACION V'),('2122','O.T. CONTABILIDAD'),('2201','O. T. COMPUTACION VI'),('2225','O. T. ENSEÑANZA DE INGLES'),('2226','O.T. HISTOPATOLOGÍA'),('E101','FOTOGRAFÍA'),('E102','PINTURA'),('E103','ESCULTURA'),('E104','GRABADO'),('E105','CERÁMICA'),('E106','DANZA CLÁSICA'),('E107','DANZA CONTEMPORÁNEA'),('E108','DANZA ESPAÑOLA'),('E109','DANZA REGIONAL'),('E110','BANDA'),('E111','CORO'),('E112','CLARINETE'),('E113','FLAUTA'),('E114','GUITARRA'),('E115','ESTUDIANTINA'),('E116','PIANO'),('E117','SAXOFÓN'),('E118','TROMPETA'),('E119','ORATORIA'),('E120','TEATRO'),('E121','CINE'),('﻿140','MATEMATICAS IV');
+INSERT INTO `materia` VALUES ('1400','MATEMATICAS IV','MATEM. IV',4),('1401','FISICA III','FIS. III',4),('1402','LENGUA ESPAÑOLA','L. ESPAÑ',4),('1403','HISTORIA UNIVERSAL III','H.UNI.III',4),('1404','LOGICA','LOGICA',4),('1405','GEOGRAFIA','GEOGRAFIA',4),('1406','DIBUJO II','DIBUJO II',4),('1407','LENGUA EXTRAN. INGLES IV','L.E.I. IV',4),('1408','LENGUA EXTRAN. FRANCES IV','L.E.F. IV',4),('1409','ED. ESTETICA-ARTISTICA IV','E.E.A. IV',4),('1410','EDUCACION FISICA IV','E.F. IV',4),('1411','ORIENTACION EDUCATIVA IV','O.EDU. IV',4),('1412','INFORMATICA','INFORMAT.',4),('1500','MATEMATICAS V','MATEM. V',5),('1501','QUIMICA III','QUIM. III',5),('1502','BIOLOGIA IV','BIOL. IV',5),('1503','EDUCACION PARA LA SALUD','E. SALUD',5),('1504','HISTORIA DE MEXICO II','H. MEXICO',5),('1505','ETIMOLOGIAS GRECOLATINAS','E. GREC.',5),('1506','L. EXTRANJERA INGLES V','L.E.I. V',5),('1507','L. EXTRANJERA FRANCES V','L.E.F. V',5),('1508','L. EXTRANJERA ITALIANO I','L.E.IT. I',5),('1509','L. EXTRANJERA ALEMAN I','L.E.A. I',5),('1510','L. EXTRANJERA INGLES I','L.E.I. I',5),('1511','L. EXTRANJERA FRANCES I','L.E.F. I',5),('1512','ETICA','ETICA',5),('1513','EDUCACION FISICA V','E.F. V',5),('1514','ED. ESTETICA-ARTISTICA V','E.E.A. V',5),('1515','ORIENTACION EDUCATIVA V','O.ED. V',5),('1516','LITERATURA UNIVERSAL','LIT. UNI.',5),('1600','MATEMATICAS VI AREA I Y II','MATEM. VI',6),('1601','DERECHO','DERECHO',6),('1602','LITERATURA MEX. E IB.','LIT. MEX.',6),('1603','INGLES VI','INGLES VI',6),('1604','FRANCES VI','FRANC. VI',6),('1605','ALEMAN II','ALEMAN II',6),('1606','ITALIANO II','ITAL. II',6),('1607','INGLES II','INGLES II',6),('1608','FRANCES II','FRANC. II',6),('1609','PSICOLOGIA','PSIC.',6),('1610','DIBUJO CONSTRUCTIVO II','D. C. II',6),('1611','FISICA IV AREA I','FISICA IV',6),('1612','QUIMICA IV AREA I','QUIM. IV',6),('1613','BIOLOGIA V','BIOL. V',6),('1614','GEOGRAFIA ECONOMICA','GEOG. ECO',6),('1615','INT. AL EST. C. S. Y ECO.','INT. EST.',6),('1616','PROBS. SOC. Y POL. Y ECO.','PROB. SOC',6),('1617','HISTORIA DE LA CULTURA','H. CULT.',6),('1618','HISTORIA DE LAS DOC. FIL.','H DOC FIL',6),('1619','MATEMATICAS VI AREA III','MATE VI',6),('1620','MATEMATICAS VI AREA IV','MATE VI',6),('1621','FISICA IV AREA II','FISICA IV',6),('1622','QUIMICA IV AREA II','QUIM. IV',6),('1700','HIGIENE MENTAL','HIG. MENT',6),('1703','REVOLUCION MEXICANA','REV. MEX.',6),('1704','CONT. Y GEST. ADMINISTRAT','CONT GEST',6),('1705','PENS. FILOSOFICO EN MEXIC','PENS FIL.',6),('1706','GEOLOGIA Y MINEROLOGIA','GEOLOGIA',6),('1707','GEOGRAFIA POLITICA','GEOG POL.',6),('1708','MODELADO II','MODEL II',6),('1709','FISICO-QUIMICA','FIS-QUIM.',6),('1710','TEMAS SELECTOS DE MATEM.','T S MATE.',6),('1711','TEMAS SELECTOS DE BIOLOG.','T S BIOL.',6),('1712','ESTADISTICA Y PROBABILID.','EST. PROB',6),('1713','LATIN','LATIN',6),('1714','GRIEGO','GRIEGO',6),('1715','COMUNICACION VISUAL','COM. VIS.',6),('1716','TEMAS SEL. MORFOL. Y FIS.','T S MORFO',6),('1717','ESTETICA','ESTETICA',6),('1718','HISTORIA DEL ARTE','H. ARTE',6),('1719','INFORMAT. APLI. C. E IND.','INF. APLI',6),('1720','SOCIOLOGIA','SOCIOLOG.',6),('1723','ASTRONOMIA','ASTRONOM.',6),('2101','O. T. COMPUTACION V','O.T.COMP1',5),('2122','O.T. CONTABILIDAD','O.T.CONTA',5),('2201','O. T. COMPUTACION VI','O.T.COMP2',5),('2225','O. T. ENSEÑANZA DE INGLES','O.T. ING',5),('2226','O.T. HISTOPATOLOGÍA','O.T. HIST',6),('E101','FOTOGRAFÍA','FOTO',4),('E102','PINTURA','PINTURA',4),('E103','ESCULTURA','ESCULTURA',4),('E104','GRABADO','GRABADO',4),('E105','CERÁMICA','CERÁMICA',4),('E106','DANZA CLÁSICA','D. CLÁSI',4),('E107','DANZA CONTEMPORÁNEA','D. CONTEM',4),('E108','DANZA ESPAÑOLA','D. ESPAÑ',4),('E109','DANZA REGIONAL','D. REGNAL',4),('E110','BANDA','BANDA',4),('E111','CORO','CORO',4),('E112','CLARINETE','CLARINETE',4),('E113','FLAUTA','FLAUTA',4),('E114','GUITARRA','GUITARRA',4),('E115','ESTUDIANTINA','ESTUDTINA',4),('E116','PIANO','PIANO',4),('E117','SAXOFÓN','SAXOFÓN',4),('E118','TROMPETA','TROMPETA',4),('E119','ORATORIA','ORATORIA',4),('E120','TEATRO','TEATRO',4),('E121','CINE','CINE',4);
 /*!40000 ALTER TABLE `materia` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `notificacion`
+--
+
+DROP TABLE IF EXISTS `notificacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `notificacion` (
+  `id_notificacion` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` varchar(64) NOT NULL,
+  `id_asesoria` int(11) NOT NULL,
+  `id_tipo_notificacion` tinyint(4) NOT NULL,
+  `visto` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id_notificacion`),
+  KEY `id_usuario` (`id_usuario`),
+  KEY `id_asesoria` (`id_asesoria`),
+  KEY `id_tipo_notificacion` (`id_tipo_notificacion`),
+  CONSTRAINT `notificacion_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `notificacion_ibfk_2` FOREIGN KEY (`id_asesoria`) REFERENCES `asesoria` (`id_asesoria`),
+  CONSTRAINT `notificacion_ibfk_3` FOREIGN KEY (`id_tipo_notificacion`) REFERENCES `tipo_notificacion` (`id_tipo_notificacion`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notificacion`
+--
+
+LOCK TABLES `notificacion` WRITE;
+/*!40000 ALTER TABLE `notificacion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `notificacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -180,7 +214,7 @@ DROP TABLE IF EXISTS `reporte`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reporte` (
   `id_reporte` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` bigint(20) NOT NULL,
+  `id_usuario` varchar(64) NOT NULL,
   `id_asesoria` int(11) NOT NULL,
   `id_razon` tinyint(4) NOT NULL,
   PRIMARY KEY (`id_reporte`),
@@ -211,7 +245,7 @@ DROP TABLE IF EXISTS `suspension`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `suspension` (
   `id_suspension` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` bigint(20) NOT NULL,
+  `id_usuario` varchar(64) NOT NULL,
   `fecha_hora` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id_suspension`),
   KEY `id_usuario` (`id_usuario`),
@@ -229,6 +263,31 @@ LOCK TABLES `suspension` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tipo_notificacion`
+--
+
+DROP TABLE IF EXISTS `tipo_notificacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tipo_notificacion` (
+  `id_tipo_notificacion` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(32) NOT NULL,
+  `cuerpo` text NOT NULL,
+  PRIMARY KEY (`id_tipo_notificacion`),
+  UNIQUE KEY `titulo` (`titulo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipo_notificacion`
+--
+
+LOCK TABLES `tipo_notificacion` WRITE;
+/*!40000 ALTER TABLE `tipo_notificacion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tipo_notificacion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `usuario`
 --
 
@@ -236,13 +295,13 @@ DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario` (
-  `id_usuario` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_usuario` varchar(64) NOT NULL,
   `contrasena` varchar(64) NOT NULL,
   `sal` varchar(23) NOT NULL,
-  `num_cuenta` bigint(20) NOT NULL,
+  `num_cuenta` varchar(56) NOT NULL,
   `correo` varchar(64) NOT NULL,
-  `grado` enum('cuarto','quinto','sexto') DEFAULT NULL,
-  `telefono` varchar(64) NOT NULL,
+  `grado` enum('4','5','6') NOT NULL,
+  `telefono` varchar(56) NOT NULL,
   `nombre` varchar(32) NOT NULL,
   `prim_ape` varchar(32) NOT NULL,
   `seg_ape` varchar(32) NOT NULL,
@@ -250,10 +309,17 @@ CREATE TABLE `usuario` (
   `foto` text NOT NULL DEFAULT '../../statics/perfiles/foto-perfil.jpg',
   `num_faltas` tinyint(4) NOT NULL DEFAULT 0,
   `es_admin` tinyint(1) NOT NULL DEFAULT 0,
-
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `num_cuenta` (`num_cuenta`),
-  UNIQUE KEY `correo` (`correo`)
+  UNIQUE KEY `correo` (`correo`),
+  UNIQUE KEY `num_cuenta_2` (`num_cuenta`),
+  UNIQUE KEY `telefono` (`telefono`),
+  UNIQUE KEY `num_cuenta_3` (`num_cuenta`),
+  UNIQUE KEY `telefono_2` (`telefono`),
+  UNIQUE KEY `telefono_3` (`telefono`),
+  UNIQUE KEY `num_cuenta_4` (`num_cuenta`),
+  UNIQUE KEY `telefono_4` (`telefono`),
+  UNIQUE KEY `num_cuenta_5` (`num_cuenta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -275,7 +341,7 @@ DROP TABLE IF EXISTS `usuario_has_horario`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario_has_horario` (
   `id_uhh` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` bigint(20) NOT NULL,
+  `id_usuario` varchar(64) NOT NULL,
   `id_hora` tinyint(4) NOT NULL,
   `id_dia` tinyint(4) NOT NULL,
   PRIMARY KEY (`id_uhh`),
@@ -298,6 +364,34 @@ LOCK TABLES `usuario_has_horario` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `usuario_has_materia`
+--
+
+DROP TABLE IF EXISTS `usuario_has_materia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuario_has_materia` (
+  `id_uhm` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` varchar(64) NOT NULL,
+  `id_materia` varchar(4) NOT NULL,
+  PRIMARY KEY (`id_uhm`),
+  KEY `id_usuario` (`id_usuario`),
+  KEY `id_materia` (`id_materia`),
+  CONSTRAINT `usuario_has_materia_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `usuario_has_materia_ibfk_2` FOREIGN KEY (`id_materia`) REFERENCES `materia` (`id_materia`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario_has_materia`
+--
+
+LOCK TABLES `usuario_has_materia` WRITE;
+/*!40000 ALTER TABLE `usuario_has_materia` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usuario_has_materia` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `usuario_has_valoracion`
 --
 
@@ -306,8 +400,8 @@ DROP TABLE IF EXISTS `usuario_has_valoracion`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario_has_valoracion` (
   `id_uhv` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` bigint(20) NOT NULL,
-  `id_comentador` bigint(20) NOT NULL,
+  `id_usuario` varchar(64) NOT NULL,
+  `id_comentador` varchar(64) NOT NULL,
   `id_asesoria` int(11) NOT NULL,
   `comentario` text DEFAULT NULL,
   `calificacion` tinyint(4) DEFAULT NULL,
@@ -339,4 +433,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-06  1:20:29
+-- Dump completed on 2021-06-07 13:32:05
