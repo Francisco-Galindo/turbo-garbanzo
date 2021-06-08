@@ -119,8 +119,8 @@
 #leyenda{
     display: grid;
     height: 200px;
-    grid-template-columns:  45% 2.5% 50%;
-    grid-template-rows:    20% 20% 20% 20%;
+    grid-template-columns:  27.5% 2.5% 70%;
+    grid-template-rows:    7% 20% 20% 20%;
 }
 #rImp{
     grid-column-start:1;
@@ -157,7 +157,6 @@
 #btnCNA{
     display: flex;
     justify-content: center;
-    margin-top: 42px;
     margin-bottom: 42px;
 }
 
