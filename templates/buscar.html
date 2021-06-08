@@ -48,7 +48,11 @@
     </nav>
     
     <div id="busqueda">
-        <input id="buscador"type="text" class="carrera" name="carrera" placeholder="Buscar" value="" required>
+        <input id="buscador" type="text" class="carrera" name="carrera" placeholder="Buscar" value="" required>
+        <select name="modoBusqueda" id="modoBusqueda">
+            <option value="0">Asesoría</option>
+            <option value="1">Asesor</option>
+        </select>
         <!-- <button type="button" class="submitcarr" name="button">Enviar</button> -->
     </div>
 
@@ -58,7 +62,7 @@
     
             <div class="ops">
                 <h1>Fecha:</h1>
-                <select class="filtmod" name="modalidad">
+                <select name="modalidad">
                     <option value="0">Todas</option>
                     <option value="1">A Distancia</option>
                     <option value="2">Abierto</option>
@@ -66,9 +70,19 @@
                 </select>
             </div>
             
+            <div class="ops">
+                <h1>Horario:</h1>
+                <select name="modalidad">
+                    <option value="0">Todas</option>
+                    <option value="1">A Distancia</option>
+                    <option value="2">Abierto</option>
+                    <option value="3">Escolarizado</option>
+                </select>
+            </div>
+
             <div  class="ops">
                 <h1>Materia:</h1>
-                <select class="filtmod" name="modalidad">
+                <select name="modalidad">
                     <option value="0">Todas</option>
                     <option value="1">A Distancia</option>
                     <option value="2">Abierto</option>
@@ -78,7 +92,7 @@
     
             <div  class="ops">
                 <h1>Modalidad:</h1>
-                <select class="filtmod" name="modalidad">
+                <select name="modalidad">
                     <option value="0">Todas</option>
                     <option value="1">A Distancia</option>
                     <option value="2">Abierto</option>
