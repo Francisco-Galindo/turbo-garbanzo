@@ -9,7 +9,19 @@ h1{
     margin-bottom: 42px;
 }
 #buscador{
-    width: 910px;
+    width: 778px;
+    height: 75px;
+    background: rgba(1, 30, 69, 0.75);
+    border-radius: 12.25px;
+    border: 0;
+
+    font-family: "Ruf";
+    font-size: 50px;
+    color: #dfdfdf;
+    text-align: center;
+}
+#modoBusqueda{
+    width: 315px;
     height: 75px;
     background: rgba(1, 30, 69, 0.75);
     border-radius: 12.25px;
@@ -27,10 +39,10 @@ h1{
 }
 #filt{
     display: grid;
-    grid-template-rows:  20% 27% 27% 27%;
+    grid-template-rows:  15% 20% 20% 20% 20%;
     
     width: 315px;
-    height: 574px;
+    height: 725px;
     background-color: var(--azul1);
     border-radius: 5px;
     grid-column-start: 2;

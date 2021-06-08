@@ -1,0 +1,25 @@
+#principal{
+    flex-grow: 1;
+}
+#cont{
+    display: grid;
+    height: 600px;
+    grid-template-columns: 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5%;
+    grid-template-rows:    8% 8% 8% 2.5% 8% 8% 8% 8% 2.5% 8% 8% 8%;
+    padding-top: 20px;
+}
+.tituloSc{
+    height: 50px;
+    background-color: var(--gris1);
+    border-radius: 5px;
+
+    grid-column-start: 2;
+    grid-column-end: 9;
+    grid-row-start: 1;
+    grid-row-end: 1; 
+    text-align: center;
+    padding-top: 5px;
+
+    font-size: 36px;
+    color: #dfdfdf;
+}
