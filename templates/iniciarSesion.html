@@ -5,22 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciciar sesión</title>
+    <link rel="stylesheet" href="../statics/styles/basics.css">
+    <link rel="stylesheet" href="../statics/styles/iniciarSesion.css">
 </head>
 <body>
-    <header>
+    <div id="uno">
         <h1>Iniciar Sesión</h1>
-    </header>
-    <div>
-        <h2>Asesorías P6</h2>
     </div>
+    <div id="primer">
+        <div id="logo">
+            <img id="logo" src="../statics/img/favicon/favicon.svg" alt="logo de pingüino" width="250px">
+        </div>
+        
+        <div id="asesoria">
+            <h2>Asesorías P6</h2>
+        </div>
+    </div>
+    <br>
     <form>
-        <label for="nocuenta">Número de cuenta:<br></label>
-        <input type="number" name="nocuenta" required>
-        <br><br><br>
-        <label for="password">Contraseña: <br></label>
-        <input type="password" name="password" required>
-        <br><br>
-        <button tipe="submit" >Iniciar Sesión</button>
+        <div id="elements">
+            <label for="nocuenta">Número de cuenta:<br></label>
+            <input type="number" name="nocuenta" id="nocuenta" required class="inputs">
+            <br><br><br>
+            <label for="password">Contraseña: <br></label>
+            <input type="password" name="password" id="password" required class="inputs">
+            <br><br>
+        </div>
+        
+        <div id="boton">
+            <button tipe="submit" >Iniciar Sesión</button>
+        </div>
+        
     </form>
 </body>
 </html>

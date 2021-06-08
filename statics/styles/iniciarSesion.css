@@ -1,0 +1,51 @@
+#uno{
+    width: 100%;
+    background-color: var(--azul1);
+    text-align: center;
+    color: var(--textwhite);
+   
+}
+h1{
+    margin: 3px;
+    text-align: center;
+    display: inline-block;
+    font-size: 50px;
+}
+h2{
+    font-size: 40px;
+    margin:2px;
+}
+button{
+    width: 200px;
+    height: 50px;
+    background-color: var(--azul1);
+    color: var(--textwhite);
+    font-family: "RufB";
+    font-size: 25px;
+    text-align: center;
+    cursor: pointer;
+}
+#boton{
+    display: flex;
+    justify-content: center;
+}
+#primer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#asesoria{
+    width: 240px;
+    background-color: var(--azul1);
+    color: var(--textwhite);
+}
+#elements{
+    text-align: center;
+    font-family: "LGeorge";
+    font-size: 20px;
+    padding:20px;
+}
+.inputs{
+    background-color: var(--azul2);
+    color: var(--textwhite)
+}

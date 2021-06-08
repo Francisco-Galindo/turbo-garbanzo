@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Crear cuenta</title>
     <link rel="stylesheet" href="../statics/styles/basics.css">
     <link rel="stylesheet" href="../statics/styles/crearCuenta.css">
 </head>
@@ -12,54 +12,56 @@
     <div id="uno">
         <h1>Crear Cuenta</h1>
     </div>
-    
-    <div id="logo">
-        <img id="logo" src="../statics/img/favicon/favicon.svg" alt="logo de pingüino" width="300px">
+    <div id="primer">
+        <div id="logo">
+            <img id="logo" src="../statics/img/favicon/favicon.svg" alt="logo de pingüino" width="250px">
+        </div>
+        
+        <div id="asesoria">
+            <h2>Asesorías P6</h2>
+        </div>
     </div>
-    
-    <div id="asesoria">
-        <h2>Asesorías P6</h2>
-    </div>
+    <br>
     
     <form>
         <div class="container">
             <div id="col1">
                 <div class="label">
-                    <label for="name" class="dato">Nombre (s):</label><br>
-                    <label for="primApe" class="dato">Primer apellido:</label><br>
-                    <label for="segApe" class="dato">Segundo apellido:</label><br>
-                    <label for="nocuenta" class="dato">Número de cuenta:</label><br>
+                    <label for="name" class="dato">Nombre (s):</label><br><br>
+                    <label for="primApe" class="dato">Primer apellido:</label><br><br>
+                    <label for="segApe" class="dato">Segundo apellido:</label><br><br>
+                    <label for="nocuenta" class="dato">Número de cuenta:</label><br><br>
                     <label for="email" class="dato">Correo: </label>
                 </div>
                 
 
                 <div class="inputs">
-                    <input type="text" name="name" id="name"required>
+                    <input type="text" class="answer" name="name" id="name"required>
                     <br><br>
-                    <input type="text" name="primApe" id="primApe" required>
+                    <input type="text" class="answer" name="primApe" id="primApe" required>
                     <br><br>
-                    <input type="text" name="segApe" id="segApe">
+                    <input type="text" class="answer" name="segApe" id="segApe">
                     <br><br>
-                    <input type="number" name="nocuenta" id="nocuenta" required>
+                    <input type="number" class="answer" name="nocuenta" id="nocuenta" required>
                     <br><br>
-                    <input type="email" name="email" id="email"required>
+                    <input type="email" class="answer" name="email" id="email"required>
                 </div>
                 
             </div>
     
             <div id="col2">
                 <div class="label">
-                    <label for="tel" class="dato">Teléfono:</label><br>
-                    <label for="nacimiento" class="dato">Fecha de nacimiento:</label><br>
-                    <label for="grado" class="dato">Grado:</label><br>
-                    <label for="arch" class="dato">Ingrese una foto de perfil: </label><br>
-                    <label for="password" class="dato">Contraseña:</label><br>
+                    <label for="tel" class="dato">Teléfono:</label><br><br>
+                    <label for="nacimiento" class="dato">Fecha de nacimiento:</label><br><br>
+                    <label for="grado" class="dato">Grado:</label><br><br>
+                    <label for="arch" class="dato">Foto de perfil: </label><br><br>
+                    <label for="password" class="dato">Contraseña:</label><br><br>
                 </div>
                 
                 <div class="inputs">
-                    <input type="number" name="tel" id="tel" required>
+                    <input type="number" class="answer" name="tel" id="tel" required>
                     <br><br>
-                    <input type="date" name="nacimiento" id="nacimiento" required>
+                    <input type="date" class="answer" name="nacimiento" id="nacimiento" required>
                     <br><br>
                     <select > 
                         <option value="4" >Cuarto grado</option>
@@ -67,16 +69,19 @@
                         <option value="6" >Sexto grado</option>
                     </select>
                     <br><br>
-                    <input type="file" name="arch" id="arch">
+                    <input type="file" class="answer" name="arch" id="arch">
                     <br><br>
-                    <input type="password" name="password" id="password"required>
+                    <input type="password" class="answer" name="password" id="password"required>
                     <br><br>
                 </div>
                 
             </div>
            
         </div>
-        <button type="submit">Crear Cuenta</button>
+        <div id="boton">
+            <button type="submit" >Crear Cuenta</button>
+        </div>
+        
     </form>
     
     

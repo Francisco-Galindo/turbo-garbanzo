@@ -1,0 +1,40 @@
+#title{
+    width: 100%;
+    background-color: var(--azul4);
+    text-align: center;
+    color: black;
+   
+}
+#tabla{
+    justify-items: center;
+}
+table {
+    border: 1px  white;
+    margin: auto;
+    font-family: "LGeorge";
+    font-size: 30px;
+ }
+ th, td {
+    width: 30%;
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid  rgb(170, 238, 255);
+    border-collapse: collapse;
+    background-color: var(--azul2);
+    color: var(--textwhite);
+ }
+ #botones{
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+     column-gap: 90px;
+ }
+ button{
+     display:block;
+    background-color: var(--azul1);
+    color: var(--textwhite);
+    font-family: "RufB";
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+ }
