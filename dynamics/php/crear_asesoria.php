@@ -9,6 +9,7 @@ $_POST['cupo'] = "2";
 $_POST['medio'] = "true";
 $_POST['lugar'] = "Escuela Nacional Preparatoria Plantel 6 Antonio Caso";
 
+
 if (isset($_SESSION['usuario'])) {
 	include('config.php');
 	$conexion = conectar_base();
