@@ -1,0 +1,48 @@
+#title{
+    width: 100%;
+    background-color: var(--azul3);
+    text-align: center;
+    color: var(--textwhite);
+   
+}
+#container{
+    text-align: center;
+}
+button{
+    width: 180px;
+    height: 45px;
+    background-color: var(--azul1);
+    color: var(--textwhite);
+    font-family: "RufB";
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+select{
+    background-color: var(--azul2);
+    color: var(--textwhite);
+}
+#boton{
+    display: flex;
+    justify-content: center;
+}
+.inputs{
+    background-color: var(--azul2);
+    color: var(--textwhite);
+}
+#container{
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    padding: 15px;
+    align-items: center;
+    justify-content: center;
+}
+#col1, #col2{
+    display:flex;
+    flex-direction: column;
+    padding: 25px;
+}
+#col1{
+    row-gap: 2px;
+}

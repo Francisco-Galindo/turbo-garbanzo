@@ -8,38 +8,61 @@
     background-color: var(--azul1);
     text-align: center;
     color: var(--textwhite);
-    margin-top: 0%;
+   
 }
 h1{
-    margin-top: 0%;
+    margin: 3px;
     text-align: center;
     display: inline-block;
+    font-size: 50px;
+}
+h2{
+    font-size: 40px;
+    margin:2px;
 }
 
 input, select{
     background-color: var(--azul2);
     color: var(--textwhite);
 }
-.container{
-    display:flex;
-    flex-direction: row;
+button{
+    width: 200px;
+    height: 50px;
+    background-color: var(--azul1);
+    color: var(--textwhite);
+    font-family: "RufB";
+    font-size: 25px;
+    text-align: center;
+    cursor: pointer;
 }
-#col1, #col2{
-    display:flex;
-    flex-direction: row;
-
-    
+#boton{
+    display: flex;
+    justify-content: center;
 }
-.label{
-    display:flex;
+#primer{
+    display: flex;
     flex-direction: column;
-     
-}
-.inputs{
-    margin-top: 5px;
+    align-items: center;
 }
 #asesoria{
-    width: 150px;
+    width: 240px;
     background-color: var(--azul1);
     color: var(--textwhite);
 }
+.container{
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    padding: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+#col1, #col2{
+    display:flex;
+    flex-direction: row;
+    padding: 25px;
+}
+
+
+
