@@ -1,9 +1,13 @@
+h2{
+    font-size: 40px;
+}
 #container{
     display: grid;
     grid-template-columns: 2% 4% 22% 3% 28% 2% 37% 2%;
     grid-template-rows: 3% 10% 1% 6% 1% 6% 3% 44% 1% 22% 3%;
     width: 100%;
     height: 100%;
+
 }
 #fotoPerfil{
     grid-column-start: 3;
@@ -40,6 +44,7 @@
     grid-row-start: 8;
     grid-row-end: 11;
     background-color: var(--azul1);
+    padding:10px;
 }
 #horario{
     grid-column-start: 7;
@@ -54,6 +59,7 @@
     grid-row-start: 10;
     grid-row-end: 11;
     background-color: var(--azul1);
+    padding:10px;
 }
 #opciones{
     grid-column-start: 7;
@@ -73,4 +79,39 @@ button{
     height: 40px;
     background-color: var(--azul2);
     color: var(--textwhite)
+}
+p{
+    font-family: "LGeorge";
+    font-size: 20px;
+    color: black;
+    background-color: rgb(170, 170, 170);
+    padding: auto;
+    text-align: center;
+}
+
+
+/*=ADAPTABILIDAD
+----------------------------------------------------------*/
+@media screen and (max-width: 1300px) {
+    #container{
+        display: flex;
+        flex-direction: column;
+        row-gap: 15px;
+
+    }
+    h2{
+        font-family: "Rufb";
+        font-size: 30px;
+    }
+    h3{
+        font-family: "LGeorgeb";
+        font-size: 22px;
+    }
+    p{
+        font-size: 15px;
+    }
+    #opciones :first-child{
+        margin-right: 10px;
+    }
+    
 }

@@ -1,15 +1,5 @@
-.dato{
-    font-size: 19px;
-    font-family:"LGeorge";
-    background-color: rgba(0, 183, 255, 0.205);
-}
-#uno{
-    width: 100%;
-    background-color: var(--azul1);
-    text-align: center;
-    color: var(--textwhite);
-   
-}
+/* =Títulos y logo
+---------------------------------------------------*/
 h1{
     margin: 3px;
     text-align: center;
@@ -20,10 +10,34 @@ h2{
     font-size: 40px;
     margin:2px;
 }
+#uno{
+    width: 100%;
+    background-color: var(--azul1);
+    text-align: center;
+    color: var(--textwhite);
+   
+}
+#primer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#asesoria{
+    width: 240px;
+    background-color: var(--azul1);
+    color: var(--textwhite);
+}
 
+/* =Formato del formulario
+---------------------------------------------------*/
 input, select{
     background-color: var(--azul2);
     color: var(--textwhite);
+}
+label{
+    font-size: 19px;
+    font-family:"LGeorge";
+    background-color: rgba(0, 183, 255, 0.205);
 }
 button{
     width: 200px;
@@ -38,16 +52,6 @@ button{
 #boton{
     display: flex;
     justify-content: center;
-}
-#primer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-#asesoria{
-    width: 240px;
-    background-color: var(--azul1);
-    color: var(--textwhite);
 }
 .container{
     width:100%;
@@ -64,5 +68,35 @@ button{
     padding: 25px;
 }
 
+/* =ADAPTABILIDA
+----------------------------------------------------------*/
+@media screen and (max-width: 930px){
+    .container{
+        flex-direction: column;
+        padding: 3px;
+        align-items: left;
+        justify-content: left;
+    }
+    label{
+        font-size: 15px;
+        font-family:"LGeorge";
+        background-color: rgba(0, 183, 255, 0.205);
+    }
+
+}
+@media screen and (max-width: 510px){
+    .container{
+        overflow-x: auto;
+    }
+    label{
+        font-size: 12px;
+    }
+    input, select{
+        row-gap: 10px;
+    }
+
+    
+
+}
 
 
