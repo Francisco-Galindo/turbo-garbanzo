@@ -2,28 +2,27 @@
 ---------------------------------------------*/
 #cont{
     display: grid;
-    height: 700px;
+    height: 600px;
     grid-template-columns: 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5% 5%;
-    grid-template-rows:    7% 7% 7% 2.5% 7% 7% 7% 7%;
+    grid-template-rows:    8% 8% 8% 2.5% 8% 8% 8% 8% 2.5% 8% 8% 8%;
     padding-top: 20px;
 }
 /*=CUADROS DE CONTENIDO
 ---------------------------------------------*/
-#c1, #c2, #c3, #c4{
+#c1, #c2{
     background-color: var(--azul1);
     height: 295px;
-    width: 660px;
     border-radius: 8px;
 }
 /*=Subtitulos & cuadros
 ---------------------------------------------*/
 .tituloSc{
     height: 50px;
-    width: 650px;
     background-color: var(--gris1);
     border-radius: 5px;
 
     grid-column-start: 2;
+    grid-column-end: 9;
     grid-row-start: 1;
     grid-row-end: 1; 
     text-align: center;
@@ -33,10 +32,10 @@
     color: #dfdfdf;
 }
 .subtituloSc{
-    font-size: 32px;
+    font-size: 36px;
 
-    height: 45px;
-    width: 340px;
+    height: 50px;
+
     background-color: var(--azul3);
     border-radius: 5px;
 
@@ -44,7 +43,7 @@
     color: #dfdfdf;
     text-align: center;
 }
-#moradito1, #moradito2, #moradito3{
+#bloque1, #bloque2{
     display: flex;
     padding-top: 20px;
     flex-direction:column;
@@ -53,41 +52,46 @@
     align-content: center;
 }
 p{
-    background-color: #822861;
+    background-color: var(--azul2);
     color: white;
-    width: 480px;
-    border-radius: 8px;
+    width: 470px;
+    height: 45px;
+    border-radius: 5px;
     text-align: center;
+    font-family: "LGeorge";
+    font-size: 26px;
 }
 #BE{
     grid-column-start:4;
-    grid-column-end:4;
+    grid-column-end:7;
     grid-row-start:3;
     grid-row-end:3;
 }
 #c1{
     grid-column-start: 2;
+    grid-column-end: 9;
     grid-row-start: 5;
     grid-row-end: 5;
 }
 
 #FE{
     grid-column-start: 14;
-    grid-column-end: 14;
+    grid-column-end: 17;
     grid-row-start:3;
     grid-row-end:3;
 }
 #c2{
     grid-column-start: 12;
-    grid-column-end: 12;
+    grid-column-end: 19;
     grid-row-start:5;
     grid-row-end:5;
 }
 
 #programadores{
     grid-column-start: 2;
-    grid-row-start: 11;
-    grid-row-end: 11;
+    grid-column-end: 9;
+    grid-row-start: 13;
+    grid-row-end: 13;
 }
 /*=fotos
 ---------------------------------------------*/
@@ -103,40 +107,40 @@ p{
     box-sizing: border-box;
     border-radius: 10px;
 }
-#imgi{
+#imgc{
     z-index: 100000;
 }
-#imgm{
+#imgf{
     z-index: 10000;
 }
 #imgs{
     z-index: 1000;
 }
-#imgme{
+#imgj{
     z-index: 1000;
 }
 
 
-#morado{
+#bloque3{
     width: 100%;
     display: flex;
     justify-content: space-around;
     margin-top: 2%;;
 }
-#morado h3{
+#bloque3 h3{
     width: 180px;
-    height: 30px;
+    height: 34px;
 
-    font-family: "m23";
+    font-family: "LGeorge";
+    font-size: 20px;
     color: white;
-    font-size: medium;
     text-align: center;
 
     box-sizing: border-box;
     background-color: var(--azul1);
 
     padding-top: 5px;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 /*=ADAPTABILIDAD
@@ -148,17 +152,17 @@ p{
         flex-wrap: nowrap;
         align-items: center;
     }
-    #fotos{
-        display: none;
-    }
-    #morado{
+    #bloque3{
         display: flex;
         flex-direction:column;
         flex-wrap: nowrap;
         justify-content: center;
         align-items: center;
     }
-    #morado h3{
+    #bloque3 h3{
         padding-left: 2px;
+    }
+    #fotos{
+        display: none;
     }
 }

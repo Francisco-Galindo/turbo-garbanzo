@@ -39,8 +39,14 @@
 
 /*=CUERPO STANDARD
 ---------------------------------------------*/
+html{
+  height: 100%;
+}
 body{
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 h1{
@@ -104,11 +110,12 @@ footer{
   bottom: 0;
   width: 100%;
   height: 35px;
+
+  background-color: var(--azul1);
+}
+h3{
   text-align: center;
   font-family: "lGeorge";
   font-size: 28px;
-
-  background-color: var(--azul1);
   color: white;
-  position: fixed;
 }

@@ -1,0 +1,92 @@
+#cont{
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns:  2.5% 55.5% 39.5% 2.5%;
+    grid-template-rows:    100% ;
+}
+/*=Bloque de Asesorias
+---------------------------------------------*/
+#asesorias{
+    grid-column-start:2;
+}
+#btnBA{
+    display: flex;
+    justify-content: center;
+    margin-top: 42px;
+    margin-bottom: 42px;
+}
+#btnBA>a{
+    width: 592px;
+    height: 68px;
+
+    background-color: var(--azul3);
+    border-radius: 12.25px;
+
+    text-decoration: none;
+    font-family: "Ruf";
+    font-size: 46px ;
+    text-align: center;
+    color: #dfdfdf;
+}
+
+#txtAses{
+    width: 380px;
+    height: 44px;
+
+    background-color: var(--gris1);
+    font-family: "Ruf";
+    font-size: 32px ;
+    text-align: center;
+
+    color: #dfdfdf;
+
+    border-radius: 5px;
+}
+
+#imp{
+    width: 250px;
+    height: 44px;
+    background-color: var(--azul2);
+    border-radius: 5px;
+}
+
+#imp>h1{
+    font-family: "Ruf";
+    font-size: 32px ;
+    text-align: center;
+
+    color: #dfdfdf;
+}
+
+#asis{
+    width: 250px;
+    height: 44px;
+    background-color: var(--azul2);
+    border-radius: 5px;
+}
+
+#asis>h1{
+    font-family: "Ruf";
+    font-size: 32px ;
+    text-align: center;
+
+    color: #dfdfdf;
+}
+/*=Bloque de Proximos Eventos
+---------------------------------------------*/
+#proxEve{
+    grid-column-start:3;
+}
+
+#txtProx{
+
+}
+#calendario{
+
+}
+#leyenda{
+
+}
+#btnCNA{
+    
+}
