@@ -94,6 +94,7 @@ if (isset($_FILES['imagen'])) {
 	unset($arch, $nombre, $ext);
 }
 
+// Checando si usuario ya existe
 $id = hash("sha256", $num_cuenta);
 $consulta = "SELECT * FROM usuario WHERE id_usuario='$id' OR correo='$correo';";
 $resultado = mysqli_query($conexion, $consulta);
@@ -102,6 +103,7 @@ if (mysqli_num_rows($resultado) !== 0) {
 	array_push($error, 'Usuario existente');
 }
 
+//  Creando el usuario
 if ($error[0] === false) {
 
 	$pimienta = obtener_pimienta();
@@ -136,6 +138,7 @@ if ($error[0] === false) {
 
 mysqli_close($conexion);
 
+// Enviando resultados
 if ($error[0] === false) {
 	echo 'Exito';
 } else {
