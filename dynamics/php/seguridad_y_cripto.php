@@ -91,6 +91,7 @@ function descifrar_cadena(string $cadena, string $llave)
  * Itera sobre todo el arreglo dado, se encarga de escapar los caracteres
  * que podrían ser utilizados para realizar un ataque XSS o 
  * inyecciones SQL.
+ * Regresa el arreglo purgado.
  */
 function purgar_arreglo(array $arreglo, $conexion)
 {
