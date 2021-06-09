@@ -5,9 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciciar sesión</title>
+    <script src="../libs/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../dynamics/js/inicio_sesion.js"></script>
     <link rel="icon" href="../statics/img/favicon/favicon.svg" type="image/png">
     <link rel="stylesheet" href="../statics/styles/basics.css">
     <link rel="stylesheet" href="../statics/styles/iniciarSesion.css">
+    
 </head>
 <body>
     <div id="uno">
@@ -25,7 +28,7 @@
             </div>
         </div>
         <br>
-        <form>
+        <!-- <form> -->
             <div id="elements">
                 <label for="nocuenta">Número de cuenta:<br></label>
                 <input type="number" name="nocuenta" id="nocuenta" required class="inputs">
@@ -36,13 +39,17 @@
             </div>
             
             <div id="boton">
-                <button tipe="submit" >Iniciar Sesión</button>
+                <button  id="enviar">Iniciar Sesión</button>
             </div>
             
-        </form>
+         <!--</form>-->
         <br><br>
+        <div id="#new">
+
+        </div>
     </div>
     
     <footer>Asesorías P6</footer>
+    
 </body>
 </html>

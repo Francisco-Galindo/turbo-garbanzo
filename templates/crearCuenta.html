@@ -8,6 +8,8 @@
     <link rel="icon" href="../statics/img/favicon/favicon.svg" type="image/png">
     <link rel="stylesheet" href="../statics/styles/basics.css">
     <link rel="stylesheet" href="../statics/styles/crearCuenta.css">
+    <script src="../libs/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../dynamics/js/crearCuenta.js"></script>
 </head>
 <body>
     <div id="uno">
@@ -24,7 +26,7 @@
     </div>
     <br>
     
-    <form>
+    <!-- <form> -->
         <div class="container">
             <div id="col1">
                 <div class="label">
@@ -41,7 +43,7 @@
                     <br><br>
                     <input type="text" name="primApe" id="primApe" required>
                     <br><br>
-                    <input type="text" name="segApe" id="segApe">
+                    <input type="text" name="segApe" id="segApe" required>
                     <br><br>
                     <input type="number" name="nocuenta" id="nocuenta" required>
                     <br><br>
@@ -64,7 +66,7 @@
                     <br><br>
                     <input type="date" name="nacimiento" id="nacimiento" required>
                     <br><br>
-                    <select > 
+                    <select id="grado"> 
                         <option value="4" >Cuarto grado</option>
                         <option value="5" >Quinto grado</option>
                         <option value="6" >Sexto grado</option>
@@ -80,10 +82,10 @@
            
         </div>
         <div id="boton">
-            <button type="submit" >Crear Cuenta</button>
+            <button type="submit" id="crear">Crear Cuenta</button>
         </div>
         
-    </form>
+    <!--</form>-->
     <br><br>
     
     <footer>Asesorías P6</footer>
