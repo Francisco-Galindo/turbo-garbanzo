@@ -5,6 +5,9 @@ require 'seguridad_y_cripto.php';
 
 define('ACCIONES', array('mostrar_opciones', 'elegir_materia', 'ver_elegidas'));
 
+/**
+ * Devuelve un JSON de las materias que puede impartir alguien dependiendo de su grado
+ */
 function mostrar_opciones($conexion, $row, $id_usuario)
 {
         $grado = $row['grado'];
@@ -25,7 +28,10 @@ function mostrar_opciones($conexion, $row, $id_usuario)
         return true;
 }
 
-
+/**
+ * Recibe un arreglo de ids de materias y sube a la base de datos que el usuario
+ *  puede asesorar sobre el tema.
+ */
 function elegir_materia($conexion, $arreglo, $id_usuario)
 {
         $alerta = '';
@@ -49,25 +55,31 @@ function elegir_materia($conexion, $arreglo, $id_usuario)
         }
 }
 
-
+/**
+ * Imprime todas las materias que el usuario puede asesorar
+ */
 function ver_materias_del_usuario($conexion, $id_usuario)
 {
-        $consulta = "SELECT materia FROM materia t1
+        $consulta = "SELECT t1.id_materia, t1.materia FROM materia t1
                 INNER JOIN usuario_has_materia t2 ON t1.id_materia=t2.id_materia
                 WHERE t2.id_usuario='$id_usuario'";
         $resultado = mysqli_query($conexion, $consulta);
 
+        $materias = array();
         while ($resultado && $row = mysqli_fetch_assoc($resultado)) {
-                echo $row['materia'];
-                echo '<br>';
+                $materias += [$row['id_materia'] => $row['materia']];
+                // echo $row['materia'];
+                // echo '<br>';
         }
+
+        echo json_encode($materias, JSON_UNESCAPED_UNICODE);
         return true;
 }
 /******************************************************************************/
 
 
 $_POST['id_usuario'] = '9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07';
-$_POST['accion'] = 'mostrar_opciones';
+$_POST['accion'] = 'ver_elegidas';
 $_POST['materias'] = ['1400', '1412'];
 
 
