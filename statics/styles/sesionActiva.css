@@ -1,3 +1,10 @@
+.flechas{
+    background-color: yellow;
+}
+#der{
+    position: absolute;
+    right: 5%;
+}
 #cont{
     flex-grow: 1;
     display: grid;
@@ -174,4 +181,13 @@
     text-align: center;
     color: #dfdfdf;
 }
-
+/*=Calendario
+----------------------------------*/
+#fecha{
+    position: relative;
+    top: 0%;
+    left: 10%;
+    width: 80%;
+    height: 75%;
+    background-color: white;
+}
