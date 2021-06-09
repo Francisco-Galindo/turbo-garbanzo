@@ -3,31 +3,28 @@
 require 'config.php';
 require 'seguridad_y_cripto.php';
 
-function mostrar_noti_aviso_inicio($row)
+function mostrar_noti_aviso_inicio($id_notificacion, $row)
 {
 	echo '<div id="aseIni" class="notif">
 			<h1 class="tipo">Tu asesoría</h1>
 			<h1 class="preg">La fecha de tu asesoría  de'.
 			$row['tema'] . ' con ' . $row['nombre'] . $row['prim_ape'].
-			'ya llegó.</h1>
-			<button type="button" class="submitcarr"
-			name="button">Aceptar</button>
-		</div>';
+			'ya llegó.</h1>';
+	echo '<button id="'. $id_notificacion .'" type="button" class="submitcarr" name="button">Aceptar</button> </div>';
 }
 
-function mostrar_noti_aviso_final($row)
+function mostrar_noti_aviso_final($id_notificacion, $row)
 {
 	echo '<div id="aseFin" class="notif">
 			<h1 class="tipo">Tu asesoría</h1>
 			<h1 class="preg">Tu asesoría de' .
 			$row['tema'] . ' con ' . $row['nombre'] . $row['prim_ape'].
-			'ya terminó.</h1>
-			<button type="button" class="submitcarr" name="button">Aceptar</button>
-		</div>';
+			'ya terminó.</h1>';
+	echo '<button id="'. $id_notificacion .'" type="button" class="submitcarr" name="button">Aceptar</button> </div>';
 }
 
 
-function mostrar_noti_final_formulario($conexion, $row, $row_asesoria, $id_asesoria)
+function mostrar_noti_final_formulario($id_notificacion, $conexion, $row, $row_asesoria, $id_asesoria)
 {
 	$consulta = "SELECT id_usuario FROM asesoria_has_usuario
 		WHERE id_asesoria=$id_asesoria";
@@ -93,11 +90,10 @@ function mostrar_noti_final_formulario($conexion, $row, $row_asesoria, $id_aseso
 		echo '</label>';
 	}
 
-	echo '<button type="button" class="submitcarr" name="button">Aceptar</button>
-	    </div>';
+	echo '<button id="'. $id_notificacion .'" type="button" class="submitcarr" name="button">Aceptar</button> </div>';
 }
 
-function mostrar_noti_confirmar_asesoria($conexion, $row_asesoria, $id_asesoria)
+function mostrar_noti_confirmar_asesoria($id_notificacion, $conexion, $row_asesoria, $id_asesoria)
 {
 	$consulta = "SELECT id_usuario FROM asesoria_has_usuario
 		WHERE id_asesoria=$id_asesoria
@@ -129,13 +125,12 @@ function mostrar_noti_confirmar_asesoria($conexion, $row_asesoria, $id_asesoria)
 			</div>
 
 			<label><input type="radio" value="true">Aceptar</label>
-			<label><input type="radio" value="false">Rechazar</label>
+			<label><input type="radio" value="false">Rechazar</label>';
 
-			<button type="button" class="submitcarr" name="button">Aceptar</button>
-		</div>';
+	echo '<button id="'. $id_notificacion .'" type="button" class="submitcarr" name="button">Aceptar</button> </div>';
 }
 
-function mostrar_noti_pasar_asistencia($conexion, $row, $id_asesoria)
+function mostrar_noti_pasar_asistencia($id_notificacion, $conexion, $row, $id_asesoria)
 {
 	$consulta = "SELECT id_usuario FROM asesoria_has_usuario
 		WHERE id_asesoria=$id_asesoria";
@@ -169,11 +164,10 @@ function mostrar_noti_pasar_asistencia($conexion, $row, $id_asesoria)
 		echo '</label>';
 	}
 
-	echo '<button id"'. $row['id_asesoria'] .'" type="button" class="submitcarr" name="button">
-		Aceptar</button></div>';
+	echo '<button id="'. $id_notificacion .'" type="button" class="submitcarr" name="button">Aceptar</button> </div>';
 }
 
-function mostrar_noti_aviso_strike($conexion, $id_usuario)
+function mostrar_noti_aviso_strike($id_notificacion, $conexion, $id_usuario)
 {
 	$consulta = "SELECT num_faltas FROM usuario
 		WHERE $id_usuario='$id_usuario'";
@@ -189,12 +183,11 @@ function mostrar_noti_aviso_strike($conexion, $id_usuario)
 			<h1 class="tipo">¡Strike!</h1>
 			<h1 class="preg">Has recibido un strike</h1>
 			<p>Tienes ' . $strikes . ', recuerda que si acumulas 3,
-			ameritarás una suspensión de dos semanas.</p>
-			<button type="button" class="submitcarr" name="button">Aceptar</button>
-		</div>';
+			ameritarás una suspensión de dos semanas.</p>';
+	echo '<button id="'. $id_notificacion .'" type="button" class="submitcarr" name="button">Aceptar</button> </div>';
 }
 
-function mostrar_noti_recibir_confirmacion($row)
+function mostrar_noti_recibir_confirmacion($id_notificacion, $row)
 {
 	if ($row['confirmada'] == true) {
 		$mensaje = 'Solicitud confirmada';
@@ -204,10 +197,11 @@ function mostrar_noti_recibir_confirmacion($row)
 	echo '<div id="aseTermino" class="notif">
 			<h1 class="tipo">' . $mensaje . '</h1>
 			<h1 class="preg">'.$row['tema'].'</h1>
-			<p>En la asesoría de' . $row['nombre'] . ' para el '. $row['fecha_hora'] .'.</p>
-			<button type="button" class="submitcarr" name="button">Aceptar</button>
-		</div>';
+			<p>En la asesoría de' . $row['nombre'] . ' para el '. $row['fecha_hora'] .'.</p>';
+	echo '<button id="'. $id_notificacion .'" type="button" class="submitcarr" name="button">Aceptar</button> </div>';
 }
+
+
 
 session_start();
 $conexion = conectar_base();
@@ -227,6 +221,7 @@ $consulta = "SELECT * FROM notificacion
 $resultado = mysqli_query($conexion, $consulta);
 
 while ($row = mysqli_fetch_assoc($resultado)) {
+	$id_notificacion = $row['id_notificacion'];
 	$tipo_notificacion = $tipos_notificacion[$row['id_tipo_notificacion']];
 
 	$id_asesoria = $row['id_asesoria'];
@@ -241,19 +236,24 @@ while ($row = mysqli_fetch_assoc($resultado)) {
 
 
 	if ($tipo_notificacion === 'aviso_final')  {
-		mostrar_noti_aviso_final($row_asesoria);
+		mostrar_noti_aviso_final($id_notificacion, $row_asesoria);
 	} elseif ($tipo_notificacion === 'aviso_inicio') {
-		mostrar_noti_aviso_inicio($row_asesoria);
+		mostrar_noti_aviso_inicio($id_notificacion, $row_asesoria);
 	} elseif ($tipo_notificacion === 'valorar') {
-		mostrar_noti_final_formulario($conexion, $row, $row_asesoria, $id_asesoria);
+		mostrar_noti_final_formulario($id_notificacion, $conexion,
+			$row, $row_asesoria, $id_asesoria);
 	} elseif ($tipo_notificacion === 'confirmar_asesoria') {
-		mostrar_noti_confirmar_asesoria($conexion, $row_asesoria, $id_asesoria);
+		mostrar_noti_confirmar_asesoria($id_notificacion, 
+			$conexion, $row_asesoria, $id_asesoria);
 	} elseif ($tipo_notificacion === 'pasar_asistencia') {
-		mostrar_noti_pasar_asistencia($conexion, $row_asesoria, $id_asesoria);
+		mostrar_noti_pasar_asistencia($id_notificacion, $conexion,
+			$row_asesoria, $id_asesoria);
 	} elseif ($tipo_notificacion === 'aviso_trike') {
-		mostrar_noti_aviso_strike($conexion, $id_usuario);
+		mostrar_noti_aviso_strike($id_notificacion, $conexion,
+			$id_usuario);
 	} elseif ($tipo_notificacion === 'recibir_confirmacion') {
-		mostrar_noti_recibir_confirmacion($row_asesoria);
+		mostrar_noti_recibir_confirmacion($id_notificacion,
+			$row_asesoria);
 	}
 }
 
