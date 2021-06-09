@@ -1,55 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../../statics/img/favicon/favicon.svg" type="image/png">
-    <link rel="stylesheet" href="../../libs/bootstrap-5.0.1-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="../../libs/fontawesome-free-5.15.3-web/css/all.min.css">
-    <link rel="stylesheet" href="../../statics/styles/basics.css">
-    <link rel="stylesheet" href="../../statics/styles/notifiaciones.css">
-    <title>Notificaciones</title>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="d-flex">
-                <a class="navbar-brand" href="#" id="blockNav">
-                    <img id="navLogo" src="../statics/img/favicon/favicon.svg" alt="" class="d-inline-block align-text-top">
-                </a>
-                <a class="navbar-brand" id="titulo" href="#">
-                    <h2 id="tituNav" >Asesorías P6</h2>
-                </a> 
-            </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="d-flex">
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href=""><i class="fas fa-bell"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#" id="nomUser"><h2 id="nomNav">Nombre del Usuario</h2></a>
-                        </li>
-        
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href=""><i class="far fa-user-circle"></i></a>
-                        </li>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div>
-    </nav>
-    <div id="principal">
-        <div id="cont">
-            <h1 class="tituloSc">Notificaciones</h1>
-        </div>
-        <div id="notificaciones">
-
 <?php
 
 require 'config.php';
@@ -62,7 +10,7 @@ function mostrar_noti_aviso_inicio($row)
 			<h1 class="preg">La fecha de tu asesoría  de'.
 			$row['tema'] . ' con ' . $row['nombre'] . $row['prim_ape'].
 			'ya llegó.</h1>
-			<button type="button" class="submitcarr" 
+			<button type="button" class="submitcarr"
 			name="button">Aceptar</button>
 		</div>';
 }
@@ -78,83 +26,185 @@ function mostrar_noti_aviso_final($row)
 		</div>';
 }
 
-///////////////////////////////////////////////
-function mostrar_noti_final_formulario($row)
+
+function mostrar_noti_final_formulario($conexion, $row, $row_asesoria, $id_asesoria)
 {
+	$consulta = "SELECT id_usuario FROM asesoria_has_usuario
+		WHERE id_asesoria=$id_asesoria";
+	$resultado = mysqli_query($conexion, $consulta);
+
+	$usuarios = array();
+	if (mysqli_num_rows($resultado) > 0) {
+		while ($row_asesoria = mysqli_fetch_assoc($resultado)) {
+			$id_usuario = $row_asesoria['id_usuario'];
+			$consulta_usuario = "SELECT nombe, prim_ape FROM usuario
+				WHERE id_usuario='$usuarios'";
+			$resultado = mysqli_query($conexion, $consulta_usuario);
+			$row_usuario = mysqli_fetch_assoc($resultado);
+			$nombre = $row_usuario['nombre'] .
+				' ' . $row_usuario['prim_ape'];
+			$usuarios += [$usuarios => $nombre];
+
+		}
+
+	} else {
+		return;
+	}
+
+	$razones = array();
+	$consulta = "SELECT * FROM razon";
+	$resultado = mysqli_query($conexion, $consulta);
+	while ($row_razon = mysqli_fetch_assoc($resultado)) {
+		$razones += [$row_razon['id_razon'] => $row_razon['razon']];
+	}
+
 	echo '<div id="alumTermino" class="notif">
 		<h1 class="tipo">Terminó la sesión</h1>
 		<h1 class="preg">La asesoría de ' .
 		$row['tema'] . ' con ' . $row['nombre'] . $row['prim_ape'].
 		'ya ha terminado
-			¿Gustas dejar un comentario?</h1>
-		    	<textarea name="texto" rows="10" cols="100"></textarea>
-		<h1 class="preg">¿Gustas calificar la asesoría?</h1>
-		<label>
-			<input type="number" id="" min="1" max="5">
-		</label>
+		¿Gustas dejar un comentario?</h1>';
 
-		<h1 class="preg">¿Algún usuario tuvó un comportamiento inapropiado?</h1>
-		<label for= "ResTaco">
-		    	<label><input type="checkbox" name="taco5" value="A" 	required>Verde</label>
-			<label><input type="checkbox" name="taco5" value="B">Roja</label>
-		    	<label><input type="checkbox" name="taco5" value="C">Naranja (de habanero)</label>
-		</label>
-		<h1 class="preg">¿Cuál fue su falta?</h1>.
-		<label for= "ResTaco">
-			<label><input type="radio" name ="taco5" value="A" required>Verde</label>
-			<label><input type="radio" name ="taco5" value="B">Roja</label>
-			<label><input type="radio" name ="taco5" value="C">Naranja (de habanero)</label>
-			<label><input type="radio" name ="taco5" value="B">Roja</label>
-			<label><input type="radio" name ="taco5" value="C">Naranja (de habanero)</label>
-		</label>
-		<button type="button" class="submitcarr" name="button">Aceptar</button>
+	echo '<textarea id="'.$row_asesoria['id_notificacion'].'::' . 'com'. '"
+		name="texto" rows="10" cols="100"></textarea>';
+
+	echo '<h1 class="preg">¿Gustas calificar la asesoría?</h1>
+		<label>';
+	echo '<input
+		id="'.$row_asesoria['id_notificacion'].'::' . 'val'. '"
+		type="number" min="1" max="5">';
+	echo '</label>
+
+		<h1 class="preg">¿Algún usuario tuvó un comportamiento inapropiado?</h1>';
+
+	foreach ($usuarios as $id_usuario => $usuario) {
+		echo '<label>';
+		echo $usuario;
+		echo '<input id="'. $id_usuario .'" type="checkbox">';
+		echo '</label>';
+	}
+
+	echo '<h1 class="preg">¿Cuál fue su falta?</h1>.';
+
+	foreach ($razones as $id_razon => $razon) {
+		echo '<label>';
+		echo $razon;
+		echo '<input id="'. $id_razon .'" type="checkbox">';
+		echo '</label>';
+	}
+
+	echo '<button type="button" class="submitcarr" name="button">Aceptar</button>
 	    </div>';
 }
 
-function mostrar_noti_confirmar_asesoria()
+function mostrar_noti_confirmar_asesoria($conexion, $row_asesoria, $id_asesoria)
 {
+	$consulta = "SELECT id_usuario FROM asesoria_has_usuario
+		WHERE id_asesoria=$id_asesoria
+		AND es_solicitante=true;";
+	$resultado = mysqli_query($conexion, $consulta);
+	$row = mysqli_fetch_assoc($resultado);
+	$id_usuario = $row['id_usuario'];
+
+	$consulta = "SELECT nombre, prim_ape, grado, correo FROM usuario
+		WHERE id_usuario='$id_usuario';";
+	$resultado = mysqli_query($conexion, $consulta);
+	$row = mysqli_fetch_assoc($resultado);
+	$nombre = $row['nombre'];
+	$prim_ape = $row['prim_ape'];
+	$nombre .= ' ' . $prim_ape;
+	$grado = $row['grado'];
+	$correo = $row['correo'];
+
+
 	echo '<div id="aseSoli" class="notif">
 			<h1 class="tipo">Solicitud de asesoría</h1>
-			<h1 class="preg">USUARIO esta solicitando una asesoría</h1>
-			<div>
-			Información de la asesoría:
+			<h1 class="preg">'. $nombre .' esta solicitando una asesoría</h1>
+			<div>';
+	echo 'Año escolar: ' . $grado;
+	echo '<br>';
+	echo 'Correo: ' . $correo;
+
+	echo 'Información de la asesoría:
 			</div>
-			<label for= "ResTaco">
-			<label><input type="radio" name ="taco5" value="A" required>Verde</label>
-			<label><input type="radio" name ="taco5" value="B">Roja</label>
-			</label>
+
+			<label><input type="radio" value="true">Aceptar</label>
+			<label><input type="radio" value="false">Rechazar</label>
+
 			<button type="button" class="submitcarr" name="button">Aceptar</button>
 		</div>';
 }
 
-function mostrar_noti_pasar_asistencia()
+function mostrar_noti_pasar_asistencia($conexion, $row, $id_asesoria)
 {
+	$consulta = "SELECT id_usuario FROM asesoria_has_usuario
+		WHERE id_asesoria=$id_asesoria";
+	$resultado = mysqli_query($conexion, $consulta);
+
+	$usuarios = array();
+	if (mysqli_num_rows($resultado) > 0) {
+		while ($row_asesoria = mysqli_fetch_assoc($resultado)) {
+			$id_usuario = $row_asesoria['id_usuario'];
+			$consulta_usuario = "SELECT nombe, prim_ape FROM usuario
+				WHERE id_usuario='$usuarios'";
+			$resultado = mysqli_query($conexion, $consulta_usuario);
+			$row_usuario = mysqli_fetch_assoc($resultado);
+			$nombre = $row_usuario['nombre'] .
+				' ' . $row_usuario['prim_ape'];
+			$usuarios += [$usuarios => $nombre];
+
+		}
+
+	} else {
+		return;
+	}
 	echo '<div id="aseTermino" class="notif">
-			<h1 class="tipo">Terminó tu sesión</h1>
-			<h1 class="preg">¿Quiénes asistieron a la asesoría?</h1>
-			<label for= "ResTaco">
-			<label><input type="radio" name ="taco5" value="A" required>Verde</label>
-			<label><input type="radio" name ="taco5" value="B">Roja</label>
-			<label><input type="radio" name ="taco5" value="C">Naranja (de habanero)</label>
-			</label>
-			<button type="button" class="submitcarr" name="button">Aceptar</button>
-		</div>';
+		<h1 class="tipo">Terminó tu sesión</h1>
+		<h1 class="preg">¿Quiénes asistieron a la asesoría?</h1>';
+
+	foreach ($usuarios as $id_usuario => $usuario) {
+		echo '<label>';
+		echo $usuario;
+		echo '<input id="'. $id_usuario .'" type="checkbox">';
+		echo '</label>';
+	}
+
+	echo '<button id"'. $row['id_asesoria'] .'" type="button" class="submitcarr" name="button">
+		Aceptar</button></div>';
 }
 
-function mostrar_noti_aviso_strike()
+function mostrar_noti_aviso_strike($conexion, $id_usuario)
 {
+	$consulta = "SELECT num_faltas FROM usuario
+		WHERE $id_usuario='$id_usuario'";
+	$resultado = mysqli_query($conexion, $consulta);
+	if (mysqli_num_rows($resultado) === 1) {
+		$row = mysqli_fetch_assoc($resultado);
+		$strikes = $row['num_faltas'];
+	} else {
+		return;
+	}
+
 	echo '<div id="aseTermino" class="notif">
 			<h1 class="tipo">¡Strike!</h1>
 			<h1 class="preg">Has recibido un strike</h1>
+			<p>Tienes ' . $strikes . ', recuerda que si acumulas 3,
+			ameritarás una suspensión de dos semanas.</p>
 			<button type="button" class="submitcarr" name="button">Aceptar</button>
 		</div>';
 }
 
-function mostrar_noti_recibir_confirmacion()
+function mostrar_noti_recibir_confirmacion($row)
 {
+	if ($row['confirmada'] == true) {
+		$mensaje = 'Solicitud confirmada';
+	} else {
+		$mensaje = 'Solicitud rechazada';
+	}
 	echo '<div id="aseTermino" class="notif">
-			<h1 class="tipo">¡Strike!</h1>
-			<h1 class="preg">Has recibido un strike</h1>
+			<h1 class="tipo">' . $mensaje . '</h1>
+			<h1 class="preg">'.$row['tema'].'</h1>
+			<p>En la asesoría de' . $row['nombre'] . ' para el '. $row['fecha_hora'] .'.</p>
 			<button type="button" class="submitcarr" name="button">Aceptar</button>
 		</div>';
 }
@@ -180,12 +230,12 @@ while ($row = mysqli_fetch_assoc($resultado)) {
 	$tipo_notificacion = $tipos_notificacion[$row['id_tipo_notificacion']];
 
 	$id_asesoria = $row['id_asesoria'];
-	
+
 	$consulta = "SELECT nombre, prim_ape, seg_ape, materia, tema,
-	 fecha_hora, duracion_simple, cupo, medio_vir FROM usuario 
-	 INNER JOIN asesoria ON usuario.id_usuario=asesoria.id_usuario 
-	 INNER JOIN materia ON asesoria.id_materia=materia.id_materia 
-	 WHERE id_asesoria=$id_asesoria";
+		fecha_hora, duracion_simple, cupo, medio_vir FROM usuario
+		INNER JOIN asesoria ON usuario.id_usuario=asesoria.id_usuario
+		INNER JOIN materia ON asesoria.id_materia=materia.id_materia
+		WHERE id_asesoria=$id_asesoria";
 	$resultado_asesoria = mysqli_query($conexion, $consulta);
 	$row_asesoria = mysqli_fetch_assoc($resultado_asesoria);
 
@@ -195,30 +245,16 @@ while ($row = mysqli_fetch_assoc($resultado)) {
 	} elseif ($tipo_notificacion === 'aviso_inicio') {
 		mostrar_noti_aviso_inicio($row_asesoria);
 	} elseif ($tipo_notificacion === 'valorar') {
+		mostrar_noti_final_formulario($conexion, $row, $row_asesoria, $id_asesoria);
 	} elseif ($tipo_notificacion === 'confirmar_asesoria') {
-		mostrar_noti_confirmar_asesoria();
+		mostrar_noti_confirmar_asesoria($conexion, $row_asesoria, $id_asesoria);
 	} elseif ($tipo_notificacion === 'pasar_asistencia') {
-		mostrar_noti_pasar_asistencia();
+		mostrar_noti_pasar_asistencia($conexion, $row_asesoria, $id_asesoria);
 	} elseif ($tipo_notificacion === 'aviso_trike') {
-		mostrar_noti_aviso_strike();
+		mostrar_noti_aviso_strike($conexion, $id_usuario);
 	} elseif ($tipo_notificacion === 'recibir_confirmacion') {
-		mostrar_noti_recibir_confirmacion();
+		mostrar_noti_recibir_confirmacion($row_asesoria);
 	}
 }
 
-// mostrar_noti_recibir_confirmacion();
-// mostrar_noti_aviso_strike();
-// mostrar_noti_pasar_asistencia();
-// mostrar_noti_confirmar_asesoria();
 // EOF
-
-?>
-
-</div>
-    <footer>
-        <h3>Asesorías P6</h3>
-    </footer>
-
-    <script src="../../libs/bootstrap-5.0.1-dist/js/bootstrap.min.js"></script>
-</body>
-</html>
