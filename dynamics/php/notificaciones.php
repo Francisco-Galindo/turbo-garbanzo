@@ -27,5 +27,8 @@ while ($row = mysqli_fetch_assoc($resultado)) {
 	echo $row['id_asesoria'] . '<br>';
 	echo $row['fecha_hora'] . '<br>';
 	echo strtotime($row['fecha_hora']) - time() . '<br>';
+	if (strtotime($row['fecha_hora']) - time() <= 0 ) {
+		
+	}
 }
  //EOF
