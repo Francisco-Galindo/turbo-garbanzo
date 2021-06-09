@@ -40,7 +40,8 @@ function ver_horarios_cercanos(
 	$tiempo_actual,
 	$tiempo_a_comparar,
 	$horarios_disponibles
-) {
+)
+{
 	$horarios = ver_horarios_usuario($conexion, $id_usuario);
 	$horarios = json_decode($horarios, true, 512, JSON_UNESCAPED_UNICODE);
 
@@ -124,7 +125,7 @@ function elegir_horarios($conexion, $id_usuario, $horarios)
 	}
 }
 
-
+session_start();
 $conexion = conectar_base();
 $_POST['horarios'] = ['1::2', '3::1', '3::3'];
 $_POST['accion'] = 'ver_todos_los_horarios';
@@ -169,9 +170,6 @@ if ($accion === 'ver_horario_usuario') {
 	$alerta = elegir_horarios($conexion, $id_usuario, $horarios);
 }
 
-
-// ver_todos_horarios($conexion);
-// elegir_horarios($conexion, $id_usuario, $horarios);
 
 mysqli_close($conexion);
 

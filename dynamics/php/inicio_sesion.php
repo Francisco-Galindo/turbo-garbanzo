@@ -3,9 +3,6 @@
 require 'config.php';
 require 'seguridad_y_cripto.php';
 
-$_POST['num_cuenta'] = '320054336';
-$_POST['contrasena'] = 'popo';
-
 $conexion = conectar_base();
 // Purgando el arreglo $_POST de posibles ataques
 $_POST = purgar_arreglo($_POST, $conexion);
@@ -28,13 +25,13 @@ if ($num_cuenta === null || strlen($num_cuenta) !== 9) {
 	array_push($error, 'Número de cuenta no válido');
 }
 
-
+$id = null;
 // Comparando la contraseña con la de la base de datos
 if ($error[0] === false) {
 	$num_cuenta_hash = hash('sha256', $num_cuenta);
 	$contrasena_hash = hash('sha256', $contrasena);
 
-	$consulta = "SELECT contrasena, sal FROM usuario
+	$consulta = "SELECT id_usuario, contrasena, sal FROM usuario
 		WHERE id_usuario='$num_cuenta_hash';";
 	$resultado = mysqli_query($conexion, $consulta);
 
@@ -43,6 +40,7 @@ if ($error[0] === false) {
 		array_push($error, 'No existe tal usuario');
 	} else {
 		$row = mysqli_fetch_assoc($resultado);
+		$id = $row['id_usuario'];
 		$hash_bd = $row['contrasena'];
 		$sal = $row['sal'];
 
@@ -62,6 +60,8 @@ if ($error[0] === false) {
 
 // Enviando la respuesta
 if ($error[0] === false) {
+	session_start();
+	$_SESSION['id_usuario'] = $id;
 	echo 'Exito';
 } else {
 	$error[0] = 'Error:';
@@ -69,6 +69,7 @@ if ($error[0] === false) {
 		echo $valor;
 		echo '|';
 	}
+	exit(500);
 }
 
 // EOF
