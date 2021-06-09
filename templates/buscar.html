@@ -5,10 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../statics/img/favicon/favicon.svg" type="image/png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="../libs/fontawesome-free-5.15.3-web/css/all.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="../libs/bootstrap-5.0.1-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../libs/bootstrap-5.0.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../libs/fontawesome-free-5.15.3-web/css/all.min.css">
     <link rel="stylesheet" href="../statics/styles/basics.css">
     <link rel="stylesheet" href="../statics/styles/buscar.css">
     <title>Buscar</title>
@@ -49,6 +47,7 @@
     
     <div id="busqueda">
         <input id="buscador" type="text" class="carrera" name="carrera" placeholder="Buscar" value="" required>
+
         <select name="modoBusqueda" id="modoBusqueda">
             <option value="0">Asesoría</option>
             <option value="1">Asesor</option>
@@ -59,50 +58,56 @@
     <div id="cont">
         <div id="filt">
             <h1 id="Filtros">Filtros</h1>
-    
-            <div class="ops">
-                <h1>Fecha:</h1>
-                <select name="modalidad">
-                    <option value="0">Todas</option>
-                    <option value="1">A Distancia</option>
-                    <option value="2">Abierto</option>
-                    <option value="3">Escolarizado</option>
-                </select>
+            <div id="filt1">
+                <div class="ops">
+                    <h1>Fecha:</h1>
+                    <select name="modalidad">
+                        <option value="0">Todas</option>
+                        <option value="1">A Distancia</option>
+                        <option value="2">Abierto</option>
+                        <option value="3">Escolarizado</option>
+                    </select>
+                </div>
+                
+                <div class="ops">
+                    <h1>Horario:</h1>
+                    <select name="modalidad">
+                        <option value="0">Todas</option>
+                        <option value="1">A Distancia</option>
+                        <option value="2">Abierto</option>
+                        <option value="3">Escolarizado</option>
+                    </select>
+                </div>
             </div>
             
-            <div class="ops">
-                <h1>Horario:</h1>
-                <select name="modalidad">
-                    <option value="0">Todas</option>
-                    <option value="1">A Distancia</option>
-                    <option value="2">Abierto</option>
-                    <option value="3">Escolarizado</option>
-                </select>
+            <div id="filt2">
+                <div  class="ops">
+                    <h1>Materia:</h1>
+                    <select name="modalidad">
+                        <option value="0">Todas</option>
+                        <option value="1">A Distancia</option>
+                        <option value="2">Abierto</option>
+                        <option value="3">Escolarizado</option>
+                    </select>
+                </div>
+        
+                <div  class="ops">
+                    <h1>Modalidad:</h1>
+                    <select name="modalidad">
+                        <option value="0">Todas</option>
+                        <option value="1">A Distancia</option>
+                        <option value="2">Abierto</option>
+                        <option value="3">Escolarizado</option>
+                    </select>
+                </div>
             </div>
 
-            <div  class="ops">
-                <h1>Materia:</h1>
-                <select name="modalidad">
-                    <option value="0">Todas</option>
-                    <option value="1">A Distancia</option>
-                    <option value="2">Abierto</option>
-                    <option value="3">Escolarizado</option>
-                </select>
-            </div>
-    
-            <div  class="ops">
-                <h1>Modalidad:</h1>
-                <select name="modalidad">
-                    <option value="0">Todas</option>
-                    <option value="1">A Distancia</option>
-                    <option value="2">Abierto</option>
-                    <option value="3">Escolarizado</option>
-                </select>
-            </div>
         </div>
     
         <div class="results">
-            
+            <div id="tarjeta">
+
+            </div>
         </div>
     </div>
     
@@ -110,5 +115,7 @@
     <footer>
         <h3>Asesorías P6</h3>
     </footer>
+
+    <script src="../libs/bootstrap-5.0.1-dist/js/bootstrap.min.js"></script>
 </body>
 </html>

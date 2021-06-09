@@ -152,20 +152,29 @@ p{
     #cont{
         display: flex;
         flex-direction:column;
-        flex-wrap: nowrap;
         align-items: center;
     }
     #bloque3{
         display: flex;
         flex-direction:column;
-        flex-wrap: nowrap;
         justify-content: center;
         align-items: center;
+    }
+    #FE,#programadores{
+        margin-top: 15px;
     }
     #bloque3 h3{
         padding-left: 2px;
     }
     #fotos{
         display: none;
+    }
+}
+@media screen and (max-width: 480px){
+    #c1,#c2{
+        width: 250px;
+    }
+    #bloque1,#bloque2,p{
+        width: 250px;
     }
 }

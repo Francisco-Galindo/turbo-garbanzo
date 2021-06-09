@@ -15,18 +15,26 @@ h1{
     font-size: 50px;
 }
 h2{
-    font-size: 40px;
+    font-size: 42px;
+    text-align: center;
     margin:2px;
+    padding-top: 17px;
 }
 button{
-    width: 200px;
+    width: 300px;
     height: 50px;
     background-color: var(--azul1);
     color: var(--textwhite);
     font-family: "RufB";
-    font-size: 25px;
+    font-size: 32px;
     text-align: center;
     cursor: pointer;
+    border-radius: 12.25px;
+    border: none;
+}
+#logo{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 #boton{
     display: flex;
@@ -38,8 +46,10 @@ button{
     align-items: center;
 }
 #asesoria{
-    width: 240px;
+    width: 350px;
+    height: 90px;
     background-color: var(--azul1);
+    border-radius: 5px;
     color: var(--textwhite);
 }
 #elements{
