@@ -13,6 +13,7 @@
     height: 50px;
     background-color: var(--gris1);
     border-radius: 5px;
+    width: 430px;
 
     grid-column-start: 2;
     grid-row-start: 1;
@@ -51,6 +52,7 @@ button{
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    width: 1130px;
 }
 .tipo{
     align-self: start;
@@ -81,7 +83,6 @@ button{
     align-self: center;
     background-color: var(--azul2);
     border-radius: 5px;
-    width: 1130px;
     height: 288px;
 }
 
@@ -89,7 +90,6 @@ button{
     align-self: center;
     background-color: var(--azul2);
     border-radius: 5px;
-    width: 1130px;
     height: 288px;
 }
 
@@ -97,7 +97,6 @@ button{
     align-self: center;
     background-color: var(--azul2);
     border-radius: 5px;
-    width: 1130px;
     height: 1125px;
 }
 
@@ -107,7 +106,6 @@ button{
     align-self: center;
     background-color: var(--azul2);
     border-radius: 5px;
-    width: 1130px;
     height: 288px;
 }
 
@@ -117,6 +115,34 @@ button{
     align-self: center;
     background-color: var(--azul2);
     border-radius: 5px;
-    width: 1130px;
     height: 288px;
+}
+/*=ADAPTABILIDAD
+-----------------------------------------------------------*/
+
+@media screen and (max-width: 1150px){
+ .notif{
+    width: 700px;
+ }
+}
+@media screen and (max-width: 730px){
+    .notif{
+        width: 450px;
+    }
+}
+@media screen and (max-width: 480px){
+    #cont{
+        width: 300px;
+    }
+    .notif{
+        width: 300px;
+    }
+    .tituloSc{
+        width: 300px;
+    }
+    .preg{
+        font-size:24px;
+        width: 300px;
+        height: 85px;
+    }
 }
