@@ -140,6 +140,7 @@ mysqli_close($conexion);
 
 // Enviando resultados
 if ($error[0] === false) {
+	$_SESSION['id_usuario'] = $id;
 	echo 'Exito';
 } else {
 	for ($i = 1; $i < count($error); $i++) {

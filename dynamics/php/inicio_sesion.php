@@ -28,13 +28,13 @@ if ($num_cuenta === null || strlen($num_cuenta) !== 9) {
 	array_push($error, 'Número de cuenta no válido');
 }
 
-
+$id = null;
 // Comparando la contraseña con la de la base de datos
 if ($error[0] === false) {
 	$num_cuenta_hash = hash('sha256', $num_cuenta);
 	$contrasena_hash = hash('sha256', $contrasena);
 
-	$consulta = "SELECT contrasena, sal FROM usuario
+	$consulta = "SELECT id_usuario, contrasena, sal FROM usuario
 		WHERE id_usuario='$num_cuenta_hash';";
 	$resultado = mysqli_query($conexion, $consulta);
 
@@ -43,6 +43,7 @@ if ($error[0] === false) {
 		array_push($error, 'No existe tal usuario');
 	} else {
 		$row = mysqli_fetch_assoc($resultado);
+		$id = $row['id_usuario'];
 		$hash_bd = $row['contrasena'];
 		$sal = $row['sal'];
 
@@ -62,6 +63,9 @@ if ($error[0] === false) {
 
 // Enviando la respuesta
 if ($error[0] === false) {
+	session_start();
+	$_SESSION['id_usuario'] = $id;
+	echo $_SESSION['id_usuario'] . '<br>';
 	echo 'Exito';
 } else {
 	$error[0] = 'Error:';

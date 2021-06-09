@@ -48,6 +48,12 @@ h1{
     grid-column-start: 2;
     text-align: center;
 }
+#filt1{
+    grid-row-start: 2;
+}
+#filt2{
+    grid-row-start: 4;
+}
 #Filtros{
     align-self: center;
 }
@@ -70,6 +76,175 @@ select{
     grid-column-start: 4;
     background-color: #dfdfdf;
 }
+#tarjeta{
+    width: 100%;
+    height: 265px;
+    background-color: var(--azul2);
+    border-radius: 5px;
+}
 #cont{
     flex-grow: 1;
+}
+
+/*=ADAPTABILIDAD
+-----------------------------------------------------------*/
+@media screen and (max-width: 1400px){
+    #cont{
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+    }
+    #filt{
+        display: flex;
+        flex-direction:row;
+        align-items: center;
+
+        width: 90%;
+        height: 150px;
+        background-color: var(--azul1);
+        border-radius: 5px;
+        text-align: center;
+        justify-content: center;
+    }
+    #filt1{
+        display: flex;
+        flex-direction: row;
+    }
+    #filt2{
+        display: flex;
+        flex-direction: row;
+    }
+    .ops{
+        margin-left:30px ;
+    }
+    h1{
+        font-size: 28px;
+        color: #dfdfdf;
+    }
+    select{
+        width: 180px;
+        height: 40px;
+        background-color: var(--azul2);
+        border-radius: 5px;
+        border: 0;
+    
+        font-family: "LGeorge";
+        font-size: 22px;
+        color: #dfdfdf;
+        text-align: center;
+    }
+    .results{
+        flex-direction:column;
+        background-color: #dfdfdf;
+        width: 85%;
+        height: 100%;
+        margin-top: 25px;
+    }
+    #tarjeta{
+        width: 100%;
+        height: 265px;
+        background-color: var(--azul2);
+        border-radius: 5px;
+    }
+}
+@media screen and (max-width: 1040px){
+    #filt{
+        height: 250px;
+    }
+    #filt1{
+        display: flex;
+        flex-direction: column;
+        margin-left: 20px;
+    }
+    #filt2{
+        display: flex;
+        flex-direction: column;
+        margin-left: 20px;
+    }
+}
+@media screen and (max-width: 840px){
+    #busqueda{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 15px;
+    }
+    #buscador{
+        width: 450px;
+        height: 50px;
+        font-size: 38px;
+        color: #dfdfdf;
+        text-align: center;
+    }
+    #modoBusqueda{
+        width: 250x;
+        height: 50px;
+        font-size: 38px;
+        color: #dfdfdf;
+        text-align: center;
+        margin-top: 5px;
+    }
+    #filt{
+        height: 250px;
+        justify-content: center;
+    }
+    #filt1{
+        margin-left: 0px;
+        
+    }
+    #filt2{
+        margin-left: 0px;
+    }
+    h1{
+        font-size: 20px;
+        color: #dfdfdf;
+    }
+    select{
+        width: 150px;
+        height: 40px;
+        background-color: var(--azul2);
+        border-radius: 5px;
+        border: 0;
+    
+        font-family: "LGeorge";
+        font-size: 20px;
+        color: #dfdfdf;
+        text-align: center;
+    }
+}
+@media screen and (max-width: 480px){
+    #buscador{
+        width: 300px;
+        height: 30px;
+        font-size: 30px;
+        color: #dfdfdf;
+        text-align: center;
+    }
+    #modoBusqueda{
+        width: 150px;
+        height: 30px;
+        font-size: 20px;
+        color: #dfdfdf;
+        text-align: center;
+        margin-top: 5px;
+    }
+    #filt{
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+
+        width: 90%;
+        height: 100%;
+        background-color: var(--azul1);
+        border-radius: 5px;
+        text-align: center;
+        justify-content: center;
+    }
+    #filt1{
+        justify-self: center;
+    }
+    .ops{
+        margin-left: 0%;
+    }
 }
