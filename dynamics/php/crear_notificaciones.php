@@ -84,6 +84,22 @@ function notificar_solicitud_asesoria_asesor(
 	[$id_aviso]);
 }
 
+function notificar_solicitud_asesoria_alumno(
+	$conexion,
+	$id_usuario,
+	$id_asesoria
+)
+{
+	$consulta = "SELECT id_tipo_notificacion FROM tipo_notificacion
+		WHERE titulo='recibir_confirmacion';";
+	$resultado = mysqli_query($conexion, $consulta);
+	$row = mysqli_fetch_assoc($resultado);
+	$id_aviso = $row['id_tipo_notificacion'];
+
+	notificar_sobre_sesion($conexion, $id_asesoria, $id_usuario, 
+	[$id_aviso]);
+}
+
 function notificar_sobre_sesion(
 	$conexion,
 	$id_asesoria,
