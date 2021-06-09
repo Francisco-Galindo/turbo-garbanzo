@@ -1,5 +1,5 @@
 <?php
-$_SESSION['usuario'] = '1';
+$_SESSION['usuario'] = '9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07';
 $_POST['fecha'] = "2021-05-05";
 $_POST['hora'] = "19:05";
 $_POST['duracion'] = "true";
@@ -29,7 +29,7 @@ if (isset($_SESSION['usuario'])) {
 	$medio = (($_POST['medio']) == "true") ? true : false;
 	$lugar = $_POST['lugar'];
 
-	$datos_as = "INSERT INTO asesoria (id_usuario,id_materia,tema,fecha_hora,duracion_simple,cupo,medio_vir,lugar) VALUES ($usuario, '$materia','$tema','$fechaHora','$duracion','$cupo','$medio','$lugar')";
+	$datos_as = "INSERT INTO asesoria (id_usuario,id_materia,tema,fecha_hora,duracion_simple,cupo,medio_vir,lugar) VALUES ('$usuario', '$materia','$tema','$fechaHora','$duracion','$cupo','$medio','$lugar')";
 
 	$ins = mysqli_query($conexion, $datos_as);
 	if ($ins) {  
