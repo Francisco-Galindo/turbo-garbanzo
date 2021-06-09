@@ -9,7 +9,7 @@ function mostrar_opciones($conexion, $row, $id_usuario)
 {
         $grado = $row['grado'];
         $grado = 6;
-        $consulta = "SELECT id_materia, materia FROM materia 
+        $consulta = "SELECT id_materia, materia FROM materia
                 WHERE grado<='$grado';";
         $resultado = mysqli_query($conexion, $consulta);
 
@@ -30,12 +30,12 @@ function elegir_materia($conexion, $arreglo, $id_usuario)
 {
         $alerta = '';
 
-        $consulta = "DELETE FROM usuario_has_materia 
+        $consulta = "DELETE FROM usuario_has_materia
                 WHERE id_usuario='$id_usuario'";
         $resultado = mysqli_query($conexion, $consulta);
         foreach ($arreglo as $seriado) {
-                $consulta = "INSERT INTO usuario_has_materia 
-                (id_usuario, id_materia) 
+                $consulta = "INSERT INTO usuario_has_materia
+                (id_usuario, id_materia)
                 VALUES ('$id_usuario', '$seriado');";
                 $resultado = mysqli_query($conexion, $consulta);
                 if (!$resultado) {
@@ -63,7 +63,7 @@ function ver_materias_del_usuario($conexion, $id_usuario)
         }
         return true;
 }
-
+/******************************************************************************/
 
 
 $_POST['id_usuario'] = '9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07';
@@ -94,7 +94,7 @@ $consulta = "SELECT grado FROM usuario WHERE id_usuario='$id_usuario';";
 $resultado = mysqli_query($conexion, $consulta);
 if (mysqli_num_rows($resultado) === 0) {
         $error[0] = true;
-	array_push($error, 'Usuario inexistente');
+        array_push($error, 'Usuario inexistente');
 } else {
         if ($accion === 'mostrar_opciones') {
                 $row = mysqli_fetch_assoc($resultado);
@@ -106,22 +106,22 @@ if (mysqli_num_rows($resultado) === 0) {
         }
         if ($exito === false) {
                 $error[0] = true;
-	        array_push($error, 'Consulta fallida');
+                array_push($error, 'Consulta fallida');
         }
         mysqli_close($conexion);
 }
 
 if ($error[0] === false) {
-	if ($exito !== true) {
+        if ($exito !== true) {
                 echo 'Advertencia: ';
                 echo $exito;
         }
 } else {
-	$error[0] = 'Error:';
-	foreach ($error as $valor) {
-		echo $valor;
-		echo '|';
-	}
+        $error[0] = 'Error:';
+        foreach ($error as $valor) {
+                echo $valor;
+                echo '|';
+        }
 }
 
 // EOF
