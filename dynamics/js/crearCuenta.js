@@ -33,7 +33,7 @@ $(document).ready(function() {
            
         })
         peticion.fail(function(resp){
-            console.log("No se realizó la petición");
+            console.log("No se realizó la petición :(");
         })
         
     });
