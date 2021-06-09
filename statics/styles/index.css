@@ -1,9 +1,6 @@
 #principal{
     flex-grow: 1;
 }
-a{
-    padding: 0px;
-}
 #nav{
     height: 80px;
     width: 100%;
@@ -97,6 +94,9 @@ a{
     border-radius: 12.25px;
     justify-self: right;
 }
+#iniSes:hover{
+    background-color: var(--azul4);
+}
 #iniCue{
 
     grid-column-start: 3;
@@ -108,6 +108,9 @@ a{
     cursor: pointer;
     border-radius: 12.25px;
     justify-self: left;
+}
+#iniCue:hover{
+    background-color: #43B50C;
 }
 footer{
     width: 100%;

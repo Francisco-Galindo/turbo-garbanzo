@@ -100,16 +100,12 @@ button{
     height: 1125px;
 }
 
-
-
 #aseIni{
     align-self: center;
     background-color: var(--azul2);
     border-radius: 5px;
     height: 288px;
 }
-
-
 
 #aseFin{
     align-self: center;
