@@ -7,15 +7,20 @@ h1{
     font-size: 50px;
 }
 h2{
-    font-size: 40px;
+    font-size: 50px;
+    text-align: center;
     margin:2px;
+    padding-top: 15px;
 }
 #uno{
     width: 100%;
     background-color: var(--azul1);
     text-align: center;
     color: var(--textwhite);
-   
+}
+#logo{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 #primer{
     display: flex;
@@ -23,8 +28,10 @@ h2{
     align-items: center;
 }
 #asesoria{
-    width: 240px;
+    width: 320px;
+    height: 90px;
     background-color: var(--azul1);
+    border-radius: 5px;
     color: var(--textwhite);
 }
 
@@ -33,21 +40,32 @@ h2{
 input, select{
     background-color: var(--azul2);
     color: var(--textwhite);
+    width: 200px;
+    height: 35px;
+    margin-top: 3.5px;
 }
 label{
-    font-size: 19px;
+    font-size: 26px;
     font-family:"LGeorge";
-    background-color: rgba(0, 183, 255, 0.205);
+    /* background-color: rgba(0, 183, 255, 0.205); */
+}
+#label1{
+    width: 225px;
+}
+#label2{
+    width: 250px;
 }
 button{
-    width: 200px;
+    width: 300px;
     height: 50px;
     background-color: var(--azul1);
     color: var(--textwhite);
     font-family: "RufB";
-    font-size: 25px;
+    font-size: 32px;
     text-align: center;
     cursor: pointer;
+    border-radius: 12.25px;
+    border: none;
 }
 #boton{
     display: flex;
@@ -60,6 +78,7 @@ button{
     padding: 15px;
     align-items: center;
     justify-content: center;
+    flex-grow: 1;
 }
 
 #col1, #col2{
@@ -79,33 +98,72 @@ footer{
 }
 /* =ADAPTABILIDA
 ----------------------------------------------------------*/
-@media screen and (max-width: 930px){
+@media screen and (max-width: 995px){
     .container{
         flex-direction: column;
         padding: 3px;
         align-items: left;
         justify-content: left;
     }
-    label{
-        font-size: 15px;
-        font-family:"LGeorge";
-        background-color: rgba(0, 183, 255, 0.205);
+    #label1{
+        width: 250px;
     }
-
 }
 @media screen and (max-width: 510px){
     .container{
-        overflow-x: auto;
+        overflow-x: 1;
+    }
+    #label1{
+        width: 180px;
+    }
+    #label2{
+        width: 180px;
     }
     label{
-        font-size: 12px;
+        font-size: 20px;
     }
     input, select{
-        row-gap: 10px;
+        background-color: var(--azul2);
+        color: var(--textwhite);
+        width: 180px;
+        height: 28px;
+        margin-top: 3.5px;
     }
-
-    
-
+    #nacimiento{
+        margin-top: 15px;
+    }
+    #grado{
+        margin-top:20px;
+    }
 }
-
+@media screen and (max-width: 410px){
+    #label1{
+        width: 115px;
+    }
+    #label2{
+        width: 115px;
+    }
+    #primApe{
+        margin-top: 25px;
+    }
+    #segApe{
+        margin-top: 25px;
+    }
+    #nocuenta{
+        margin-top: 25px;
+    }
+    #email{
+        margin-top: 25px;
+    }
+    label{
+        font-size: 18px;
+    }
+    input, select{
+        background-color: var(--azul2);
+        color: var(--textwhite);
+        width: 150px;
+        height: 22px;
+        margin-top: 3.5px;
+    }
+} 
 

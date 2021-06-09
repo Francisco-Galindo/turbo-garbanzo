@@ -3,9 +3,6 @@
 require 'config.php';
 require 'seguridad_y_cripto.php';
 
-$_POST['num_cuenta'] ;//= '320054336';
-$_POST['contrasena'] ;//= 'popo';
-
 $conexion = conectar_base();
 // Purgando el arreglo $_POST de posibles ataques
 $_POST = purgar_arreglo($_POST, $conexion);
@@ -65,7 +62,6 @@ if ($error[0] === false) {
 if ($error[0] === false) {
 	session_start();
 	$_SESSION['id_usuario'] = $id;
-	echo $_SESSION['id_usuario'] . '<br>';
 	echo 'Exito';
 } else {
 	$error[0] = 'Error:';
@@ -73,6 +69,7 @@ if ($error[0] === false) {
 		echo $valor;
 		echo '|';
 	}
+	exit(500);
 }
 
 // EOF

@@ -15,18 +15,29 @@ h1{
     font-size: 50px;
 }
 h2{
-    font-size: 40px;
+    font-size: 50px;
+    text-align: center;
     margin:2px;
+    padding-top: 15px;
 }
 button{
-    width: 200px;
+    width: 300px;
     height: 50px;
     background-color: var(--azul1);
     color: var(--textwhite);
     font-family: "RufB";
-    font-size: 25px;
+    font-size: 32px;
     text-align: center;
     cursor: pointer;
+    border-radius: 12.25px;
+    border: none;
+}
+label{
+    font-size: 26px;
+}
+#logo{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 #boton{
     display: flex;
@@ -38,8 +49,10 @@ button{
     align-items: center;
 }
 #asesoria{
-    width: 240px;
+    width: 320px;
+    height: 90px;
     background-color: var(--azul1);
+    border-radius: 5px;
     color: var(--textwhite);
 }
 #elements{
@@ -49,6 +62,8 @@ button{
     padding:20px;
 }
 .inputs{
+    width: 275px;
+    height: 40px;
     background-color: var(--azul2);
     color: var(--textwhite)
 }
