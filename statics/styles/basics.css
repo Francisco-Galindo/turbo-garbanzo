@@ -57,6 +57,11 @@ h2{
   font-family:"Ruf";
 }
 
+a{
+  padding: 0px;
+  text-decoration: none;
+}
+
 /*=NAVBAR
 ------------------------------------*/
 .navbar,.container-fluid{
