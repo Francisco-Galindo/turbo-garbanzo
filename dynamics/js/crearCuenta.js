@@ -29,7 +29,7 @@ $(document).ready(function() {
             method:"POST"
         });
         peticion.done(function (resp){
-            console.log("se hizo correctamente la peticion");
+            console.log(resp);
            
         })
         peticion.fail(function(resp){
