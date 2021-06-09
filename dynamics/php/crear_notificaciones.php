@@ -10,8 +10,7 @@ function notificar_inicio_asesoria(
 	$tipos_notificacion = array();
 	if ($es_asesor) {
 		$consulta = "SELECT id_tipo_notificacion FROM tipo_notificacion
-			WHERE titulo='aviso_inicio'
-			OR titulo='pasar_asistencia';";
+			WHERE titulo='aviso_inicio';";
 	} else {
 		$consulta = "SELECT id_tipo_notificacion FROM tipo_notificacion
 			WHERE titulo='aviso_inicio';";
@@ -36,12 +35,14 @@ function notificar_final_asesoria(
 	if ($es_asesor) {
 		$consulta = "SELECT id_tipo_notificacion FROM tipo_notificacion
 			WHERE titulo='aviso_final'
-			OR titulo='reportar';";
+			OR titulo='reportar'
+			OR titulo='pasar_asistencia';";
 	} else {
 		$consulta = "SELECT id_tipo_notificacion FROM tipo_notificacion
 			WHERE titulo='aviso_final'
 			OR titulo='reportar'
-			OR titulo='valorar';";
+			OR titulo='valorar'
+			OR titulo='pasar_asistencia';";
 	}
 	$resultado = mysqli_query($conexion, $consulta);
 	while ($row = mysqli_fetch_assoc($resultado)) {
@@ -116,7 +117,7 @@ function notificar_sobre_sesion(
 		WHERE id_usuario='$id_usuario'
 		AND $cadena_ids";
 	$resultado = mysqli_query($conexion, $consulta);
-	echo $consulta;
+
 	// $row = mysqli_fetch_assoc($resultado);
 	if (mysqli_num_rows($resultado) === 0) {
 		foreach ($tipos_notificacion as $id_tipo) {
