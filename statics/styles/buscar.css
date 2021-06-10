@@ -137,7 +137,12 @@ select{
     background-color:var(--gris1);
     align-self: flex-end;
     border-radius: 12.25px;
+    font-family: "LGeorge";
+    font-size: 32px;
+    color: #dfdfdf;
+    text-align: center;
 }
+
 /*=ADAPTABILIDAD
 -----------------------------------------------------------*/
 @media screen and (max-width: 1400px){
