@@ -149,7 +149,7 @@ function elegir_horarios($conexion, $id_usuario, $horarios)
                 WHERE id_usuario='$id_usuario';";
 	$resultado = mysqli_query($conexion, $consulta);
 	foreach ($horarios as $horario) {
-		$horario = explode('::', $horario);
+		$horario = explode('::', $horario[0]);
 		$consulta = "INSERT INTO usuario_has_horario
 			(id_usuario, id_hora, id_dia)
 			VALUES ('$id_usuario', $horario[1], $horario[0]);";
@@ -207,15 +207,24 @@ if ($accion === 'ver_horario_usuario') {
 	echo '<br><br>';
 	ver_todos_horarios($conexion);	
 } elseif ($accion === 'elegir_horario_usuario') {
-	$alerta = elegir_horarios($conexion, $id_usuario, $horarios);
+
+	parse_str($_POST['horarios'], $horarios);
+	$horarios = array_values($horarios);
+	array_pop($horarios);
+	if (count($horarios) >= 2) {
+		$alerta = elegir_horarios($conexion, $id_usuario, $horarios);
+	} else {
+		$alerta = "Se necesitan mínimo 2 horarios";
+	}
+
 }
 
 
 mysqli_close($conexion);
 
-if (isset($alerta)) {
+if (isset($alerta) && $alerta !== true) {
 	echo $alerta;
+} elseif (isset($alerta)) {
+	echo 'Exito';
 }
-header('location: ../../templates/sesionActiva.html');
-
 // EOF
