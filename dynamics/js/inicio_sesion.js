@@ -25,7 +25,9 @@ $(document).ready(function() {
                 method:"POST"
             });
             peticion.done(function (resp){
-                console.log("Se realizó");
+                if (resp == 'Exito') {
+                    window.location.replace("./sesionActiva.html")
+                }
             
             })
             peticion.fail(function(resp){

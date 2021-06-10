@@ -28,11 +28,10 @@ if ($num_cuenta === null || strlen($num_cuenta) !== 9) {
 $id = null;
 // Comparando la contraseña con la de la base de datos
 if ($error[0] === false) {
-	$num_cuenta_hash = hash('sha256', $num_cuenta);
 	$contrasena_hash = hash('sha256', $contrasena);
 
 	$consulta = "SELECT id_usuario, contrasena, sal FROM usuario
-		WHERE id_usuario='$num_cuenta_hash';";
+		WHERE id_usuario='$num_cuenta';";
 	$resultado = mysqli_query($conexion, $consulta);
 
 	if(mysqli_num_rows($resultado) === 0) {
