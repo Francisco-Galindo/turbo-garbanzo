@@ -26,7 +26,6 @@ $(document).ready(function() {
         let regexImg = /^[A-Za-zá-úÁ-Ú0-9_\-()\/&%$#!¡¿?]{1,50}\.(jpg|png|jpeg)$/;
         let regexContrasena = /[\wñÑ_\-\/\.&%$#!?¿¡]{6,20}/; 
 
-        
         verifica.push(regexCorreo.test(email));
         verifica.push(regexCuenta.test(noCuenta));
         verifica.push(regexNames.test(nombre));
@@ -36,7 +35,6 @@ $(document).ready(function() {
         verifica.push(regexImg.test(arch));
         verifica.push(regexContrasena.test(password));
 
-        
 
 
         let peticion= $.ajax({
