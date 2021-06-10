@@ -1,5 +1,5 @@
 $(document).ready (function(){
-    $("#enviar").on("click", function(){
+    $("#crear").on("click", function(){
         console.log("click");
         let fecha = $("#date").val();
         let hora = $("#hora").val();
@@ -13,6 +13,11 @@ $(document).ready (function(){
         let regexTema=/[A-Za-zñÑá-úÁ-Ú\:\s]{2,70}/;
         let regexLugar=/[A-Za-zñÑá-úÁ-Ú0-9\\_\:\.\-]{2,70}/;
 
+        verifica.push(regexTema.test(email));
+        verifica.push(regexLugar.test(noCuenta));
+        verifica.push(regexCorreo.test(email));
+        verifica.push(regexCuenta.test(noCuenta));
+        
         
 
         if((verifica && verifica2 )===true)

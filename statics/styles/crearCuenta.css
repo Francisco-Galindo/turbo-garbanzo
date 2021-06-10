@@ -102,6 +102,12 @@ footer{
 #nacimiento, #grado, #arch, #password{
     margin-top: 15px;
 }
+h5{
+    text-align: center;
+    font-size: 12px;
+    font-family:"LGeorge";
+
+}
 /* =ADAPTABILIDAD
 ------------------------------------------------------------*/
 @media screen and (max-width: 995px){
