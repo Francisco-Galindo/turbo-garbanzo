@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `asesoria`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `asesoria` (
   `id_asesoria` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` varchar(64) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   `id_materia` varchar(4) DEFAULT NULL,
   `tema` text NOT NULL,
   `fecha_hora` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -59,7 +59,7 @@ DROP TABLE IF EXISTS `asesoria_has_usuario`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `asesoria_has_usuario` (
   `id_ahu` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` varchar(64) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   `id_asesoria` int(11) NOT NULL,
   `es_solicitante` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_ahu`),
@@ -164,7 +164,7 @@ DROP TABLE IF EXISTS `notificacion`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `notificacion` (
   `id_notificacion` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` varchar(64) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   `id_asesoria` int(11) NOT NULL,
   `id_tipo_notificacion` tinyint(4) NOT NULL,
   `visto` tinyint(1) NOT NULL DEFAULT 0,
@@ -220,7 +220,7 @@ DROP TABLE IF EXISTS `reporte`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reporte` (
   `id_reporte` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` varchar(64) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   `id_asesoria` int(11) NOT NULL,
   PRIMARY KEY (`id_reporte`),
   KEY `id_usuario` (`id_usuario`),
@@ -276,7 +276,7 @@ DROP TABLE IF EXISTS `suspension`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `suspension` (
   `id_suspension` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` varchar(64) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   `fecha_hora` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id_suspension`),
   KEY `id_usuario` (`id_usuario`),
@@ -326,7 +326,7 @@ DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario` (
-  `id_usuario` varchar(64) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   `contrasena` varchar(64) NOT NULL,
   `sal` varchar(23) NOT NULL,
   `num_cuenta` varchar(56) NOT NULL,
@@ -360,7 +360,6 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('563ba8540f8e0ce61a6b3646a12db42ca55d8ccd69e3beaf11e26b0927e1e037','621fdf739618b97238de819ad88de880c92701d858a7faacb1f2eb6312ed1337','60c04f9a193299.19802246','a2dUaThjSkpXaVlUandtZzdXZVYvdz09Ojp75oK/G5tjsYcfhER82BCg','carlitos@alf.com','5','d1owZk9kdjQwbEg0eFNIdm9Scm1TQT09Ojr5JDiohkqtZOWbLI/94dbT','Papu','Gomez','Lel','2003-01-06','../statics/perfiles/perfil.png',0,0),('9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07','fa6dd9264d10d5517569e095b8f260282f6362471fefdfcdbd863bdf356b3626','60be67e7486561.88225675','YzJqV1BCclZvbGRWa1o1QlBjbmpEQT09OjpOgdQgcloKeHhKFRarV+cT','paqui10718@gmail.com','6','M2ZnR0p6OThhQnI5MnA1V0JnT0RXdz09OjrtI1ieVBNHnEps0fZDUiul','Francisco','Galindo','Mena','2004-09-01','../../statics/perfiles/foto-perfil.jpg',0,0);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -373,7 +372,7 @@ DROP TABLE IF EXISTS `usuario_has_horario`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario_has_horario` (
   `id_uhh` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` varchar(64) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   `id_hora` tinyint(4) NOT NULL,
   `id_dia` tinyint(4) NOT NULL,
   PRIMARY KEY (`id_uhh`),
@@ -392,7 +391,6 @@ CREATE TABLE `usuario_has_horario` (
 
 LOCK TABLES `usuario_has_horario` WRITE;
 /*!40000 ALTER TABLE `usuario_has_horario` DISABLE KEYS */;
-INSERT INTO `usuario_has_horario` VALUES (16,'9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07',2,1),(17,'9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07',1,3),(18,'9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07',3,3);
 /*!40000 ALTER TABLE `usuario_has_horario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -405,7 +403,7 @@ DROP TABLE IF EXISTS `usuario_has_materia`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario_has_materia` (
   `id_uhm` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` varchar(64) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   `id_materia` varchar(4) NOT NULL,
   PRIMARY KEY (`id_uhm`),
   KEY `id_usuario` (`id_usuario`),
@@ -421,7 +419,6 @@ CREATE TABLE `usuario_has_materia` (
 
 LOCK TABLES `usuario_has_materia` WRITE;
 /*!40000 ALTER TABLE `usuario_has_materia` DISABLE KEYS */;
-INSERT INTO `usuario_has_materia` VALUES (15,'9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07','1400'),(16,'9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07','1412');
 /*!40000 ALTER TABLE `usuario_has_materia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -434,8 +431,8 @@ DROP TABLE IF EXISTS `valoracion`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `valoracion` (
   `id_uhv` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` varchar(64) NOT NULL,
-  `id_comentador` varchar(64) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_comentador` int(11) NOT NULL,
   `id_asesoria` int(11) NOT NULL,
   `comentario` text DEFAULT NULL,
   `calificacion` tinyint(4) DEFAULT NULL,
@@ -467,4 +464,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-09 22:32:59
+-- Dump completed on 2021-06-10  8:14:08

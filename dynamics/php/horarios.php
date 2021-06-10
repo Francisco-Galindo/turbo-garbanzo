@@ -11,6 +11,41 @@ define('ACCIONES', array(
 	'ver_todos_los_horarios', 'elegir_horario_usuario'
 ));
 
+function obtener_horarios_ocupados($conexion, $id_usuario)
+{
+	$timestamps_ocupadas = array();
+	$consulta = "SELECT fecha_hora, duracion_simple FROM asesoria
+		WHERE id_usuario='$id_usuario';";
+	$resultado = mysqli_query($conexion, $consulta);
+	if (mysqli_num_rows($resultado) !== 0) {
+		while ($row = mysqli_fetch_assoc($resultado)) {
+			$timestamp = strtotime($row['fecha_hora']);
+			array_push($timestamps_ocupadas, $timestamp);
+			if ($row['duracion_simple'] == false) {
+				$timestamp += 50 * 60;
+				array_push($timestamps_ocupadas, $timestamp);
+			}
+		}
+	}
+
+	$consulta = "SELECT t2.fecha_hora, t2.duracion_simple FROM asesoria_has_usuario t1
+		INNER JOIN asesoria t2 ON t1.id_asesoria=t2.id_asesoria
+		WHERE t2.id_usuario='$id_usuario';";
+	$resultado = mysqli_query($conexion, $consulta);
+	if (mysqli_num_rows($resultado) !== 0) {
+		while ($row = mysqli_fetch_assoc($resultado)) {
+			$timestamp = strtotime($row['fecha_hora']);
+			array_push($timestamps_ocupadas, $timestamp);
+			if ($row['duracion_simple'] == false) {
+				$timestamp += 50 * 60;
+				array_push($timestamps_ocupadas, $timestamp);
+			}
+		}
+	}
+
+	return $timestamps_ocupadas;
+}
+
 function ver_horarios_usuario($conexion, $id_usuario)
 {
 	$horarios = array();
@@ -66,7 +101,11 @@ function ver_horarios_cercanos(
 		$un_dia_entre_fechas =
 			$horario_timestamp >= $tiempo_actual;
 
-		if ($mismo_dia_semana && $un_dia_entre_fechas) {
+		
+		$horarios_ocupados = obtener_horarios_ocupados($conexion, $id_usuario);
+		$no_encima = !in_array($horario_timestamp, $horarios_ocupados);
+
+		if ($mismo_dia_semana && $un_dia_entre_fechas && $no_encima) {
 			$fecha_cadena = date('j/n H:i A', $horario_timestamp);
 			$horarios_disponibles += [$horario_timestamp => 
 				$fecha_cadena];
@@ -129,7 +168,7 @@ function elegir_horarios($conexion, $id_usuario, $horarios)
 session_start();
 $conexion = conectar_base();
 $_POST['horarios'] = ['1::2', '3::1', '3::3'];
-$_POST['accion'] = 'ver_todos_los_horarios';
+$_POST['accion'] = 'ver_disponibilidad_cercana';
 $_SESSION['id_usuario'] = '9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07';
 
 $_POST = purgar_arreglo($_POST, $conexion);
