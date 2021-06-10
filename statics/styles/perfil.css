@@ -94,8 +94,24 @@ p{
     padding: auto;
     text-align: center;
 }
-#modalPaleta{
-    align-content: center;
+.modal-title{
+    color: var(--azul4);
+}
+.modal-header,.modal-footer{
+    background-color: var(--azul1);
+}
+.modal-body{
+    background-color: var(--azul2);
+}
+
+#usuario{
+    display: none;
+}
+#paleta{
+    background-color: var(--gris1);
+    font-size: 28px;
+    color: #dfdfdf;
+    cursor: pointer;
 }
 /*=ADAPTABILIDAD
 ----------------------------------------------------------*/
