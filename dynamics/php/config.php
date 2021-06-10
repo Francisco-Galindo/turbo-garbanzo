@@ -3,7 +3,7 @@
 define('ROOTUSER', 'root');
 define('DBUSER', 'turbogarbanzo');
 define('DBHOST', 'localhost');
-define('PASSWORD', '');
+define('PASSWORD', 'el_garbanzo');
 define('DB', 'asesorias_p6');
 
 /**
@@ -19,19 +19,21 @@ function conectar_base()
 
 	// Si la conexión no pudo ser realizada, creando el usuario necesario
 	if (!$conexion) {
-		$conexion = mysqli_connect(DBHOST, ROOTUSER, PASSWORD, DB);
-		$consulta = 'CREATE USER \'' . DBUSER .
-			'\'@\'localhost\' IDENTIFIED BY \'\'';
-		$resultado = mysqli_query($conexion, $consulta);
+		// Se intentó que el usuario para la base de datos de creara automáticamente, pero no salió
 
-		$consulta = 'GRANT ALL PRIVILEGES ON ' . DB .
-			'.* TO \'' . DBUSER . '\'@\'' . DBHOST . '\';';
-		$resultado = mysqli_query($conexion, $consulta);
+		// $conexion = mysqli_connect(DBHOST, ROOTUSER, PASSWORD, DB);
+		// $consulta = 'CREATE USER \'' . DBUSER .
+		// 	'\'@\'localhost\' IDENTIFIED BY \''.PASSWORD.'\'';
+		// $resultado = mysqli_query($conexion, $consulta);
 
-		$conexion = mysqli_connect(DBHOST, DBUSER, PASSWORD, DB);
+		// $consulta = 'GRANT ALL PRIVILEGES ON ' . DB .
+		// 	'.* TO \'' . DBUSER . '\'@\'' . DBHOST . '\'';
+		// $resultado = mysqli_query($conexion, $consulta);
+
+		// $conexion = mysqli_connect(DBHOST, DBUSER, PASSWORD, DB);
 	}
 
-	return $conexion;
+return $conexion;
 }
 
 // EOF

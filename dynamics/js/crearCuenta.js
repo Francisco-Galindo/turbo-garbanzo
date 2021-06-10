@@ -25,11 +25,11 @@ $(document).ready(function() {
 
         //algunas validaciones para crear cuenta
         let regexCorreo= /^[\w\.\-\ñ]{4,20}(\.([\w\.\-]))*@([\w\.\-]+)(\.[\w\.\-]+)/;
-        let regexCuenta = /^[1-3]\d{8}/;
+        let regexCuenta = /^[1-3]\d{9}/;
         let regexNames = /[A-Za-zñÑá-úÁ-Ú]{2,32}/;
-        let regexTel = /^[1-9]\d{9}$/;
+        let regexTel = /^[\d]{9}$/;
         let regexImg = /^[A-Za-zá-úÁ-Ú0-9_\-\(\)\/&%$#!¡¿?\:\\]{1,50}\.(jpg|png|jpeg)$/;
-        let regexContrasena = /[\wñÑ_\-\/\.&%$#!?¿¡]{6,20}/; 
+        let regexContrasena = /^(?=.*[A-ZÑ]+)(?=.*[\W_]+)(?=.*[\d]+)(?=.*[a-zñ]+).{8,}$/; 
         
         let today = new Date();
         let fecha = (today.getFullYear()+"-"+today.getMonth()+"-"+today.getDay());   

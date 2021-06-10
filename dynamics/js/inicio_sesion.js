@@ -27,6 +27,8 @@ $(document).ready(function() {
             peticion.done(function (resp){
                 if (resp == 'Exito') {
                     window.location.replace("./sesionActiva.html")
+                } else {
+                    console.log(resp);
                 }
             
             })
