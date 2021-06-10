@@ -1,7 +1,13 @@
 $(document).ready(function() {
 
-    $("#crear").on("click", function(){
-        console.log("click");
+    let arch;
+    $("#arch").change(function(event) {
+        arch = this.files[0];
+    })
+
+    $("#crear").on("click", function(evento){
+
+        evento.preventDefault();
         let verifica = [];
         let nombre = $("#name").val();
         let primApe = $("#primApe").val();
@@ -11,12 +17,10 @@ $(document).ready(function() {
         let tel = $("#tel").val();
         let nacimiento = $("#nacimiento").val();
         let grado = $("#grado").val();
-        let arch = $("#arch").val();
+        
         let password = $("#password").val();
 
-        console.log(arch);
-        console.log(grado);
-        console.log(nacimiento);
+
 
         //algunas validaciones para crear cuenta
         let regexCorreo= /^[\w\.\-\ñ]{4,20}(\.([\w\.\-]))*@([\w\.\-]+)(\.[\w\.\-]+)/;
@@ -37,27 +41,37 @@ $(document).ready(function() {
 
 
 
+        console.log(nombre);
+        let formulario = new FormData();
+        formulario.append('nombre', nombre);
+        formulario.append('prim_ape', primApe);
+        formulario.append('seg_ape', segApe);
+        formulario.append('num_cuenta', noCuenta);
+        formulario.append('correo', email);
+        formulario.append('telefono', tel);
+        formulario.append('fecha_nacimiento', nacimiento);
+        formulario.append('grado', grado);
+        formulario.append('contrasena', password);
+        formulario.append('imagen', arch);
+
+
+
         let peticion= $.ajax({
+            method:"POST",
             url: "../dynamics/php/registro.php",
-            data: {num_cuenta:noCuenta, 
-                   contrasena:password,
-                   correo: email,
-                   grado: grado,
-                   telefono: tel,
-                   nombre: nombre,
-                   prim_ape: primApe,
-                   seg_ape: segApe,
-                   fecha_nacimiento: nacimiento,
-                   imagen: arch
-                },
-            method:"POST"
+            data: formulario,
+            cache: false,
+            contentType: false,
+            processData: false,
         });
         peticion.done(function (resp){
             console.log(resp);
+            window.location.replace("./horarios.html");
            
         })
         peticion.fail(function(resp){
-            console.log("No se realizó la petición :(");
+            console.log(resp);
+            console.log("no")
         })
         
     });
