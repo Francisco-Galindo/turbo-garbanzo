@@ -5,6 +5,7 @@ $(document).ready(function() {
         let cuenta = $("#nocuenta").val();
         let password = $("#password").val();
 
+        //Dos validaciones del form de iniciode sesión
         let reguexCuenta = /^[1-3]\d{9}$/;
         let reguexContrasena = /[\wñÑ_\-\/\.&%$#!?¿¡]{6,20}/;
 
