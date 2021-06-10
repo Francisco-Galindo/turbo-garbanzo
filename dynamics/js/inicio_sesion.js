@@ -8,7 +8,6 @@ $(document).ready(function() {
         console.log(cuenta);
         
         let reguexCuenta = /^[\d]{9}$/;
-        let reguexContrasena = /^(?=.*[A-ZÑ]+)(?=.*[\W_]+)(?=.*[\d]+)(?=.*[a-zñ]+).{8,}$/;
 
         var verifica = reguexCuenta.test(cuenta);
         console.log(verifica);
@@ -25,7 +24,11 @@ $(document).ready(function() {
                 method:"POST"
             });
             peticion.done(function (resp){
-                console.log("Se realizó");
+                if (resp == 'Exito') {
+                    window.location.replace("./sesionActiva.html")
+                } else {
+                    console.log(resp);
+                }
             
             })
             peticion.fail(function(resp){
@@ -34,7 +37,6 @@ $(document).ready(function() {
         }
         else{  
             $(".text-danger").remove();
-            $(".espacio").remove();
             if(verifica!==true)
             {
                 if(cuenta==="")

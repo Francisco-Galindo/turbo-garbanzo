@@ -12,6 +12,11 @@ h2{
     margin:2px;
     padding-top: 15px;
 }
+p{
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+}
 #uno{
     width: 100%;
     background-color: var(--azul1);
@@ -49,12 +54,10 @@ label{
     font-family:"LGeorge";
     /*background-color: rgba(0, 183, 255, 0.205); */
 }
-#label1{
+#label1, #label2{
     width: 225px;
 }
-#label2{
-    width: 250px;
-}
+
 button{
     width: 300px;
     height: 50px;
@@ -96,8 +99,17 @@ footer{
     background-color: var(--azul1);
     color: var(--textwhite);
 }
-/* =ADAPTABILIDA
-----------------------------------------------------------*/
+#nacimiento, #grado, #arch, #password{
+    margin-top: 15px;
+}
+h5{
+    text-align: center;
+    font-size: 12px;
+    font-family:"LGeorge";
+
+}
+/* =ADAPTABILIDAD
+------------------------------------------------------------*/
 @media screen and (max-width: 995px){
     .container{
         flex-direction: column;
@@ -113,10 +125,7 @@ footer{
     .container{
         overflow-x: 1;
     }
-    #label1{
-        width: 180px;
-    }
-    #label2{
+    #label1, #label2{
         width: 180px;
     }
     label{
@@ -134,6 +143,11 @@ footer{
     }
     #grado{
         margin-top:20px;
+    }
+    p{
+        text-align: center;
+        font-size: 18px;
+        font-weight: 400;
     }
 }
 @media screen and (max-width: 410px){

@@ -124,18 +124,19 @@ function ver_todos_horarios($conexion)
 		array_push($horas, [$row['id_hora'], $row['hora']]);
 	}
 
-	$consulta = 'SELECT id_dia, dia FROM dia;';
+	$consulta = 'SELECT id_dia, dia FROM dia ORDER BY id_dia;';
 	$resultado = mysqli_query($conexion, $consulta);
 	while ($row = mysqli_fetch_assoc($resultado)) {
-		echo '<br>';
+		echo '<br><strong>';
 		echo $row['dia'];
-		echo '<br>';
+		echo '</strong><br>';
 		foreach ($horas as $hora) {
-			echo '<label>';
+			echo '<label class="checkbox-inline">';
 			echo $hora[1];
-			echo '<input tabindex="0" id="' . $row['id_dia'] . '::' . $hora[0] . '" type="checkbox"> ';
+			echo '<input name="horarios[]" tabindex="0" value="' . $row['id_dia'] . '::' . $hora[0] . '" type="checkbox"> ';
 			echo '</label>';
 		}
+
 	}
 }
 
@@ -148,7 +149,7 @@ function elegir_horarios($conexion, $id_usuario, $horarios)
                 WHERE id_usuario='$id_usuario';";
 	$resultado = mysqli_query($conexion, $consulta);
 	foreach ($horarios as $horario) {
-		$horario = explode('::', $horario);
+		$horario = explode('::', $horario[0]);
 		$consulta = "INSERT INTO usuario_has_horario
 			(id_usuario, id_hora, id_dia)
 			VALUES ('$id_usuario', $horario[1], $horario[0]);";
@@ -167,11 +168,12 @@ function elegir_horarios($conexion, $id_usuario, $horarios)
 
 session_start();
 $conexion = conectar_base();
-$_POST['horarios'] = ['1::2', '3::1', '3::3'];
-$_POST['accion'] = 'ver_disponibilidad_cercana';
+// $_POST['horarios'] = ['1::2', '3::1', '3::3'];
+// $_POST['accion'] = 'ver_disponibilidad_cercana';
 
 $_POST = purgar_arreglo($_POST, $conexion);
 $_SESSION = purgar_arreglo($_SESSION, $conexion);
+
 $id_usuario = $_SESSION['id_usuario'];
 
 $accion = isset($_POST['accion']) && in_array($_POST['accion'], ACCIONES) ?
@@ -202,12 +204,27 @@ if ($accion === 'ver_horario_usuario') {
 
 	echo json_encode($horarios_disponibles);
 } elseif ($accion === 'ver_todos_los_horarios') {
+	echo '<br><br>';
 	ver_todos_horarios($conexion);	
 } elseif ($accion === 'elegir_horario_usuario') {
-	$alerta = elegir_horarios($conexion, $id_usuario, $horarios);
+
+	parse_str($_POST['horarios'], $horarios);
+	$horarios = array_values($horarios);
+	array_pop($horarios);
+	if (count($horarios) >= 2) {
+		$alerta = elegir_horarios($conexion, $id_usuario, $horarios);
+	} else {
+		$alerta = "Se necesitan mínimo 2 horarios";
+	}
+
 }
 
 
 mysqli_close($conexion);
 
+if (isset($alerta) && $alerta !== true) {
+	echo $alerta;
+} elseif (isset($alerta)) {
+	echo 'Exito';
+}
 // EOF
