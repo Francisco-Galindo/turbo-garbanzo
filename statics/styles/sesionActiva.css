@@ -18,6 +18,7 @@
     grid-column-start:2;
 
 }
+
 #btnBA{
     display: flex;
     justify-content: center;
@@ -279,6 +280,12 @@
     font-size: 46px ;
     text-align: center;
     color: #dfdfdf;
+}
+
+#btnCNA>a:hover{
+    color: #dfdfdf;
+    background-color: var(--azul4);
+
 }
 /*=Calendario
 ----------------------------------*/

@@ -43,8 +43,8 @@
             </div>
           </div>
         </div>
-      </nav>
-
+    </nav>
+    
       <div id="container">
         <div id="fotoPerfil">
             <img src="../statics/img/perfiles/perfil.png" width="150px">
@@ -64,7 +64,25 @@
 
         <div id="opciones">
             <a href="" ><button>Reportar</button></a>
-            <button>Personalizar</button>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#cambioPaleta">Personalizar</button>
+ 
+            <div class="modal fade" id="cambioPaleta" tabindex="-1" aria-labelledby="modalPaleta" aria-hidden="true" > 
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalPaleta">Configuración de Paleta</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Contenido del modal
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="evaluacion">
