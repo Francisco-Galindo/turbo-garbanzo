@@ -3,6 +3,13 @@
 require 'config.php';
 require 'seguridad_y_cripto.php';
 
+$tipos_notificacion = array();
+$consulta = "SELECT id_tipo_notificacion, titulo FROM tipo_notificacion";
+$resultado = mysqli_query($conexion, $consulta);
+while ($row = mysqli_fetch_assoc($resultado)) {
+	$tipos_notificacion += [$row['id_tipo_notificacion'] => $row['titulo']];
+}
+
 function resolver_noti($conexion, $arreglo)
 {
         $id_noti = $arreglo['id_notificacion'];
@@ -77,7 +84,70 @@ function accion_formulario($conexion, $arreglo, $id_comentador)
 
 function accion_confirmar_asesoria($conexion, $arreglo)
 {
+        $id_noti = $arreglo['id_notificacion'];
+        $opcion = $arreglo['opcion'];
+
         
+        $consulta = "SELECT t2.id_asesoria FROM notificacion t1
+                INNER JOIN asesoria t2 ON t1.id_asesoria=t2.id_asesoria
+                WHERE id_notificacion=$id_noti;";
+        $resultado = mysqli_query($conexion, $consulta);
+        $row = mysqli_fetch_assoc($resultado);
+        $id_asesoria = $row['id_asesoria'];
+
+        $consulta = "UPDATE asesoria SET confirmada=$opcion 
+                WHERE id_asesoria=$id_asesoria;";
+        $resultado = mysqli_query($conexion, $consulta);
+
+        $consulta = "SELECT id_usuario FROM asesoria_has_usuario
+                WHERE id_asesoria=$id_asesoria;";
+        $resultado = mysqli_query($conexion, $consulta);
+        $row = mysqli_fetch_assoc($resultado);
+        $id_usuario = $row['id_usuario'];
+
+        $consulta = "SELECT id_tipo_notificacion FROM tipo_notificacion
+                WHERE tittulo='recibir_confirmacion';";
+        $resultado = mysqli_query($conexion, $consulta);
+        $row = mysqli_fetch_assoc($resultado);
+        $id_tipo_noti = $row['id_tipo_notificacion'];
+
+        $consulta = "INSERT INTO notificacion (id_usuario, id_asesoria,
+                id_tipo_notificacion)
+                VALUES ('$id_usuario', $id_asesoria, $id_tipo_noti);";
+
+}
+
+function accion_pasar_asistencia($conexion, $arreglo)
+{
+        $id_noti = $arreglo['id_notificacion'];
+        $usuarios_asistentes = $arreglo['usuarios'];
+
+        foreach ($usuarios_asistentes as $id_usuario) {
+                $consulta = "SELECT id_usuario FROM usuario 
+                        WHERE id_usuario='$id_usuario';";
+                $resultado = mysqli_query($conexion, $consulta);
+                if (mysqli_num_rows($resultado) === 0) {
+                        return false;
+                }
+        }
+
+        $consulta = "SELECT t2.id_asesoria FROM notificacion t1
+                INNER JOIN asesoria t2 ON t1.id_asesoria=t2.id_asesoria
+                WHERE id_notificacion=$id_noti;";
+        $resultado = mysqli_query($conexion, $consulta);
+        $row = mysqli_fetch_assoc($resultado);
+        $id_asesoria = $row['id_asesoria'];
+
+        $consulta = "SELECT id_usuario FROM asesoria_has_usuario
+        WHERE id_asesoria='$id_asesoria';";
+        $resultado = mysqli_query($conexion, $consulta);
+        while ($row = mysqli_fetch_array($resultado)) {
+                $usuario_checado = $row['id_usuario'];
+                if (!in_array( $usuario_checado, $usuarios_asistentes)) {
+                        $consulta = "UPDATE usuario SET num_faltas=num_faltas+1 
+                        WHERE id_usuario='$id_usuario';";
+                }
+        }
 }
 
 // EOF

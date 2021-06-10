@@ -127,8 +127,8 @@ function mostrar_noti_confirmar_asesoria($id_notificacion, $conexion, $row_aseso
 	echo 'Información de la asesoría:</div>';
 	echo '<form action="./resolver_notificaciones.php" method="POST">';
 
-	echo '<label><input type="radio" value="true">Aceptar</label>
-		<label><input type="radio" value="false">Rechazar</label>';
+	echo '<label><input type="radio" value="true" name="opcion">Aceptar</label>
+		<label><input type="radio" value="false" name="opcion">Rechazar</label>';
 
 	echo '<input type="hidden" name="id_notificacion" value="'. $id_notificacion .'">';
 	echo '<input type="submit" class="submitcarr" value="Aceptar"></form></div>';
@@ -165,7 +165,7 @@ function mostrar_noti_pasar_asistencia($id_notificacion, $conexion, $row, $id_as
 	foreach ($usuarios as $id_usuario => $usuario) {
 		echo '<label>';
 		echo $usuario;
-		echo '<input value="'. $id_usuario .'" type="checkbox">';
+		echo '<input name="usuarios[]" value="'. $id_usuario .'" type="checkbox">';
 		echo '</label>';
 	}
 
