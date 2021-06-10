@@ -69,16 +69,22 @@ h2{
     text-align: center;
     padding: 15px;
     font-family: "LGeorge";
-    font-size: 20px;
+    font-size: 28px;
 }
 #opciones :first-child{
     margin-right: 15px;
 }
 button{
-    width: 120px;
-    height: 40px;
+    width: 170px;
+    height: 60px;
     background-color: var(--azul2);
-    color: var(--textwhite)
+    color: var(--textwhite);
+    border-radius: 12.25px;
+    border: 0px
+    
+}
+button:hover{
+    color: var(--azul4);
 }
 p{
     font-family: "LGeorge";
@@ -88,8 +94,9 @@ p{
     padding: auto;
     text-align: center;
 }
-
-
+#modalPaleta{
+    align-content: center;
+}
 /*=ADAPTABILIDAD
 ----------------------------------------------------------*/
 @media screen and (max-width: 1300px) {
