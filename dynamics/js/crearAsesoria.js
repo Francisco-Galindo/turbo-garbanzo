@@ -9,11 +9,9 @@ $(document).ready (function(){
         let lugar = $("#lugar").val();
         let medio = $("#medio").val();
 
-
-        console.log(cuenta);
         
-        let regexTema=/[A-Za-zñÑá-úÁ-Ú]{2,70}/;
-        let regexLugar=/[A-Za-zñÑá-úÁ-Ú]{2,70}/;
+        let regexTema=/[A-Za-zñÑá-úÁ-Ú\:\s]{2,70}/;
+        let regexLugar=/[A-Za-zñÑá-úÁ-Ú0-9\\_\:\.\-]{2,70}/;
 
         
 

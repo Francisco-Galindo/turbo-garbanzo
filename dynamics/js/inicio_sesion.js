@@ -36,7 +36,6 @@ $(document).ready(function() {
         }
         else{  
             $(".text-danger").remove();
-            $(".espacio").remove();
             if(verifica!==true)
             {
                 if(cuenta==="")
