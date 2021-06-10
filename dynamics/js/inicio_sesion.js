@@ -6,7 +6,7 @@ $(document).ready(function() {
         let password = $("#password").val();
 
         console.log(cuenta);
-        //Dos validaciones del form de iniciode sesión
+        
         let reguexCuenta = /^[1-3]\d{8}$/;
         let reguexContrasena = /[\wñÑ_\-\/\.&%$#!?¿¡]{6,20}/;
 
