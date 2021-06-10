@@ -48,15 +48,18 @@
     <div id="principal">
         <div>
             <br>
-            <h1 class="tituloSc">Materias</h1>
+            <h1 class="tituloSc">Elige la(s) materias que vayas a asesorar en el sitio (mínimo 2)</h1>
             <br>
-            <label> ESE
+            <!-- <label> ESE
                 <input id='1400' value='1400' type="checkbox">
             </label>
             <br>
             <label> ESE
                 <input id='1400' value='1400' type="checkbox">
-            </label>
+            </label> -->
+            <form id="materias" action="../dynamics/php/horarios.php" method="POST">
+
+            </form>
         </div>
     </div>
     <footer>
@@ -64,5 +67,7 @@
       </footer>
 
       <script src="../libs/bootstrap-5.0.1-dist/js/bootstrap.min.js"></script>
+      <script src="../libs/jquery/jquery-3.6.0.min.js"></script>
+      <script src="../dynamics/js/elegir_materias.js"></script>
 </body>
 </html>

@@ -18,7 +18,7 @@ function mostrar_opciones($conexion, $row, $id_usuario)
 
         while ($row = mysqli_fetch_assoc($resultado)) {
                 echo '<label>' . $row['materia'] .
-                        '<input id=\'' . $row['id_materia'] .
+                        '<input name=\'' . 'materias[]' .
                         '\' value=\'' . $row['id_materia'] . '\' type="checkbox">
                 </label>';
 
@@ -40,6 +40,7 @@ function elegir_materia($conexion, $arreglo, $id_usuario)
                 WHERE id_usuario='$id_usuario'";
         $resultado = mysqli_query($conexion, $consulta);
         foreach ($arreglo as $seriado) {
+                $seriado = $seriado[0];
                 $consulta = "INSERT INTO usuario_has_materia
                 (id_usuario, id_materia)
                 VALUES ('$id_usuario', '$seriado');";
@@ -78,13 +79,13 @@ function ver_materias_del_usuario($conexion, $id_usuario)
 /******************************************************************************/
 
 
-$_POST['accion'] = 'ver_elegidas';
+// $_POST['accion'] = 'ver_elegidas';
 // $_POST['materias'] = ['1400', '1412'];
-
-
+session_start();
 $conexion = conectar_base();
 // Purgando el arreglo $_POST de posibles ataques
 $_POST = purgar_arreglo($_POST, $conexion);
+$_SESSION = purgar_arreglo($_SESSION, $conexion);
 $error = array(false);
 
 $id_usuario = isset($_POST['id_usuario']) && strlen($_POST['id_usuario']) === 64 ?
@@ -93,13 +94,25 @@ $id_usuario = isset($_POST['id_usuario']) && strlen($_POST['id_usuario']) === 64
 $accion = isset($_POST['accion']) && in_array($_POST['accion'], ACCIONES) ?
         $_POST['accion'] : null;
 
-$materias = isset($_POST['materias']) && is_array($_POST['materias']) ?
-        $_POST['materias'] : null;
+if (isset($_POST['materias'])) {
+        parse_str($_POST['materias'], $materias);
+        $materias = array_values($materias);
+        array_pop($materias);
+} else {
+        $materias = null;
+}
 
-if ($accion === null || $materias === null) {
+
+if ($accion === null) {
+        echo 'Accion inválida';
         mysqli_close($conexion);
         exit(500);
 }
+if ($accion === 'mostrar_opciones' || $accion === 'elegir_materia') {
+        $id_usuario = $_SESSION['id_usuario'];
+}
+
+$exito = null;
 
 $consulta = "SELECT grado FROM usuario WHERE id_usuario='$id_usuario';";
 $resultado = mysqli_query($conexion, $consulta);
@@ -111,21 +124,24 @@ if (mysqli_num_rows($resultado) === 0) {
                 $row = mysqli_fetch_assoc($resultado);
                 $exito = mostrar_opciones($conexion, $row, $id_usuario);
         } elseif ($accion === 'elegir_materia' && $materias !== null) {
-                $exito = elegir_materia($conexion, $materias, $id_usuario);
+                if (count($materias) >= 2) {
+                        $exito = elegir_materia($conexion, $materias, $id_usuario);
+                } else {
+                        $exito = 'Se necesitan mínimo 2 materias';
+                }
         } elseif ($accion == 'ver_elegidas') {
                 $exito = ver_materias_del_usuario($conexion, $id_usuario);
         }
-        if ($exito === false) {
-                $error[0] = true;
-                array_push($error, 'Consulta fallida');
-        }
-        mysqli_close($conexion);
 }
 
+
+mysqli_close($conexion);
 if ($error[0] === false) {
         if ($exito !== true) {
                 echo 'Advertencia: ';
                 echo $exito;
+        } else if  ($exito && $accion === 'elegir_materia') {
+                echo 'Exito';
         }
 } else {
         $error[0] = 'Error:';
