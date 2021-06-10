@@ -10,7 +10,9 @@ function mostrar_noti_aviso_inicio($id_notificacion, $row)
 			<h1 class="preg">La fecha de tu asesoría  de'.
 			$row['tema'] . ' con ' . $row['nombre'] . $row['prim_ape'].
 			'ya llegó.</h1>';
-	echo '<button id="'. $id_notificacion .'" type="button" class="submitcarr" name="button">Aceptar</button> </div>';
+	echo '<form action="./resolver_notificaciones.php" method="POST">';
+	echo '<input type="hidden" name="id_notificacion" value="'. $id_notificacion .'">';
+	echo '<input type="submit" class="submitcarr" value="Aceptar"></form></div>';
 }
 
 function mostrar_noti_aviso_final($id_notificacion, $row)
@@ -20,7 +22,9 @@ function mostrar_noti_aviso_final($id_notificacion, $row)
 			<h1 class="preg">Tu asesoría de' .
 			$row['tema'] . ' con ' . $row['nombre'] . $row['prim_ape'].
 			'ya terminó.</h1>';
-	echo '<button id="'. $id_notificacion .'" type="button" class="submitcarr" name="button">Aceptar</button> </div>';
+	echo '<form action="./resolver_notificaciones.php" method="POST">';
+	echo '<input type="hidden" name="id_notificacion" value="'. $id_notificacion .'">';
+	echo '<input type="submit" class="submitcarr" value="Aceptar"></form></div>';
 }
 
 
@@ -62,14 +66,12 @@ function mostrar_noti_final_formulario($id_notificacion, $conexion, $row, $row_a
 		'ya ha terminado
 		¿Gustas dejar un comentario?</h1>';
 
-	echo '<textarea id="'.$row_asesoria['id_notificacion'].'::' . 'com'. '"
-		name="texto" rows="10" cols="100"></textarea>';
+	echo '<form action="./resolver_notificaciones.php" method="POST">';
+	echo '<textarea name="comentario" rows="10" cols="100"></textarea>';
 
 	echo '<h1 class="preg">¿Gustas calificar la asesoría?</h1>
 		<label>';
-	echo '<input
-		id="'.$row_asesoria['id_notificacion'].'::' . 'val'. '"
-		type="number" min="1" max="5">';
+	echo '<input name="valoracion" type="number" min="1" max="5">';
 	echo '</label>
 
 		<h1 class="preg">¿Algún usuario tuvó un comportamiento inapropiado?</h1>';
@@ -77,7 +79,7 @@ function mostrar_noti_final_formulario($id_notificacion, $conexion, $row, $row_a
 	foreach ($usuarios as $id_usuario => $usuario) {
 		echo '<label>';
 		echo $usuario;
-		echo '<input id="'. $id_usuario .'" type="checkbox">';
+		echo '<input name="usuarios[]" value="'. $id_usuario .'" type="checkbox">';
 		echo '</label>';
 	}
 
@@ -86,11 +88,12 @@ function mostrar_noti_final_formulario($id_notificacion, $conexion, $row, $row_a
 	foreach ($razones as $id_razon => $razon) {
 		echo '<label>';
 		echo $razon;
-		echo '<input id="'. $id_razon .'" type="checkbox">';
+		echo '<input name="razones[]" value="'. $id_razon .'" type="checkbox">';
 		echo '</label>';
 	}
 
-	echo '<button id="'. $id_notificacion .'" type="button" class="submitcarr" name="button">Aceptar</button> </div>';
+	echo '<input type="hidden" name="id_notificacion" value="'. $id_notificacion .'">';
+	echo '<input type="submit" class="submitcarr" value="Aceptar"></form></div>';
 }
 
 function mostrar_noti_confirmar_asesoria($id_notificacion, $conexion, $row_asesoria, $id_asesoria)
@@ -114,20 +117,21 @@ function mostrar_noti_confirmar_asesoria($id_notificacion, $conexion, $row_aseso
 
 
 	echo '<div id="aseSoli" class="notif">
-			<h1 class="tipo">Solicitud de asesoría</h1>
-			<h1 class="preg">'. $nombre .' esta solicitando una asesoría</h1>
-			<div>';
+		<h1 class="tipo">Solicitud de asesoría</h1>
+		<h1 class="preg">'. $nombre .' esta solicitando una asesoría</h1>
+		<div>';
 	echo 'Año escolar: ' . $grado;
 	echo '<br>';
 	echo 'Correo: ' . $correo;
 
-	echo 'Información de la asesoría:
-			</div>
+	echo 'Información de la asesoría:</div>';
+	echo '<form action="./resolver_notificaciones.php" method="POST">';
 
-			<label><input type="radio" value="true">Aceptar</label>
-			<label><input type="radio" value="false">Rechazar</label>';
+	echo '<label><input type="radio" value="true" name="opcion">Aceptar</label>
+		<label><input type="radio" value="false" name="opcion">Rechazar</label>';
 
-	echo '<button id="'. $id_notificacion .'" type="button" class="submitcarr" name="button">Aceptar</button> </div>';
+	echo '<input type="hidden" name="id_notificacion" value="'. $id_notificacion .'">';
+	echo '<input type="submit" class="submitcarr" value="Aceptar"></form></div>';
 }
 
 function mostrar_noti_pasar_asistencia($id_notificacion, $conexion, $row, $id_asesoria)
@@ -157,14 +161,16 @@ function mostrar_noti_pasar_asistencia($id_notificacion, $conexion, $row, $id_as
 		<h1 class="tipo">Terminó tu sesión</h1>
 		<h1 class="preg">¿Quiénes asistieron a la asesoría?</h1>';
 
+	echo '<form action="./resolver_notificaciones.php" method="POST">';
 	foreach ($usuarios as $id_usuario => $usuario) {
 		echo '<label>';
 		echo $usuario;
-		echo '<input id="'. $id_usuario .'" type="checkbox">';
+		echo '<input name="usuarios[]" value="'. $id_usuario .'" type="checkbox">';
 		echo '</label>';
 	}
 
-	echo '<button id="'. $id_notificacion .'" type="button" class="submitcarr" name="button">Aceptar</button> </div>';
+	echo '<input type="hidden" name="id_notificacion" value="'. $id_notificacion .'">';
+	echo '<input type="submit" class="submitcarr" value="Aceptar"></form></div>';
 }
 
 function mostrar_noti_aviso_strike($id_notificacion, $conexion, $id_usuario)
@@ -180,11 +186,14 @@ function mostrar_noti_aviso_strike($id_notificacion, $conexion, $id_usuario)
 	}
 
 	echo '<div id="aseTermino" class="notif">
-			<h1 class="tipo">¡Strike!</h1>
-			<h1 class="preg">Has recibido un strike</h1>
-			<p>Tienes ' . $strikes . ', recuerda que si acumulas 3,
-			ameritarás una suspensión de dos semanas.</p>';
-	echo '<button id="'. $id_notificacion .'" type="button" class="submitcarr" name="button">Aceptar</button> </div>';
+		<h1 class="tipo">¡Strike!</h1>
+		<h1 class="preg">Has recibido un strike</h1>
+		<p>Tienes ' . $strikes . ', recuerda que si acumulas 3,
+		ameritarás una suspensión de dos semanas.</p>';
+
+	echo '<form action="./resolver_notificaciones.php" method="POST">';
+	echo '<input type="hidden" name="id_notificacion" value="'. $id_notificacion .'">';
+	echo '<input type="submit" class="submitcarr" value="Aceptar"></form></div>';
 }
 
 function mostrar_noti_recibir_confirmacion($id_notificacion, $row)
@@ -198,7 +207,10 @@ function mostrar_noti_recibir_confirmacion($id_notificacion, $row)
 			<h1 class="tipo">' . $mensaje . '</h1>
 			<h1 class="preg">'.$row['tema'].'</h1>
 			<p>En la asesoría de' . $row['nombre'] . ' para el '. $row['fecha_hora'] .'.</p>';
-	echo '<button id="'. $id_notificacion .'" type="button" class="submitcarr" name="button">Aceptar</button> </div>';
+
+	echo '<form action="./resolver_notificaciones.php" method="POST">';
+	echo '<input type="hidden" name="id_notificacion" value="'. $id_notificacion .'">';
+	echo '<input type="submit" class="submitcarr" value="Aceptar"></form></div>';
 }
 
 

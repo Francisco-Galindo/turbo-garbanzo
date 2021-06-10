@@ -1,5 +1,5 @@
 /* =Títulos y logo
----------------------------------------------------*/
+--------------------------------------------------------------------*/
 h1{
     margin: 3px;
     text-align: center;
@@ -36,7 +36,7 @@ h2{
 }
 
 /* =Formato del formulario
----------------------------------------------------*/
+----------------------------------------------------------------------*/
 input, select{
     background-color: var(--azul2);
     color: var(--textwhite);
@@ -47,7 +47,7 @@ input, select{
 label{
     font-size: 26px;
     font-family:"LGeorge";
-    /* background-color: rgba(0, 183, 255, 0.205); */
+    /*background-color: rgba(0, 183, 255, 0.205); */
 }
 #label1{
     width: 225px;
@@ -143,18 +143,10 @@ footer{
     #label2{
         width: 115px;
     }
-    #primApe{
+    #primApe, #segApe, #nocuenta, #email{
         margin-top: 25px;
     }
-    #segApe{
-        margin-top: 25px;
-    }
-    #nocuenta{
-        margin-top: 25px;
-    }
-    #email{
-        margin-top: 25px;
-    }
+   
     label{
         font-size: 18px;
     }

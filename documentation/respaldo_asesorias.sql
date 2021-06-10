@@ -32,12 +32,13 @@ CREATE TABLE `asesoria` (
   `cupo` tinyint(4) NOT NULL,
   `medio_vir` tinyint(1) NOT NULL,
   `lugar` varchar(128) NOT NULL,
+  `confirmada` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_asesoria`),
   KEY `id_usuario` (`id_usuario`),
   KEY `id_materia` (`id_materia`),
   CONSTRAINT `asesoria_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
   CONSTRAINT `asesoria_ibfk_2` FOREIGN KEY (`id_materia`) REFERENCES `materia` (`id_materia`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,6 +61,7 @@ CREATE TABLE `asesoria_has_usuario` (
   `id_ahu` int(11) NOT NULL AUTO_INCREMENT,
   `id_usuario` varchar(64) NOT NULL,
   `id_asesoria` int(11) NOT NULL,
+  `es_solicitante` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_ahu`),
   KEY `id_usuario` (`id_usuario`),
   KEY `id_asesoria` (`id_asesoria`),
@@ -86,10 +88,11 @@ DROP TABLE IF EXISTS `dia`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `dia` (
   `id_dia` tinyint(4) NOT NULL AUTO_INCREMENT,
-  `dia` varchar(5) NOT NULL,
+  `dia` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id_dia`),
-  UNIQUE KEY `dia` (`dia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY `dia` (`dia`),
+  UNIQUE KEY `dia_2` (`dia`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,6 +101,7 @@ CREATE TABLE `dia` (
 
 LOCK TABLES `dia` WRITE;
 /*!40000 ALTER TABLE `dia` DISABLE KEYS */;
+INSERT INTO `dia` VALUES (4,'Jueves'),(1,'Lunes'),(2,'Martes'),(3,'Miércoles'),(5,'Viernes');
 /*!40000 ALTER TABLE `dia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,7 +116,7 @@ CREATE TABLE `hora` (
   `id_hora` tinyint(4) NOT NULL AUTO_INCREMENT,
   `hora` time NOT NULL,
   PRIMARY KEY (`id_hora`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,6 +125,7 @@ CREATE TABLE `hora` (
 
 LOCK TABLES `hora` WRITE;
 /*!40000 ALTER TABLE `hora` DISABLE KEYS */;
+INSERT INTO `hora` VALUES (1,'07:50:00'),(2,'08:40:00'),(3,'09:30:00'),(4,'10:20:00'),(5,'11:10:00'),(6,'12:00:00'),(7,'12:50:00'),(8,'13:40:00'),(9,'14:30:00'),(10,'15:20:00'),(11,'16:10:00'),(12,'17:00:00'),(13,'17:50:00'),(14,'18:40:00'),(15,'19:30:00');
 /*!40000 ALTER TABLE `hora` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,6 +168,7 @@ CREATE TABLE `notificacion` (
   `id_asesoria` int(11) NOT NULL,
   `id_tipo_notificacion` tinyint(4) NOT NULL,
   `visto` tinyint(1) NOT NULL DEFAULT 0,
+  `fecha_hora` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id_notificacion`),
   KEY `id_usuario` (`id_usuario`),
   KEY `id_asesoria` (`id_asesoria`),
@@ -170,7 +176,7 @@ CREATE TABLE `notificacion` (
   CONSTRAINT `notificacion_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
   CONSTRAINT `notificacion_ibfk_2` FOREIGN KEY (`id_asesoria`) REFERENCES `asesoria` (`id_asesoria`),
   CONSTRAINT `notificacion_ibfk_3` FOREIGN KEY (`id_tipo_notificacion`) REFERENCES `tipo_notificacion` (`id_tipo_notificacion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,14 +222,11 @@ CREATE TABLE `reporte` (
   `id_reporte` int(11) NOT NULL AUTO_INCREMENT,
   `id_usuario` varchar(64) NOT NULL,
   `id_asesoria` int(11) NOT NULL,
-  `id_razon` tinyint(4) NOT NULL,
   PRIMARY KEY (`id_reporte`),
   KEY `id_usuario` (`id_usuario`),
   KEY `id_asesoria` (`id_asesoria`),
-  KEY `id_razon` (`id_razon`),
   CONSTRAINT `reporte_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
-  CONSTRAINT `reporte_ibfk_2` FOREIGN KEY (`id_asesoria`) REFERENCES `asesoria` (`id_asesoria`),
-  CONSTRAINT `reporte_ibfk_3` FOREIGN KEY (`id_razon`) REFERENCES `razon` (`id_razon`)
+  CONSTRAINT `reporte_ibfk_2` FOREIGN KEY (`id_asesoria`) REFERENCES `asesoria` (`id_asesoria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -234,6 +237,34 @@ CREATE TABLE `reporte` (
 LOCK TABLES `reporte` WRITE;
 /*!40000 ALTER TABLE `reporte` DISABLE KEYS */;
 /*!40000 ALTER TABLE `reporte` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reporte_has_razon`
+--
+
+DROP TABLE IF EXISTS `reporte_has_razon`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reporte_has_razon` (
+  `id_rhr` int(11) NOT NULL AUTO_INCREMENT,
+  `id_reporte` int(11) NOT NULL,
+  `id_razon` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id_rhr`),
+  KEY `id_reporte` (`id_reporte`),
+  KEY `id_razon` (`id_razon`),
+  CONSTRAINT `reporte_has_razon_ibfk_1` FOREIGN KEY (`id_reporte`) REFERENCES `reporte` (`id_reporte`),
+  CONSTRAINT `reporte_has_razon_ibfk_2` FOREIGN KEY (`id_razon`) REFERENCES `razon` (`id_razon`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reporte_has_razon`
+--
+
+LOCK TABLES `reporte_has_razon` WRITE;
+/*!40000 ALTER TABLE `reporte_has_razon` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reporte_has_razon` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -272,10 +303,9 @@ DROP TABLE IF EXISTS `tipo_notificacion`;
 CREATE TABLE `tipo_notificacion` (
   `id_tipo_notificacion` tinyint(4) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(32) NOT NULL,
-  `cuerpo` text NOT NULL,
   PRIMARY KEY (`id_tipo_notificacion`),
   UNIQUE KEY `titulo` (`titulo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -284,6 +314,7 @@ CREATE TABLE `tipo_notificacion` (
 
 LOCK TABLES `tipo_notificacion` WRITE;
 /*!40000 ALTER TABLE `tipo_notificacion` DISABLE KEYS */;
+INSERT INTO `tipo_notificacion` VALUES (7,'aviso_final'),(6,'aviso_inicio'),(8,'aviso_strike'),(4,'confirmar_asesoria'),(3,'pasar_asistencia'),(5,'recibir_confirmacion'),(2,'reportar'),(1,'valorar');
 /*!40000 ALTER TABLE `tipo_notificacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -306,7 +337,7 @@ CREATE TABLE `usuario` (
   `prim_ape` varchar(32) NOT NULL,
   `seg_ape` varchar(32) NOT NULL,
   `fecha_nacimiento` date NOT NULL,
-  `foto` text NOT NULL DEFAULT '../../statics/perfiles/foto-perfil.jpg',
+  `foto` text NOT NULL DEFAULT '../statics/perfiles/perfil.png',
   `num_faltas` tinyint(4) NOT NULL DEFAULT 0,
   `es_admin` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_usuario`),
@@ -329,6 +360,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES ('563ba8540f8e0ce61a6b3646a12db42ca55d8ccd69e3beaf11e26b0927e1e037','621fdf739618b97238de819ad88de880c92701d858a7faacb1f2eb6312ed1337','60c04f9a193299.19802246','a2dUaThjSkpXaVlUandtZzdXZVYvdz09Ojp75oK/G5tjsYcfhER82BCg','carlitos@alf.com','5','d1owZk9kdjQwbEg0eFNIdm9Scm1TQT09Ojr5JDiohkqtZOWbLI/94dbT','Papu','Gomez','Lel','2003-01-06','../statics/perfiles/perfil.png',0,0),('9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07','fa6dd9264d10d5517569e095b8f260282f6362471fefdfcdbd863bdf356b3626','60be67e7486561.88225675','YzJqV1BCclZvbGRWa1o1QlBjbmpEQT09OjpOgdQgcloKeHhKFRarV+cT','paqui10718@gmail.com','6','M2ZnR0p6OThhQnI5MnA1V0JnT0RXdz09OjrtI1ieVBNHnEps0fZDUiul','Francisco','Galindo','Mena','2004-09-01','../../statics/perfiles/foto-perfil.jpg',0,0);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -351,7 +383,7 @@ CREATE TABLE `usuario_has_horario` (
   CONSTRAINT `usuario_has_horario_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
   CONSTRAINT `usuario_has_horario_ibfk_2` FOREIGN KEY (`id_hora`) REFERENCES `hora` (`id_hora`),
   CONSTRAINT `usuario_has_horario_ibfk_3` FOREIGN KEY (`id_dia`) REFERENCES `dia` (`id_dia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -360,6 +392,7 @@ CREATE TABLE `usuario_has_horario` (
 
 LOCK TABLES `usuario_has_horario` WRITE;
 /*!40000 ALTER TABLE `usuario_has_horario` DISABLE KEYS */;
+INSERT INTO `usuario_has_horario` VALUES (16,'9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07',2,1),(17,'9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07',1,3),(18,'9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07',3,3);
 /*!40000 ALTER TABLE `usuario_has_horario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -379,7 +412,7 @@ CREATE TABLE `usuario_has_materia` (
   KEY `id_materia` (`id_materia`),
   CONSTRAINT `usuario_has_materia_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
   CONSTRAINT `usuario_has_materia_ibfk_2` FOREIGN KEY (`id_materia`) REFERENCES `materia` (`id_materia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -388,17 +421,18 @@ CREATE TABLE `usuario_has_materia` (
 
 LOCK TABLES `usuario_has_materia` WRITE;
 /*!40000 ALTER TABLE `usuario_has_materia` DISABLE KEYS */;
+INSERT INTO `usuario_has_materia` VALUES (15,'9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07','1400'),(16,'9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07','1412');
 /*!40000 ALTER TABLE `usuario_has_materia` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `usuario_has_valoracion`
+-- Table structure for table `valoracion`
 --
 
-DROP TABLE IF EXISTS `usuario_has_valoracion`;
+DROP TABLE IF EXISTS `valoracion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuario_has_valoracion` (
+CREATE TABLE `valoracion` (
   `id_uhv` int(11) NOT NULL AUTO_INCREMENT,
   `id_usuario` varchar(64) NOT NULL,
   `id_comentador` varchar(64) NOT NULL,
@@ -409,19 +443,19 @@ CREATE TABLE `usuario_has_valoracion` (
   KEY `id_usuario` (`id_usuario`),
   KEY `id_comentador` (`id_comentador`),
   KEY `id_asesoria` (`id_asesoria`),
-  CONSTRAINT `usuario_has_valoracion_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
-  CONSTRAINT `usuario_has_valoracion_ibfk_2` FOREIGN KEY (`id_comentador`) REFERENCES `usuario` (`id_usuario`),
-  CONSTRAINT `usuario_has_valoracion_ibfk_3` FOREIGN KEY (`id_asesoria`) REFERENCES `asesoria` (`id_asesoria`)
+  CONSTRAINT `valoracion_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `valoracion_ibfk_2` FOREIGN KEY (`id_comentador`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `valoracion_ibfk_3` FOREIGN KEY (`id_asesoria`) REFERENCES `asesoria` (`id_asesoria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuario_has_valoracion`
+-- Dumping data for table `valoracion`
 --
 
-LOCK TABLES `usuario_has_valoracion` WRITE;
-/*!40000 ALTER TABLE `usuario_has_valoracion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `usuario_has_valoracion` ENABLE KEYS */;
+LOCK TABLES `valoracion` WRITE;
+/*!40000 ALTER TABLE `valoracion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `valoracion` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -433,4 +467,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-07 13:32:05
+-- Dump completed on 2021-06-09 22:32:59
