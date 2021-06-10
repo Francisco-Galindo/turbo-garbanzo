@@ -18,12 +18,10 @@ $(document).ready(function() {
         let tel = $("#tel").val();
         let nacimiento = $("#nacimiento").val();
         let grado = $("#grado").val();
-        
+        let img = $("#arch").val();;
         let password = $("#password").val();
 
-        console.log(arch, "archivo");
-        console.log(grado, "grado");
-        console.log(nacimiento, "nacimiento");
+        console.log(img, "archivo");
 
         //algunas validaciones para crear cuenta
         let regexCorreo= /^[\w\.\-\ñ]{4,20}(\.([\w\.\-]))*@([\w\.\-]+)(\.[\w\.\-]+)/;
@@ -63,9 +61,52 @@ $(document).ready(function() {
         verifica.push(regexTel.test(tel));
         verifica.push(regexContrasena.test(password));
 
-        if(arch!==""){
-            verifica.push(regexImg.test(arch));
-            console.log(verifica[8], "arch");
+        if(img!==""){
+            verifica.push(regexImg.test(img));
+            console.log(verifica[8], "img");
+        }
+
+        for(let value of verifica){
+            
+            if(value !==true)
+            {
+                contador++;
+            }
+        }
+        console.log("contador", contador);
+        if(contador===0)
+        {
+            $(".text-danger").remove();
+            let peticion= $.ajax({
+                url: "../dynamics/php/registro.php",
+                data: {num_cuenta:noCuenta, 
+                       contrasena:password,
+                       correo: email,
+                       grado: grado,
+                       telefono: tel,
+                       nombre: nombre,
+                       prim_ape: primApe,
+                       seg_ape: segApe,
+                       fecha_nacimiento: nacimiento,
+                       imagen: arch
+                    },
+                method:"POST"
+            });
+            peticion.done(function (resp){
+                console.log("Se hizo correctamente la petición");
+                //redireccionar
+               
+            })
+            peticion.fail(function(resp){
+                console.log("No se realizó la petición :(");
+            })
+            
+        }
+        else{
+            //verifica[nacimiento, email, noCuenta, nombe, primApe, segApe, tel, password, arch]
+            $(".text-danger").remove();
+            $("#boton").before('<p class="text-danger" class="text">Algunos datos introducidos son inválidos, intente de nuevo</p>');
+
         }
 
 
@@ -103,47 +144,7 @@ $(document).ready(function() {
         })
         
 
-        for(let value of verifica){
-            
-            if(value !==true)
-            {
-                contador++;
-            }
-        }
-        console.log("contador", contador);
-        if(contador===0)
-        {
-            $(".text-danger").remove();
-            let peticion= $.ajax({
-                url: "../dynamics/php/registro.php",
-                data: {num_cuenta:noCuenta, 
-                       contrasena:password,
-                       correo: email,
-                       grado: grado,
-                       telefono: tel,
-                       nombre: nombre,
-                       prim_ape: primApe,
-                       seg_ape: segApe,
-                       fecha_nacimiento: nacimiento,
-                       imagen: arch
-                    },
-                method:"POST"
-            });
-            peticion.done(function (resp){
-                console.log("Se hizo correctamente la petición");
-               
-            })
-            peticion.fail(function(resp){
-                console.log("No se realizó la petición :(");
-            })
-            
-        }
-        else{
-            //verifica[nacimiento, email, noCuenta, nombe, primApe, segApe, tel, password, arch]
-            $(".text-danger").remove();
-            $("#boton").before('<p class="text-danger" class="text">Algunos datos introducidos son inválidos, intente de nuevo</p>');
-
-        }
+       
        
     });
 });
