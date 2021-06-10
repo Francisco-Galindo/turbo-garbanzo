@@ -68,7 +68,8 @@ function ver_horarios_cercanos(
 
 		if ($mismo_dia_semana && $un_dia_entre_fechas) {
 			$fecha_cadena = date('j/n H:i A', $horario_timestamp);
-			$horarios_disponibles += [$horario_timestamp => 			$fecha_cadena];
+			$horarios_disponibles += [$horario_timestamp => 
+				$fecha_cadena];
 		}
 	}
 	return $horarios_disponibles;

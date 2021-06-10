@@ -32,6 +32,9 @@ button{
     border-radius: 12.25px;
     border: none;
 }
+#boton :hover{
+    background-color: #043a7c;
+}
 label{
     font-size: 26px;
 }
@@ -76,4 +79,7 @@ footer{
   
     background-color: var(--azul1);
     color: var(--textwhite);
+}
+p{
+    font-size: 19px;
 }

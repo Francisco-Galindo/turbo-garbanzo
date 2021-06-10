@@ -2,6 +2,9 @@ h1{
     font-size: 38px;
     color: #dfdfdf;
 }
+#cont{
+    flex-grow: 1;
+}
 #busqueda{
     display: flex;
     justify-content: center;
@@ -72,18 +75,72 @@ select{
 .ops{
     margin-top: 10px;
 }
-.results{
+/*=TARJETAS
+-----------------------------------------------------------*/
+#results{
     grid-column-start: 4;
     background-color: #dfdfdf;
+    justify-self: center;
 }
-#tarjeta{
-    width: 100%;
+#tarjRes{
+    
+    width: 900px;
     height: 265px;
     background-color: var(--azul2);
     border-radius: 5px;
+    margin-bottom:32px ;
+    display: flex;
+    flex-direction: column;
 }
-#cont{
-    flex-grow: 1;
+#tarjCont{
+    display: grid;
+    height: 85%;
+    grid-template-columns: 50% 50%;
+    grid-template-rows:   33% 33% 33%;
+    justify-items: center;
+    align-items: center;
+}
+#nomAses{
+    width: 354px;
+    height: 45px;
+    background-color: #dfdfdf;
+}
+#fech_hora{
+    width: 277px;
+    height: 45px;
+    background-color: #dfdfdf;
+}
+#dura{
+    width: 277px;
+    height: 45px;
+    background-color: #dfdfdf;
+}
+#califAses{
+    width: 277px;
+    height: 45px;
+    background-color: #dfdfdf;
+}
+#mate_tema{
+    width: 277px;
+    height: 45px;
+    background-color: #dfdfdf;
+}
+#cupo{
+    width: 277px;
+    height: 45px;
+    background-color: #dfdfdf;
+}
+#mas{
+
+    width: 260px;
+    height: 45px;
+    background-color:var(--gris1);
+    align-self: flex-end;
+    border-radius: 12.25px;
+    font-family: "LGeorge";
+    font-size: 32px;
+    color: #dfdfdf;
+    text-align: center;
 }
 
 /*=ADAPTABILIDAD
@@ -146,6 +203,7 @@ select{
         background-color: var(--azul2);
         border-radius: 5px;
     }
+    
 }
 @media screen and (max-width: 1040px){
     #filt{

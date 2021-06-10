@@ -30,9 +30,27 @@
     flex-direction: column;
     
 }
+.nomUser{
+    margin-left: 7px;
+    margin-right: 25px;
+    font-size: 28px;
+}
+h3{
+    margin-left: 7px;
+    margin-right: 25px;
+    font-size: 28px;
+}
+#info{
+    font-family: "LGeorge";
+    font-size:24px;
+    color: #dfdfdf;
+}
 label{
     display: flex;
     align-self: center;
+    font-family: "LGeorge";
+    font-size:24px;
+    color: #dfdfdf;
 }
 button{
     display: flex;
@@ -47,6 +65,11 @@ button{
     border: none;
     padding-left: 55px;
     color: #dfdfdf;
+}
+input[type=checkbox],input[type=radio] {
+    margin-top: 12.3px;
+    transform: scale(1.7);
+    margin-bottom: 50px;
 }
 .notif{
     display: flex;
@@ -79,6 +102,18 @@ button{
     color: #dfdfdf;
     margin-bottom: 40px;
 }
+#falta{
+    width: 90%;
+}
+#comen{
+    align-self: center;
+    margin-bottom: 15px;
+}
+#pts{
+    align-self: center;
+    width: 50%;
+    height: 5%;
+}
 #aseTermino{
     align-self: center;
     background-color: var(--azul2);
@@ -90,7 +125,7 @@ button{
     align-self: center;
     background-color: var(--azul2);
     border-radius: 5px;
-    height: 288px;
+    height: 350px;
 }
 
 #alumTermino{
@@ -124,6 +159,41 @@ button{
 @media screen and (max-width: 730px){
     .notif{
         width: 450px;
+    }
+    .nomUser{
+        margin-left: 0px;
+        margin-right: 0px;
+        font-size: 24px;
+    }
+    h3{
+        margin-left: 0px;
+        margin-right: 0px;
+        font-size: 24px;
+    }
+    label{
+        flex-direction: column;
+        align-self: center;
+        height:50px;
+        font-size:20px;
+    }
+    #aseTermino{
+        height: 410px;
+    }
+    
+    #aseSoli{
+        height: 450px;
+    }
+    
+    #alumTermino{
+        height: 1700px;
+    }
+    
+    #aseIni{
+        height: 288px;
+    }
+    
+    #aseFin{
+        height: 288px;
     }
 }
 @media screen and (max-width: 480px){

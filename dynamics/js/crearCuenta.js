@@ -13,6 +13,8 @@ $(document).ready(function() {
         let arch = $("#arch").val();
         let password = $("#password").val();
 
+
+        //algunas validaciones para crear cuenta
         let regexCorreo= /^[\w\.\-\ñ]{4,20}(\.([\w\.\-]))*@([\w\.\-]+)(\.[\w\.\-]+)/;
         let reguexCuenta = /^[1-3]\d{8}/;
         let reguexNames = /[A-Za-zñÑá-úÁ-Ú]{2,32}/;
