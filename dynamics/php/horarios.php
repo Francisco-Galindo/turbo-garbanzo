@@ -169,7 +169,6 @@ session_start();
 $conexion = conectar_base();
 $_POST['horarios'] = ['1::2', '3::1', '3::3'];
 $_POST['accion'] = 'ver_disponibilidad_cercana';
-$_SESSION['id_usuario'] = '9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07';
 
 $_POST = purgar_arreglo($_POST, $conexion);
 $_SESSION = purgar_arreglo($_SESSION, $conexion);
@@ -181,8 +180,6 @@ $accion = isset($_POST['accion']) && in_array($_POST['accion'], ACCIONES) ?
 $horarios = isset($_POST['horarios']) && is_array($_POST['horarios']) ?
 	$_POST['horarios'] : null;
 
-
-$id_usuario = '9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07';
 
 $tiempo_actual = time() + UN_DIA;
 $tiempo_a_comparar = $tiempo_actual;

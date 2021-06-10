@@ -44,11 +44,17 @@ if ($contrasena === null) {
 	$error[0] = true;
 	array_push($error, 'Contraseña no válida');
 }
+// Regex para validar una contraseña segura
+$regex = '/^(?=.*[A-ZÑ]+)(?=.*[\W_]+)(?=.*[\d]+)(?=.*[a-zñ]+).{8,}$/';
+if (!preg_match($regex, $contrasena)) {
+	$error[0] = true;
+	array_push($error, 'Contraseña insegura, necesita ser de mínimo 8 carácteres, ter letras minúsculas, mínimo una mayúscula, un número y un caracter especial.');
+}
+
 if ($num_cuenta === null || strlen($num_cuenta) !== 9) {
 	$error[0] = true;
 	array_push($error, 'Número de cuenta no válido');
 }
-
 // Regex para validar correo
 $regex = '/^[\w\.\-\ñ]{4,20}(\.([\w\.\-]))*@([\w\.\-]+)(\.[\w\.\-]+)/';
 if (!preg_match($regex, $correo)) {
@@ -95,12 +101,11 @@ if (isset($_FILES['imagen'])) {
 }
 
 // Checando si usuario ya existe
-$id = hash("sha256", $num_cuenta);
-$consulta = "SELECT * FROM usuario WHERE id_usuario='$id' OR correo='$correo';";
+$consulta = "SELECT * FROM usuario WHERE id_usuario='$num_cuenta' OR correo='$correo';";
 $resultado = mysqli_query($conexion, $consulta);
 if (mysqli_num_rows($resultado) !== 0) {
 	$error[0] = true;
-	array_push($error, 'Usuario existente');
+	array_push($error, 'Y existe un usuario registrado con estos datos');
 }
 
 //  Creando el usuario
@@ -116,14 +121,14 @@ if ($error[0] === false) {
 		$consulta = "INSERT INTO usuario
 			(id_usuario, contrasena, sal, num_cuenta, correo, grado,
 			telefono, nombre, prim_ape, seg_ape, fecha_nacimiento, foto)
-			VALUES ('$id', '$hash', '$sal', '$num_cuenta_cifrado',
+			VALUES ('$num_cuenta', '$hash', '$sal', '$num_cuenta_cifrado',
 			'$correo', '$grado', '$telefono_cifrado', '$nombre',
 			'$prim_ape', '$seg_ape', '$fecha_nacimiento', '$rutaImagen');";
 	} else {
 		$consulta = "INSERT INTO usuario
 			(id_usuario, contrasena, sal, num_cuenta, correo, grado,
 			telefono, nombre, prim_ape, seg_ape, fecha_nacimiento)
-			VALUES ('$id', '$hash', '$sal', '$num_cuenta_cifrado',
+			VALUES ('$num_cuenta', '$hash', '$sal', '$num_cuenta_cifrado',
 			'$correo', '$grado', '$telefono_cifrado', '$nombre',
 			'$prim_ape', '$seg_ape', '$fecha_nacimiento');";
 	}

@@ -78,9 +78,8 @@ function ver_materias_del_usuario($conexion, $id_usuario)
 /******************************************************************************/
 
 
-$_POST['id_usuario'] = '9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07';
 $_POST['accion'] = 'ver_elegidas';
-$_POST['materias'] = ['1400', '1412'];
+// $_POST['materias'] = ['1400', '1412'];
 
 
 $conexion = conectar_base();

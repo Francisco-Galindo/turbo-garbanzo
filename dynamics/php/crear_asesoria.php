@@ -27,7 +27,7 @@ function validaciones($numPet){
 	return $res;
 }
 
-$_SESSION['usuario'] = '9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07';
+// $_SESSION['usuario'] = '9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07';
 /*$_POST['fecha'] = "2021-05-05";
 $_POST['hora'] = "19:05";
 $_POST['duracion'] = "true";
