@@ -1,11 +1,15 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
+    // let s
     let arch;
-    $("#arch").change(function(event) {
+    $("#arch").change(function (event) {
         arch = this.files[0];
+        let ext = arch.name;
+        ext = ext.split(".").pop();
+        console.log(ext);
     })
 
-    $("#crear").on("click", function(evento){
+    $("#crear").on("click", function (evento) {
         let contador = 0;
         console.log("click");
         evento.preventDefault();
@@ -24,35 +28,33 @@ $(document).ready(function() {
         console.log(img, "archivo");
 
         //algunas validaciones para crear cuenta
-        let regexCorreo= /^[\w\.\-\ñ]{4,20}(\.([\w\.\-]))*@([\w\.\-]+)(\.[\w\.\-]+)/;
+        let regexCorreo = /^[\w\.\-\ñ]{4,20}(\.([\w\.\-]))*@([\w\.\-]+)(\.[\w\.\-]+)/;
         let regexCuenta = /^[1-3]\d{9}/;
         let regexNames = /[A-Za-zñÑá-úÁ-Ú]{2,32}/;
         let regexTel = /^[\d]{9}$/;
         let regexImg = /^[A-Za-zá-úÁ-Ú0-9_\-\(\)\/&%$#!¡¿?\:\\]{1,50}\.(jpg|png|jpeg)$/;
-        let regexContrasena = /^(?=.*[A-ZÑ]+)(?=.*[\W_]+)(?=.*[\d]+)(?=.*[a-zñ]+).{8,}$/; 
-        
+        let regexContrasena = /^(?=.*[A-ZÑ]+)(?=.*[\W_]+)(?=.*[\d]+)(?=.*[a-zñ]+).{8,}$/;
+
         let today = new Date();
-        let fecha = (today.getFullYear()+"-"+today.getMonth()+"-"+today.getDay());   
-        
-        
-        var arrayfecha= fecha.split("-");
-        if(nacimiento!=="")
-        {
-            var arrayfecha= fecha.split("-");
-            var arraynacimiento= nacimiento.split("-")
-          
-            if(arrayfecha[0]>arraynacimiento[0])
-            {
+        let fecha = (today.getFullYear() + "-" + today.getMonth() + "-" + today.getDay());
+
+
+        var arrayfecha = fecha.split("-");
+        if (nacimiento !== "") {
+            var arrayfecha = fecha.split("-");
+            var arraynacimiento = nacimiento.split("-")
+
+            if (arrayfecha[0] > arraynacimiento[0]) {
                 verifica.push(true);
             }
-            else{
+            else {
                 verifica.push(false);
             }
         }
-        else{
+        else {
             verifica.push(false);
         }
-        
+
         verifica.push(regexCorreo.test(email));
         verifica.push(regexCuenta.test(noCuenta));
         verifica.push(regexNames.test(nombre));
@@ -61,48 +63,55 @@ $(document).ready(function() {
         verifica.push(regexTel.test(tel));
         verifica.push(regexContrasena.test(password));
 
-        if(img!==""){
+        if (img !== "") {
             verifica.push(regexImg.test(img));
             console.log(verifica[8], "img");
         }
 
-        for(let value of verifica){
-            
-            if(value !==true)
-            {
+        for (let value of verifica) {
+
+            if (value !== true) {
                 contador++;
             }
         }
         console.log("contador", contador);
-        if(contador===0)
-        {
-            $(".text-danger").remove();
-            let peticion= $.ajax({
+        if (contador === 0) {
+            let formulario = new FormData();
+            formulario.append('nombre', nombre);
+            formulario.append('prim_ape', primApe);
+            formulario.append('seg_ape', segApe);
+            formulario.append('num_cuenta', noCuenta);
+            formulario.append('correo', email);
+            formulario.append('telefono', tel);
+            formulario.append('fecha_nacimiento', nacimiento);
+            formulario.append('grado', grado);
+            formulario.append('contrasena', password);
+            formulario.append('imagen', arch);
+    
+    
+    
+            let peticion = $.ajax({
+                method: "POST",
                 url: "../dynamics/php/registro.php",
-                data: {num_cuenta:noCuenta, 
-                       contrasena:password,
-                       correo: email,
-                       grado: grado,
-                       telefono: tel,
-                       nombre: nombre,
-                       prim_ape: primApe,
-                       seg_ape: segApe,
-                       fecha_nacimiento: nacimiento,
-                       imagen: arch
-                    },
-                method:"POST"
+                data: formulario,
+                cache: false,
+                contentType: false,
+                processData: false,
             });
-            peticion.done(function (resp){
-                console.log("Se hizo correctamente la petición");
-                //redireccionar
-               
+            peticion.done(function (resp) {
+                console.log(resp);
+                if (resp == 'Exito') {
+                    window.location.replace("./materias.html");
+                }
+    
             })
-            peticion.fail(function(resp){
-                console.log("No se realizó la petición :(");
+            peticion.fail(function (resp) {
+                console.log(resp);
+                console.log("no")
             })
-            
+
         }
-        else{
+        else {
             //verifica[nacimiento, email, noCuenta, nombe, primApe, segApe, tel, password, arch]
             $(".text-danger").remove();
             $("#boton").before('<p class="text-danger" class="text">Algunos datos introducidos son inválidos, intente de nuevo</p>');
@@ -111,40 +120,7 @@ $(document).ready(function() {
 
 
         console.log(nombre);
-        let formulario = new FormData();
-        formulario.append('nombre', nombre);
-        formulario.append('prim_ape', primApe);
-        formulario.append('seg_ape', segApe);
-        formulario.append('num_cuenta', noCuenta);
-        formulario.append('correo', email);
-        formulario.append('telefono', tel);
-        formulario.append('fecha_nacimiento', nacimiento);
-        formulario.append('grado', grado);
-        formulario.append('contrasena', password);
-        formulario.append('imagen', arch);
 
 
-
-        let peticion= $.ajax({
-            method:"POST",
-            url: "../dynamics/php/registro.php",
-            data: formulario,
-            cache: false,
-            contentType: false,
-            processData: false,
-        });
-        peticion.done(function (resp){
-            console.log(resp);
-            window.location.replace("./materias.html");
-           
-        })
-        peticion.fail(function(resp){
-            console.log(resp);
-            console.log("no")
-        })
-        
-
-       
-       
     });
 });
