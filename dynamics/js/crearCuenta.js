@@ -66,7 +66,7 @@ $(document).ready(function() {
         });
         peticion.done(function (resp){
             console.log(resp);
-            window.location.replace("./horarios.html");
+            window.location.replace("./materias.html");
            
         })
         peticion.fail(function(resp){
