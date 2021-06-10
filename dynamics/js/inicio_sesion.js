@@ -8,7 +8,6 @@ $(document).ready(function() {
         console.log(cuenta);
         
         let reguexCuenta = /^[\d]{9}$/;
-        let reguexContrasena = /^(?=.*[A-ZÑ]+)(?=.*[\W_]+)(?=.*[\d]+)(?=.*[a-zñ]+).{8,}$/;
 
         var verifica = reguexCuenta.test(cuenta);
         console.log(verifica);
