@@ -100,7 +100,7 @@ footer{
     color: var(--textwhite);
 }
 #nacimiento, #grado, #arch, #password{
-    margin-top: 16px;
+    margin-top: 15px;
 }
 /* =ADAPTABILIDAD
 ------------------------------------------------------------*/
@@ -119,10 +119,7 @@ footer{
     .container{
         overflow-x: 1;
     }
-    #label1{
-        width: 180px;
-    }
-    #label2{
+    #label1, #label2{
         width: 180px;
     }
     label{
