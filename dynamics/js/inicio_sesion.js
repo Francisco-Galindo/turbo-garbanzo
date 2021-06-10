@@ -7,8 +7,8 @@ $(document).ready(function() {
 
         console.log(cuenta);
         
-        let reguexCuenta = /^[1-3]\d{8}$/;
-        let reguexContrasena = /[\wñÑ_\-\/\.&%$#!?¿¡]{6,20}/;
+        let reguexCuenta = /^[\d]{9}$/;
+        let reguexContrasena = /^(?=.*[A-ZÑ]+)(?=.*[\W_]+)(?=.*[\d]+)(?=.*[a-zñ]+).{8,}$/;
 
         var verifica = reguexCuenta.test(cuenta);
         console.log(verifica);
@@ -25,7 +25,9 @@ $(document).ready(function() {
                 method:"POST"
             });
             peticion.done(function (resp){
-                console.log("Se realizó");
+                if (resp == 'Exito') {
+                    window.location.replace("./sesionActiva.html")
+                }
             
             })
             peticion.fail(function(resp){

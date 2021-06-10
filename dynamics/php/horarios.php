@@ -11,6 +11,41 @@ define('ACCIONES', array(
 	'ver_todos_los_horarios', 'elegir_horario_usuario'
 ));
 
+function obtener_horarios_ocupados($conexion, $id_usuario)
+{
+	$timestamps_ocupadas = array();
+	$consulta = "SELECT fecha_hora, duracion_simple FROM asesoria
+		WHERE id_usuario='$id_usuario';";
+	$resultado = mysqli_query($conexion, $consulta);
+	if (mysqli_num_rows($resultado) !== 0) {
+		while ($row = mysqli_fetch_assoc($resultado)) {
+			$timestamp = strtotime($row['fecha_hora']);
+			array_push($timestamps_ocupadas, $timestamp);
+			if ($row['duracion_simple'] == false) {
+				$timestamp += 50 * 60;
+				array_push($timestamps_ocupadas, $timestamp);
+			}
+		}
+	}
+
+	$consulta = "SELECT t2.fecha_hora, t2.duracion_simple FROM asesoria_has_usuario t1
+		INNER JOIN asesoria t2 ON t1.id_asesoria=t2.id_asesoria
+		WHERE t2.id_usuario='$id_usuario';";
+	$resultado = mysqli_query($conexion, $consulta);
+	if (mysqli_num_rows($resultado) !== 0) {
+		while ($row = mysqli_fetch_assoc($resultado)) {
+			$timestamp = strtotime($row['fecha_hora']);
+			array_push($timestamps_ocupadas, $timestamp);
+			if ($row['duracion_simple'] == false) {
+				$timestamp += 50 * 60;
+				array_push($timestamps_ocupadas, $timestamp);
+			}
+		}
+	}
+
+	return $timestamps_ocupadas;
+}
+
 function ver_horarios_usuario($conexion, $id_usuario)
 {
 	$horarios = array();
@@ -66,7 +101,11 @@ function ver_horarios_cercanos(
 		$un_dia_entre_fechas =
 			$horario_timestamp >= $tiempo_actual;
 
-		if ($mismo_dia_semana && $un_dia_entre_fechas) {
+		
+		$horarios_ocupados = obtener_horarios_ocupados($conexion, $id_usuario);
+		$no_encima = !in_array($horario_timestamp, $horarios_ocupados);
+
+		if ($mismo_dia_semana && $un_dia_entre_fechas && $no_encima) {
 			$fecha_cadena = date('j/n H:i A', $horario_timestamp);
 			$horarios_disponibles += [$horario_timestamp => 
 				$fecha_cadena];
@@ -85,18 +124,19 @@ function ver_todos_horarios($conexion)
 		array_push($horas, [$row['id_hora'], $row['hora']]);
 	}
 
-	$consulta = 'SELECT id_dia, dia FROM dia;';
+	$consulta = 'SELECT id_dia, dia FROM dia ORDER BY id_dia;';
 	$resultado = mysqli_query($conexion, $consulta);
 	while ($row = mysqli_fetch_assoc($resultado)) {
-		echo '<br>';
+		echo '<br><strong>';
 		echo $row['dia'];
-		echo '<br>';
+		echo '</strong><br>';
 		foreach ($horas as $hora) {
-			echo '<label>';
+			echo '<label class="checkbox-inline">';
 			echo $hora[1];
-			echo '<input tabindex="0" id="' . $row['id_dia'] . '::' . $hora[0] . '" type="checkbox"> ';
+			echo '<input name="horarios[]" tabindex="0" value="' . $row['id_dia'] . '::' . $hora[0] . '" type="checkbox"> ';
 			echo '</label>';
 		}
+
 	}
 }
 
@@ -109,7 +149,7 @@ function elegir_horarios($conexion, $id_usuario, $horarios)
                 WHERE id_usuario='$id_usuario';";
 	$resultado = mysqli_query($conexion, $consulta);
 	foreach ($horarios as $horario) {
-		$horario = explode('::', $horario);
+		$horario = explode('::', $horario[0]);
 		$consulta = "INSERT INTO usuario_has_horario
 			(id_usuario, id_hora, id_dia)
 			VALUES ('$id_usuario', $horario[1], $horario[0]);";
@@ -128,12 +168,12 @@ function elegir_horarios($conexion, $id_usuario, $horarios)
 
 session_start();
 $conexion = conectar_base();
-$_POST['horarios'] = ['1::2', '3::1', '3::3'];
-$_POST['accion'] = 'ver_todos_los_horarios';
-$_SESSION['id_usuario'] = '9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07';
+// $_POST['horarios'] = ['1::2', '3::1', '3::3'];
+// $_POST['accion'] = 'ver_disponibilidad_cercana';
 
 $_POST = purgar_arreglo($_POST, $conexion);
 $_SESSION = purgar_arreglo($_SESSION, $conexion);
+
 $id_usuario = $_SESSION['id_usuario'];
 
 $accion = isset($_POST['accion']) && in_array($_POST['accion'], ACCIONES) ?
@@ -142,8 +182,6 @@ $accion = isset($_POST['accion']) && in_array($_POST['accion'], ACCIONES) ?
 $horarios = isset($_POST['horarios']) && is_array($_POST['horarios']) ?
 	$_POST['horarios'] : null;
 
-
-$id_usuario = '9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07';
 
 $tiempo_actual = time() + UN_DIA;
 $tiempo_a_comparar = $tiempo_actual;
@@ -166,12 +204,27 @@ if ($accion === 'ver_horario_usuario') {
 
 	echo json_encode($horarios_disponibles);
 } elseif ($accion === 'ver_todos_los_horarios') {
+	echo '<br><br>';
 	ver_todos_horarios($conexion);	
 } elseif ($accion === 'elegir_horario_usuario') {
-	$alerta = elegir_horarios($conexion, $id_usuario, $horarios);
+
+	parse_str($_POST['horarios'], $horarios);
+	$horarios = array_values($horarios);
+	array_pop($horarios);
+	if (count($horarios) >= 2) {
+		$alerta = elegir_horarios($conexion, $id_usuario, $horarios);
+	} else {
+		$alerta = "Se necesitan mínimo 2 horarios";
+	}
+
 }
 
 
 mysqli_close($conexion);
 
+if (isset($alerta) && $alerta !== true) {
+	echo $alerta;
+} elseif (isset($alerta)) {
+	echo 'Exito';
+}
 // EOF

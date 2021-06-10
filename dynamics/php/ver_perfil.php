@@ -3,7 +3,7 @@
 require 'config.php';
 require 'seguridad_y_cripto.php';
 
-$_POST['id_usuario'] = '9ecea6b0b95158e3336fb8701242281706ec48692be23a8c2eb523798eaddf07';
+
 
 
 $conexion = conectar_base();

@@ -1,8 +1,14 @@
 $(document).ready(function() {
 
-    $("#crear").on("click", function(){
+    let arch;
+    $("#arch").change(function(event) {
+        arch = this.files[0];
+    })
+
+    $("#crear").on("click", function(evento){
         let contador = 0;
         console.log("click");
+        evento.preventDefault();
         let verifica = [];
         let nombre = $("#name").val();
         let primApe = $("#primApe").val();
@@ -12,7 +18,7 @@ $(document).ready(function() {
         let tel = $("#tel").val();
         let nacimiento = $("#nacimiento").val();
         let grado = $("#grado").val();
-        let arch = $("#arch").val();
+        
         let password = $("#password").val();
 
         console.log(arch, "archivo");
@@ -62,6 +68,39 @@ $(document).ready(function() {
             console.log(verifica[8], "arch");
         }
 
+
+        console.log(nombre);
+        let formulario = new FormData();
+        formulario.append('nombre', nombre);
+        formulario.append('prim_ape', primApe);
+        formulario.append('seg_ape', segApe);
+        formulario.append('num_cuenta', noCuenta);
+        formulario.append('correo', email);
+        formulario.append('telefono', tel);
+        formulario.append('fecha_nacimiento', nacimiento);
+        formulario.append('grado', grado);
+        formulario.append('contrasena', password);
+        formulario.append('imagen', arch);
+
+
+
+        let peticion= $.ajax({
+            method:"POST",
+            url: "../dynamics/php/registro.php",
+            data: formulario,
+            cache: false,
+            contentType: false,
+            processData: false,
+        });
+        peticion.done(function (resp){
+            console.log(resp);
+            window.location.replace("./materias.html");
+           
+        })
+        peticion.fail(function(resp){
+            console.log(resp);
+            console.log("no")
+        })
         
 
         for(let value of verifica){

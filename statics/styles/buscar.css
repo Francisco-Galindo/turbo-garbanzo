@@ -79,8 +79,6 @@ select{
 -----------------------------------------------------------*/
 #results{
     grid-column-start: 4;
-    background-color: #dfdfdf;
-    justify-self: center;
 }
 #tarjRes{
     
@@ -88,6 +86,7 @@ select{
     height: 265px;
     background-color: var(--azul2);
     border-radius: 5px;
+    margin-top: 10px;
     margin-bottom:32px ;
     display: flex;
     flex-direction: column;
@@ -100,37 +99,37 @@ select{
     justify-items: center;
     align-items: center;
 }
-#nomAses{
+.nomAses{
     width: 354px;
     height: 45px;
     background-color: #dfdfdf;
 }
-#fech_hora{
+.fech_hora{
     width: 277px;
     height: 45px;
     background-color: #dfdfdf;
 }
-#dura{
+.dura{
     width: 277px;
     height: 45px;
     background-color: #dfdfdf;
 }
-#califAses{
+.califAses{
     width: 277px;
     height: 45px;
     background-color: #dfdfdf;
 }
-#mate_tema{
+.mate_tema{
     width: 277px;
     height: 45px;
     background-color: #dfdfdf;
 }
-#cupo{
+.cupo{
     width: 277px;
     height: 45px;
     background-color: #dfdfdf;
 }
-#mas{
+.mas{
 
     width: 260px;
     height: 45px;
@@ -141,7 +140,12 @@ select{
     font-size: 32px;
     color: #dfdfdf;
     text-align: center;
+    cursor: pointer;
 }
+.mas:hover{
+    color: var(--azul4);
+}
+
 
 /*=ADAPTABILIDAD
 -----------------------------------------------------------*/
