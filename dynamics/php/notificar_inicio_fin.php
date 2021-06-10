@@ -40,14 +40,15 @@ while ($row = mysqli_fetch_assoc($resultado)) {
 }
 
 $consulta = "SELECT id_asesoria FROM asesoria_has_usuario
-	WHERE id_usuario='$id_usuario'
-	AND confirmada=true;";
+	WHERE id_usuario='$id_usuario';";
+
 $resultado = mysqli_query($conexion, $consulta);
 
-while ($row = mysqli_fetch_assoc($resultado)) {
+while (mysqli_num_rows($resultado) > 0 && $row = mysqli_fetch_assoc($resultado)) {
 	$id_asesoria = $row['id_asesoria'];
 	$consulta = "SELECT id_asesoria, fecha_hora FROM asesoria 
-		WHERE id_asesoria='$id_asesoria';";
+		WHERE id_asesoria='$id_asesoria'
+		AND confirmada=true;";
 	$resultado = mysqli_query($conexion, $consulta);
 
 	while ($row = mysqli_fetch_assoc($resultado)) {

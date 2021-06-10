@@ -15,10 +15,10 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <div class="d-flex">
-                <a class="navbar-brand" href="#" id="blockNav">
+                <a class="navbar-brand" href="./sesionActiva.html" id="blockNav">
                     <img id="navLogo" src="../statics/img/favicon/favicon.svg" alt="" class="d-inline-block align-text-top">
                 </a>
-                <a class="navbar-brand" id="titulo" href="#">
+                <a class="navbar-brand" id="titulo" href="./sesionActiva.html">
                     <h2 id="tituNav" >Asesorías P6</h2>
                 </a> 
             </div>
@@ -29,14 +29,14 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href=""><i class="fas fa-bell"></i></a>
+                            <a class="nav-link active" aria-current="page" href="./notificaciones.html"><i class="fas fa-bell"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#" id="nomUser"><h2 id="nomNav">Nombre del Usuario</h2></a>
+                            <a class="nav-link active" aria-current="page" href="./perfil.html" id="nomUser"><h2 id="nomNav">Nombre del Usuario</h2></a>
                         </li>
         
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href=""><i class="far fa-user-circle"></i></a>
+                            <a class="nav-link active" aria-current="page" href="./perfil.html"><i class="far fa-user-circle"></i></a>
                         </li>
                     </div>
                 </div>
@@ -52,10 +52,12 @@
             <div id="aseTermino" class="notif">
                 <h1 class="tipo">Terminó tu sesión</h1>
                 <h1 class="preg">¿Quiénes asistieron a la asesoría?</h1>
-                <label for= "ResTaco">
-                    <label><input type="radio" name ="taco5" value="A" required>Verde</label>
-                    <label><input type="radio" name ="taco5" value="B">Roja</label>
-                    <label><input type="radio" name ="taco5" value="C">Naranja (de habanero)</label>
+                <label for= "asistencia">
+                    <label><input type="checkbox" name ="usuario" value="Us1"><h3 class="nomUser">usuario1</h3></label>
+                   
+                    <label><input type="checkbox" name ="usuario" value="Us2"><h3 class="nomUser">usuario2</h3></label>
+                   
+                    <label><input type="checkbox" name ="usuario" value="Us3"><h3 class="nomUser">usuario3</h3></label>
                 </label>
                 <button type="button" class="submitcarr" name="button">Aceptar</button>
             </div>
@@ -63,12 +65,15 @@
             <div id="aseSoli" class="notif">
                 <h1 class="tipo">Solicitud de asesoría</h1>
                 <h1 class="preg">USUARIO esta solicitando una asesoría</h1>
-                <div>
-                    Información de la asesoría:
+                <div id="infoAses">
+                    <h1 id="info">Información de la Asesoría:</h1>
+                    <div>
+
+                    </div>
                 </div>
-                <label for= "ResTaco">
-                    <label><input type="radio" name ="taco5" value="A" required>Verde</label>
-                    <label><input type="radio" name ="taco5" value="B">Roja</label>
+                <label for= "soliAses">
+                    <label><input type="radio" name ="solicitud" value="Aceptar" required><h3>Aceptar</h3></label>
+                    <label><input type="radio" name ="solicitud" value="Rechazar"><h3>Rechazar</h3></label>
                 </label>
                 <button type="button" class="submitcarr" name="button">Aceptar</button>
             </div>
@@ -77,27 +82,34 @@
                 <h1 class="tipo">Terminó la sesión</h1>
                 <h1 class="preg">La asesoría ya ha termido 
                     ¿Gustas dejar un comentario?</h1>
-                    <textarea name="texto" rows="10" cols="100"></textarea>
+                    <textarea name="texto" rows="7" cols="75" id="comen"></textarea>
+                    
                 <h1 class="preg">¿Gustas calificar la asesoría?</h1>
-                <select name="modalidad">
-                    <option value="0">Todas</option>
-                    <option value="1">A Distancia</option>
-                    <option value="2">Abierto</option>
-                    <option value="3">Escolarizado</option>
+                <select name="puntaje" id="pts">
+                    <option value="1">1pt de 5pts</option>
+                    <option value="2">2pts de 5pts</option>
+                    <option value="3">3pts de 5pts</option>
+                    <option value="4">4pts de 5pts</option>
+                    <option value="5">5pts de 5pts</option>
                 </select>
+                
+                <br><br><br>
+
                 <h1 class="preg">¿Algún usuario tuvó un comportamiento inapropiado?</h1>
-                <label for= "ResTaco">
-                    <label><input type="radio" name ="taco5" value="A" required>Verde</label>
-                    <label><input type="radio" name ="taco5" value="B">Roja</label>
-                    <label><input type="radio" name ="taco5" value="C">Naranja (de habanero)</label>
+                <label for= "usRep">
+                    <label><input type="checkbox" name ="usuario" value="Us1"><h3 class="nomUser">usuario1</h3></label>
+                   
+                    <label><input type="checkbox" name ="usuario" value="Us2"><h3 class="nomUser">usuario2</h3></label>
+                   
+                    <label><input type="checkbox" name ="usuario" value="Us3"><h3 class="nomUser">usuario3</h3></label>
                 </label>
-                <h1 class="preg">¿Cuál fue su falta?</h1>.
-                <label for= "ResTaco">
-                    <label><input type="radio" name ="taco5" value="A" required>Verde</label>
-                    <label><input type="radio" name ="taco5" value="B">Roja</label>
-                    <label><input type="radio" name ="taco5" value="C">Naranja (de habanero)</label>
-                    <label><input type="radio" name ="taco5" value="B">Roja</label>
-                    <label><input type="radio" name ="taco5" value="C">Naranja (de habanero)</label>
+                <h1 class="preg">¿Cuál fue su falta?</h1>
+                <label for= "falta" id="falta">
+                    <label><input type="radio" name ="tipoFalta" value="A"><h3>No se presentó a la asesoría y no avisó</h3></label>
+                    <label><input type="radio" name ="tipoFalta" value="B"><h3>Abuso físico o verbal</h3></label>
+                    <label><input type="radio" name ="tipoFalta" value="C"><h3>Acoso</h3></label>
+                    <label><input type="radio" name ="tipoFalta" value="D"><h3>Spam</h3></label>
+                    <label><input type="radio" name ="tipoFalta" value="E"><h3>Datos personales falsos</h3></label>
                 </label>
                 <button type="button" class="submitcarr" name="button">Aceptar</button>
             </div>
