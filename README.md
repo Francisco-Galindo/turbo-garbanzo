@@ -6,7 +6,7 @@
 
 ### Integrantes del equipo 
 
-* Jazmin
+* Karla Jazmin Ramírez Domínguez
 * Francisco Mena Galindo
 * Sergio Damian Navarro Juárez
 * Carlos Emiliano García Mojica
