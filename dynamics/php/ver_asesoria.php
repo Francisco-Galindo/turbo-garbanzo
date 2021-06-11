@@ -13,7 +13,6 @@ $id_asesoria = $_POST['asesoria'];
 $conexion = conectar_base();
 date_default_timezone_set("America/Mexico_City");
 $_POST = purgar_arreglo($_POST, $conexion);
-session_start();
 $id_asesoria = $_POST['asesoria'];
 
 $consulta = "SELECT nombre, prim_ape, seg_ape, materia, tema, fecha_hora, duracion_simple, cupo, medio_vir, usuario.id_usuario FROM usuario INNER JOIN asesoria ON usuario.id_usuario=asesoria.id_usuario INNER JOIN materia ON asesoria.id_materia=materia.id_materia WHERE id_asesoria=$id_asesoria";

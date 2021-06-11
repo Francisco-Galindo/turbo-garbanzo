@@ -46,7 +46,7 @@ $resultado = mysqli_query($conexion, $consulta);
 
 while (mysqli_num_rows($resultado) > 0 && $row = mysqli_fetch_assoc($resultado)) {
 	$id_asesoria = $row['id_asesoria'];
-	$consulta = "SELECT id_asesoria, fecha_hora FROM asesoria
+	$consulta = "SELECT id_asesoria, fecha_hora, duracion_simple FROM asesoria
 		WHERE id_asesoria='$id_asesoria'
 		AND confirmada=true;";
 	$resultado = mysqli_query($conexion, $consulta);
@@ -57,7 +57,19 @@ while (mysqli_num_rows($resultado) > 0 && $row = mysqli_fetch_assoc($resultado))
 				$id_asesoria,
 				$id_usuario,
 				false);
+		} 
+		if ($row['duracion_simple'] == '1') {
+			$suma_tiempo = 50 * 60;
+		} else {
+			$suma_tiempo = 100 * 60;
+		}
+		if (strtotime($row['fecha_hora']) + $suma_tiempo - time() <= 0 ) {
+			notificar_final_asesoria($conexion,
+				$id_asesoria,
+				$id_usuario,
+				false);
 		}
 	}
 }
+
  //EOF
