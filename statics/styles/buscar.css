@@ -2,6 +2,13 @@ h1{
     font-size: 38px;
     color: #dfdfdf;
 }
+
+h4{
+    font-family:"LGeorge";
+    font-size: 22px !important;
+    color: #101010 !important;
+    text-align: center !important;
+}
 #cont{
     flex-grow: 1;
 }
