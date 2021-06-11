@@ -16,7 +16,6 @@
 #asesorias{
     
     grid-column-start:2;
-
 }
 
 #btnBA{
@@ -179,8 +178,15 @@
 .cancelar:hover{
     color: var(--azul4);
 }
+.datoPredeter{
+    font-family: "LGeorge";
+    font-size: 32px;
+    color: black;
+    text-align: center;
+}
 /*=Bloque de Proximos Eventos
----------------------------------------------*/
+/* ---------------------------------------------*/
+
 #proxEve{
     grid-column-start:3;
     display: flex;
@@ -206,11 +212,14 @@
 
     border-radius: 5px;
 }
+
 #calendario{
     align-self: center;
     background-color: var(--gris1);
     width: 541px;
     height: 498px;
+    display: flex;
+    flex-direction: column;
 }
 
 #calendario>h1{
@@ -221,6 +230,13 @@
     height: 49px;
     background-color: var(--azul2);
     color: #dfdfdf;
+}
+#contCalen{
+    margin-top: 15px;
+    align-self: center;
+    width: 450px;
+    height: 375px;
+    background-color: #dfdfdf;
 }
 
 #leyenda{
@@ -261,6 +277,13 @@
     font-size: 26px;
     font-family: "LGeorge";
 }
+#logos{
+    display: flex;
+    align-self: center;
+    width: 400px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
 #btnCNA{
     display: flex;
     justify-content: center;
@@ -287,13 +310,4 @@
     background-color: var(--azul4);
 
 }
-/*=Calendario
-----------------------------------*/
-#fecha{
-    position: relative;
-    top: 0%;
-    left: 10%;
-    width: 80%;
-    height: 75%;
-    background-color: white;
-}
+/*=Calendario*/
