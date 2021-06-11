@@ -23,7 +23,7 @@ $(document).ready (function(){
        
         let peticionHorario= $.ajax({
             method:"POST",
-            url: "../dynamics/php/crearAsesoria.php",
+            url: "../dynamics/php/crear_asesoria.php",
             data: {
                 fecha: date,
                 horario: hora,
@@ -32,8 +32,7 @@ $(document).ready (function(){
                 materia: asignatura,
                 medio: medioo,
                 cupo: cupoo,
-                lugar: place
-                
+                lugar: place           
             }
         });
         peticionHorario.done(function(resp) {
