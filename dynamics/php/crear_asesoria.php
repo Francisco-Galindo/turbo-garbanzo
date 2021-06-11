@@ -1,5 +1,5 @@
 <?php
- isset($_SESSION['id_usuario']=325676543 ;
+ $_SESSION['id_usuario']=325676543 ;
 if(isset($_SESSION['id_usuario'])){
 
 
