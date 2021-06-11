@@ -16,7 +16,6 @@
 #asesorias{
     
     grid-column-start:2;
-
 }
 
 #btnBA{
@@ -180,7 +179,8 @@
     color: var(--azul4);
 }
 /*=Bloque de Proximos Eventos
----------------------------------------------*/
+/* ---------------------------------------------*/
+
 #proxEve{
     grid-column-start:3;
     display: flex;
@@ -206,6 +206,7 @@
 
     border-radius: 5px;
 }
+/*
 #calendario{
     align-self: center;
     background-color: var(--gris1);
@@ -260,6 +261,13 @@
     grid-row-start:4;
     font-size: 26px;
     font-family: "LGeorge";
+} */
+#logos{
+    display: flex;
+    align-self: center;
+    width: 400px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 #btnCNA{
     display: flex;
@@ -287,13 +295,4 @@
     background-color: var(--azul4);
 
 }
-/*=Calendario
-----------------------------------*/
-#fecha{
-    position: relative;
-    top: 0%;
-    left: 10%;
-    width: 80%;
-    height: 75%;
-    background-color: white;
-}
+/*=Calendario*/
