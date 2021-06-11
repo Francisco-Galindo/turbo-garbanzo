@@ -29,6 +29,7 @@ $(document).ready (function(){
             }
         });
         peticionHorario.done(function(resp) {
+            console.log("Respuesta");
             console.log(resp);
         });
 
