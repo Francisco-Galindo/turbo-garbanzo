@@ -23,8 +23,12 @@
     * Una vez hecha la instalación de XAMPP, tendrás que abrirlo y activar la opción de Apache dandole click al botón junto a la palabra Apache y MySQL. 
     *Restatura la base de datos
     *Crea un usuario que pueda hacer uso de la base de datos con los siguientes comandos: 
+    ```
     CREATE USER 'turbogarbanzo'@'localhost' IDENTIFIED BY 'el_garbanzo'
+    ```
+    ```
     GRANT ALL PRIVILEGES ON \*.\* TO 'turbogarbanzo'@'localhost';
+    ```
     * Dirigirte a tus archivos en la dirección de la carpeta clonada que tendrá el nombre turbo_garbanzo.
     * En turbo_garbanzo, abre el archivo index dando doble click en ella.
     * ¡Bienvenido a Asesorías P6! donde puedes crear tus asesorías y acceder a distintas asesorías a tan solo un click de distancia.
