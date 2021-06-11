@@ -117,18 +117,15 @@ function ver_horarios_cercanos(
 
 function ver_todos_horarios($conexion)
 {
-	// $horas = array();
-	// $consulta = 'SELECT id_hora, hora FROM hora;';
-	// $resultado = mysqli_query($conexion, $consulta);
-	// while ($row = mysqli_fetch_assoc($resultado)) {
-	// 	array_push($horas, [$row['id_hora'], $row['hora']]);
-	// }
-
-	$horas = json_decode(obtener_todos_horarios($conexion), true);
+	$horas = array();
+	$consulta = 'SELECT id_hora, hora FROM hora;';
+	$resultado = mysqli_query($conexion, $consulta);
+	while ($row = mysqli_fetch_assoc($resultado)) {
+		array_push($horas, [$row['id_hora'], $row['hora']]);
+	}
 
 	$consulta = 'SELECT id_dia, dia FROM dia ORDER BY id_dia;';
 	$resultado = mysqli_query($conexion, $consulta);
-
 	while ($row = mysqli_fetch_assoc($resultado)) {
 		echo '<br><strong>';
 		echo $row['dia'];
@@ -139,7 +136,6 @@ function ver_todos_horarios($conexion)
 			echo '<input name="horarios[]" tabindex="0" value="' . $row['id_dia'] . '::' . $hora[0] . '" type="checkbox"> ';
 			echo '</label>';
 		}
-
 	}
 }
 
@@ -155,12 +151,14 @@ function obtener_todos_horarios($conexion)
 	return json_encode($horas, JSON_UNESCAPED_UNICODE);
 }
 
+
+
 function elegir_horarios($conexion, $id_usuario, $horarios)
 {
 	$alerta = '';
 
 	$consulta = "DELETE FROM usuario_has_horario
-                WHERE id_usuario='$id_usuario';";
+				WHERE id_usuario='$id_usuario';";
 	$resultado = mysqli_query($conexion, $consulta);
 	foreach ($horarios as $horario) {
 		$horario = explode('::', $horario[0]);
@@ -191,7 +189,7 @@ $_SESSION = purgar_arreglo($_SESSION, $conexion);
 $id_usuario = $_SESSION['id_usuario'];
 
 $accion = isset($_POST['accion']) && in_array($_POST['accion'], ACCIONES) ?
-        $_POST['accion'] : null;
+		$_POST['accion'] : null;
 
 $horarios = isset($_POST['horarios']) && is_array($_POST['horarios']) ?
 	$_POST['horarios'] : null;
@@ -216,7 +214,7 @@ if ($accion === 'ver_horario_usuario') {
 		$tiempo_a_comparar += UN_DIA;
 	}
 
-	echo json_encode($horarios_disponibles, JSON_UNESCAPED_UNICODE);
+	echo json_encode($horarios_disponibles);
 } elseif ($accion === 'ver_todos_los_horarios') {
 	echo '<br><br>';
 	ver_todos_horarios($conexion);	
@@ -241,4 +239,5 @@ if (isset($alerta) && $alerta !== true) {
 } elseif (isset($alerta)) {
 	echo 'Exito';
 }
+
 // EOF

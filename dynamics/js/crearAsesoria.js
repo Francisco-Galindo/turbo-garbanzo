@@ -1,5 +1,5 @@
 $(document).ready (function(){
-    $("#enviar").on("click", function(){
+    $("#crear").on("click", function(){
         console.log("click");
         let fecha = $("#date").val();
         let hora = $("#hora").val();
@@ -8,16 +8,33 @@ $(document).ready (function(){
         let materia = $("#materia").val();
         let lugar = $("#lugar").val();
         let medio = $("#medio").val();
+        let cupo = $("#cupo").val();
 
-
-        console.log(cuenta);
-        
-        let regexTema=/[A-Za-zñÑá-úÁ-Ú]{2,70}/;
-        let regexLugar=/[A-Za-zñÑá-úÁ-Ú]{2,70}/;
 
         
+        let regexTema=/[A-Za-zñÑá-úÁ-Ú\:\s]{2,70}/;
+        let regexLugar=/[A-Za-zñÑá-úÁ-Ú0-9\\_\:\.\-]{2,70}/;
 
-        if((verifica && verifica2 )===true)
+        /*verifica.push(regexTema.test(email));
+        verifica.push(regexLugar.test(noCuenta));
+        verifica.push(regexCorreo.test(email));
+        verifica.push(regexCuenta.test(noCuenta));*/
+     
+       
+        let peticionHorario= $.ajax({
+            method:"POST",
+            url: "../dynamics/php/horarios.php",
+            data: {
+                accion:"ver_disponibilidad_cercana",
+            }
+        });
+        peticionHorario.done(function(resp) {
+            console.log(resp);
+        });
+
+        
+
+        /*if((verifica && verifica2 )===true)
         {
             $(".text-danger").remove();
             let peticion= $.ajax({
@@ -62,137 +79,10 @@ $(document).ready (function(){
         z++;     
                   
             
-        }
+        }*/
         
     });
 
 
     
 });
-/*
-$("#date").on("change", ()=>{
-        numPeticion = 0;
-        peticion =$.ajax({
-            url: "../dynamics/php/crear_asesoria.php",
-            data: {pet:numPeticion, fecha:$("#date").val()},
-            method: "POST"
-        });
-        peticion.done((resp)=>{
-            console.log(resp);
-        });
-        peticion.fail(()=>{
-            console.log("Falló la petición al servidor");
-        })
-    });
-    $("#hora").on("change", ()=>{
-        numPeticion = 1;
-        peticion =$.ajax({
-            url: "../dynamics/php/crear_asesoria.php",
-            data: {pet:numPeticion, hora:$("#hora").val()},
-            method: "POST"
-        });
-        peticion.done((resp)=>{
-            console.log(resp);
-        });
-        peticion.fail(()=>{
-            console.log("Falló la petición al servidor");
-        })
-    });
-    $("#duracion").on("change", ()=>{
-        numPeticion = 2;
-        peticion =$.ajax({
-            url: "../dynamics/php/crear_asesoria.php",
-            data: {pet:numPeticion, duracion:$("#duracion").val()},
-            method: "POST"
-        });
-        peticion.done((resp)=>{
-            console.log(resp);
-        });
-        peticion.fail(()=>{
-            console.log("Falló la petición al servidor");
-        })
-    });
-    $("#tema").on("change", ()=>{
-        numPeticion = 3;
-        peticion =$.ajax({
-            url: "../dynamics/php/crear_asesoria.php",
-            data: {pet:numPeticion, tema:$("#tema").val()},
-            method: "POST"
-        });
-        peticion.done((resp)=>{
-            console.log(resp);
-        });
-        peticion.fail(()=>{
-            console.log("Falló la petición al servidor");
-        })
-    });
-    $("#materia").on("change", ()=>{
-        numPeticion = 4;
-        peticion =$.ajax({
-            url: "../dynamics/php/crear_asesoria.php",
-            data: {pet:numPeticion, materia:$("#materia").val()},
-            method: "POST"
-        });
-        peticion.done((resp)=>{
-            console.log(resp);
-        });
-        peticion.fail(()=>{
-            console.log("Falló la petición al servidor");
-        })
-    });
-    $("#cupo").on("change", ()=>{
-        numPeticion = 5;
-        peticion =$.ajax({
-            url: "../dynamics/php/crear_asesoria.php",
-            data: {pet:numPeticion, cupo:$("#cupo").val()},
-            method: "POST"
-        });
-        peticion.done((resp)=>{
-            console.log(resp);
-        });
-        peticion.fail(()=>{
-            console.log("Falló la petición al servidor");
-        })
-    });
-    $("#medio").on("change", ()=>{
-        numPeticion = 6;
-        peticion =$.ajax({
-            url: "../dynamics/php/crear_asesoria.php",
-            data: {pet:numPeticion, medio:$("#medio").val()},
-            method: "POST"
-        });
-        peticion.done((resp)=>{
-            console.log(resp);
-        });
-        peticion.fail(()=>{
-            console.log("Falló la petición al servidor");
-        })
-    });
-    $("#lugar").on("change", ()=>{
-        numPeticion = 7;
-        peticion =$.ajax({
-            url: "../dynamics/php/crear_asesoria.php",
-            data: {pet:numPeticion, lugar:$("#lugar").val()},
-            method: "POST"
-        });
-        peticion.done((resp)=>{
-            console.log(resp);
-        });
-        peticion.fail(()=>{
-            console.log("Falló la petición al servidor");
-        })
-    });
-    $("#boton").on("click", ()=>{
-        numPeticion = 8;
-        peticion =$.ajax({
-            url: "../dynamics/php/crear_asesoria.php",
-            data: {pet:numPeticion},
-            method: "POST"
-        });
-        peticion.done((resp)=>{
-            console.log(resp);
-        });
-        peticion.fail(()=>{
-            console.log("Falló la petición al servidor");
-        })
-    });*/
