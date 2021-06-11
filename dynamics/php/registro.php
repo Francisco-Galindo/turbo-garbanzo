@@ -50,7 +50,6 @@ if ($num_cuenta === null || strlen($num_cuenta) !== 9) {
 $regex = '/^[\w\.\-\ñÑ]{4,20}@([\w\.\-]+)(\.[\w\.\-]+)$/';
 if (!preg_match($regex, $correo)) {
 	$error[0] = true;
-	var_dump($_POST);
 	array_push($error, 'Correo no válido');
 }
 if (!in_array($grado, array('4', '5', '6'))) {
