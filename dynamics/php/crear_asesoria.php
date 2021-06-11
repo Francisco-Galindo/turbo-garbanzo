@@ -24,7 +24,7 @@ if(isset($_SESSION['id_usuario'])){
 			$arrOpCorr[0] = true;
 			$arrOp_Corr[1] = true;
 		if(duracion !== null){
-			$arrOpCorr[2] = ($duracion=="50 minutos" || $duracion=="100 minutos")?true:false;
+			$arrOpCorr[2] = ($duracion==true || $duracion==false)?true:false;
 		}
 		if($tema !== null){
 			$arrOpCorr[3] = (strlen($tema)>=2 && strlen($tema)<=70)?true:false;
@@ -38,7 +38,7 @@ if(isset($_SESSION['id_usuario'])){
 			}
 		}
 		if($medio !== null){
-			$arrOpCorr[5] = ($medio == "Virtual" || $medio == "Presencial")?true:false;
+			$arrOpCorr[5] = ($medio == true || $medio == false)?true:false;
 		}
 		if($lugar !== null){
 			$arrOpCorr[6] = (strlen($lugar)>=2 && strlen($lugar)<=70)?true:false;
