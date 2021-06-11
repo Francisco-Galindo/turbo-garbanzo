@@ -28,12 +28,8 @@ $(document).ready(function () {
         let regexCorreo = /^[\w\.\-\ñ]{4,20}(\.([\w\.\-]))*@([\w\.\-]+)(\.[\w\.\-]+)/;
         let regexCuenta = /^[1-3]\d{9}/;
         let regexNames = /[A-Za-zñÑá-úÁ-Ú]{2,32}/;
-<<<<<<< HEAD
-        let regexTel = /^[\d]{10}$/;
         let regexImg = /^[A-Za-zá-úÁ-Ú0-9_\-\(\)\/&%$#!¡¿?\:\\]{1,50}\.(jpg|png|jpeg)$/;
-=======
-        let regexTel = /^[1-9]\d{9}$/;
->>>>>>> 96582e40622b877fca611d388c9e919cc921c5b6
+        let regexTel = /^[1-9][\d]{9}$/;
         let regexContrasena = /^(?=.*[A-ZÑ]+)(?=.*[\W_]+)(?=.*[\d]+)(?=.*[a-zñ]+).{8,}$/;
 
         let today = new Date();
