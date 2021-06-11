@@ -3,7 +3,6 @@
 require 'config.php';
 require 'seguridad_y_cripto.php';
 date_default_timezone_set('America/Mexico_City');
-
 define('UN_DIA', 60 * 60 * 24);
 define('CUATRO_SEMANAS', UN_DIA * 28);
 define('ACCIONES', array(
@@ -133,7 +132,7 @@ function ver_todos_horarios($conexion)
 		foreach ($horas as $hora) {
 			echo '<label class="checkbox-inline">';
 			echo $hora[1];
-			echo '<input name="horarios[]" tabindex="0" value="' . $row['id_dia'] . '::' . $hora[0] . '" type="checkbox"> ';
+			echo '<input class="horario" name="horarios[]" tabindex="0" value="' . $row['id_dia'] . '::' . $hora[0] . '" type="checkbox"> ';
 			echo '</label>';
 		}
 	}

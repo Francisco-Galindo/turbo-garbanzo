@@ -8,7 +8,7 @@ $(document).ready(function () {
 	peticion.done(function (resp){
                 console.log(resp);
 		$('#materias').append(resp);
-		$('#materias').append('<button id="elegir" type="submit" name="accion" value="elegir_horario_usuario">Elegir materias</button>')
+		$('#materias').append('<button id="elegir" type="submit" name="accion" value="elegir_horario_usuario">Elegir materias</button><br><br><br>')
 
 		$("#elegir").click(function(evento) {
 			evento.preventDefault();

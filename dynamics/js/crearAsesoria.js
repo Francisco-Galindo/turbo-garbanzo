@@ -32,13 +32,11 @@ $(document).ready (function(){
                 materia: asignatura,
                 medio: medioo,
                 cupo: cupoo,
-                lugar: place
-                
+                lugar: place           
             }
         });
         peticionHorario.done(function(resp) {
-            console.log("funcionó");
-            console.log(resp)
+            
         });
 
         

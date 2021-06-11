@@ -1,6 +1,10 @@
+/* =contenedor principal
+------------------------------------------------------------*/
 #principal{
     flex-grow: 1;
 }
+/* =título
+--------------------------------------------------------------*/
 #nav{
     height: 80px;
     width: 100%;
@@ -12,6 +16,8 @@
     text-align: center;
     padding-top: 0px;
 }
+/* =cuerpo
+---------------------------------------------------------*/
 #container{
     display: grid;
     height: 450px;
@@ -112,6 +118,8 @@
 #iniCue:hover{
     background-color: #43B50C;
 }
+/* =pie de página
+--------------------------------------------------------*/
 footer{
     width: 100%;
     height: 43px;
