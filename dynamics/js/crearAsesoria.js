@@ -23,7 +23,7 @@ $(document).ready (function(){
        
         let peticionHorario= $.ajax({
             method:"POST",
-            url: "../dynamics/php/horarios.php",
+            url: "../dynamics/php/crearAsesoria.php",
             data: {
                 fecha: date,
                 horario: hora,
