@@ -178,6 +178,12 @@
 .cancelar:hover{
     color: var(--azul4);
 }
+.datoPredeter{
+    font-family: "LGeorge";
+    font-size: 32px;
+    color: black;
+    text-align: center;
+}
 /*=Bloque de Proximos Eventos
 /* ---------------------------------------------*/
 
@@ -206,12 +212,14 @@
 
     border-radius: 5px;
 }
-/*
+
 #calendario{
     align-self: center;
     background-color: var(--gris1);
     width: 541px;
     height: 498px;
+    display: flex;
+    flex-direction: column;
 }
 
 #calendario>h1{
@@ -222,6 +230,13 @@
     height: 49px;
     background-color: var(--azul2);
     color: #dfdfdf;
+}
+#contCalen{
+    margin-top: 15px;
+    align-self: center;
+    width: 450px;
+    height: 375px;
+    background-color: #dfdfdf;
 }
 
 #leyenda{
@@ -261,7 +276,7 @@
     grid-row-start:4;
     font-size: 26px;
     font-family: "LGeorge";
-} */
+}
 #logos{
     display: flex;
     align-self: center;
