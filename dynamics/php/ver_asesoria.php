@@ -5,7 +5,7 @@ if(isset($_SESSION['id_usuario']))
     $conexion = conectar_base();
     date_default_timezone_set("America/Mexico_City");
     $id_asesoria = $_POST['asesoria'];
-    $consulta = "SELECT nombre, prim_ape, seg_ape, materia, tema, fecha_hora, duracion_simple, cupo, medio_vir FROM usuario INNER JOIN asesoria ON usuario.id_usuario=asesoria.id_usuario INNER JOIN materia ON asesoria.id_materia=materia.id_materia WHERE id_asesoria=$id_asesoria";
+    $consulta = "SELECT nombre, prim_ape, seg_ape, materia, tema, fecha_hora, duracion_simple, cupo, medio_vir, id_usuario FROM usuario INNER JOIN asesoria ON usuario.id_usuario=asesoria.id_usuario INNER JOIN materia ON asesoria.id_materia=materia.id_materia WHERE id_asesoria=$id_asesoria";
     $res = mysqli_query($conexion, $consulta);
 
     while ($row = mysqli_fetch_array($res)) {
@@ -28,6 +28,11 @@ if(isset($_SESSION['id_usuario']))
         $medio = ($row[8] == "true") ? 'Virtual' : 'Presencial';
         echo '<tr><td>Medio</td><td>' . $medio . '</td></tr>';
         echo '<tr><td>Cupo</td><td>' . $row[8] . '</td></tr></tbody></table><br><br>';
+        if($row[9] == $_SESSION['id_usuario']){
+            echo '<div id="botones"><a><button>Eliminar asesoria</button></a></div>';
+        }else{
+            echo '<div id="botones"><a><button>Regresar</button></a><a><button>Inscribirme</button></a></div>'
+        }
     }
 }
 
