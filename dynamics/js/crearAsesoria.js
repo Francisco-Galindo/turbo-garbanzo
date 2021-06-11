@@ -23,7 +23,7 @@ $(document).ready (function(){
        
         let peticionHorario= $.ajax({
             method:"POST",
-            url: "../dynamics/php/crearAsesoria.php",
+            url: "../dynamics/php/crear_asesoria.php",
             data: {
                 fecha: date,
                 horario: hora,
@@ -37,58 +37,35 @@ $(document).ready (function(){
             }
         });
         peticionHorario.done(function(resp) {
-            console.log("Respuesta");
-            console.log(resp);
+            let canvas = document.getElementById("canvas");
+            let ctx = canvas.getContext("2d");
+            let asesoria = ["Asesor", "Fecha", "Horario", "Duración", "Tema", "Materia", "Cupo", "Medio", "Lugar"];
+            function nombreDatos (){
+                for(var i=0; i<720; i+=80)
+                {
+                    ctx.beginPath();
+                        ctx.font = "20px Louis George Café";
+                        ctx.fillText(asesoria[i/80], canvas.width/3, i+80)
+                        ctx.fill();
+                    ctx.closePath();
+
+                    ctx.stroke();
+                }
+                
+            }
+            function contenedor(){
+                ctx.beginPath();
+                        ctx.moveTo(canvas.width/3, i+80);
+                        ctx.rect(canvas.width/3, i+80, canvas.width/3+40, i+90);
+                    
+                ctx.closePath();
+                ctx.stroke();
+            }
+
+            nombreDatos();
+            contenedor();
         });
 
-        
-
-        /*if((verifica && verifica2 )===true)
-        {
-            $(".text-danger").remove();
-            let peticion= $.ajax({
-                url: "../dynamics/php/inicio_sesion.php",
-                data: {num_cuenta:cuenta, 
-                       contrasena:password},
-                method:"POST"
-            });
-            peticion.done(function (resp){
-                console.log("Se realizó");
-            
-            })
-            peticion.fail(function(resp){
-                console.log("No se realizó la petición");
-            })
-        }
-        else{  
-            $(".text-danger").remove();
-            $(".espacio").remove();
-            if(verifica!==true)
-            {
-                if(cuenta==="")
-                {
-                    $("#nocuenta").after('<p class="text-danger" class="text">Este campo es obligatorio</p>');
-                    $(".espacio").remove();
-                }
-                else{
-                    $("#nocuenta").after('<p class="text-danger" class="text">Número de cuenta inválido</p>');
-                }
-            }
-            if(verifica2!==true)
-            {
-                if(password==="")
-                {
-                    $("#password").after('<p class="text-danger" class="text">Este campo es obligatorio</p>');
-                }
-                else{ 
-                    $("#password").after('<p class="text-danger" class="text">Contraseña inválida</p>');
-                }
-            
-            }
-        z++;     
-                  
-            
-        }*/
         
     });
 
