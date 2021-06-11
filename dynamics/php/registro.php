@@ -47,9 +47,10 @@ if ($num_cuenta === null || strlen($num_cuenta) !== 9) {
 	array_push($error, 'Número de cuenta no válido');
 }
 // Regex para validar correo
-$regex = '/^[\w\.\-\ñ]{4,20}(\.([\w\.\-]))*@([\w\.\-]+)(\.[\w\.\-]+)/';
+$regex = '/^[\w\.\-\ñÑ]{4,20}@([\w\.\-]+)(\.[\w\.\-]+)$/';
 if (!preg_match($regex, $correo)) {
 	$error[0] = true;
+	var_dump($_POST);
 	array_push($error, 'Correo no válido');
 }
 if (!in_array($grado, array('4', '5', '6'))) {
@@ -106,7 +107,6 @@ if ($error[0] === false) {
 	$pimienta = obtener_pimienta();
 	$sal = obtener_sal();
 	$hash = hash('sha256', $contrasena . $pimienta . $sal);
-	$num_cuenta_cifrado = cifrar_cadena($num_cuenta, $contrasena);
 	$telefono_cifrado = cifrar_cadena($telefono, $contrasena);
 
 	if (isset($rutaImagen)) {
@@ -137,6 +137,7 @@ mysqli_close($conexion);
 
 // // Enviando resultados
 if ($error[0] === false) {
+	session_start();
 	$_SESSION['id_usuario'] = $num_cuenta;
 	echo 'Exito';
 } else {

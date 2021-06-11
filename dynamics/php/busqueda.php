@@ -13,7 +13,6 @@ function buscar_asesoria($conexion, $fecha, $horario, $materia, $modalidad)
 	$condiciones_a_consulta = "fecha_hora>='$ahora' AND confirmada=true";
 	
 	if ($fecha !== null && $horario === null) {
-		echo  'FSGERG';
 		$fecha_date = date('Y-m-d H:i:s', strtotime($fecha));
 		$fecha_final_dia = date('Y-m-d H:i:s', strtotime($fecha) + (24 * 60 * 60));
 		$condiciones_a_consulta .= " AND 

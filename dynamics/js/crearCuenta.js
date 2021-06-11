@@ -12,6 +12,7 @@ $(document).ready(function() {
         let nombre = $("#name").val();
         let primApe = $("#primApe").val();
         let segApe = $("#primApe").val();
+        let email = $("#email").val();
         let tel = $("#tel").val();
         let nacimiento = $("#nacimiento").val();
         let grado = $("#grado").val();
@@ -67,7 +68,12 @@ $(document).ready(function() {
         });
         peticion.done(function (resp){
             console.log(resp);
-            window.location.replace("./horarios.html");
+            if (resp == 'Exito') {
+                window.location.replace("./materias.html");
+            } else {
+                $("#boton").after(``);
+                $("#boton").after(`<h5 class="text-danger" class="text">${resp}</h5>`);
+            }
 
         });
         peticion.fail(function(resp){
