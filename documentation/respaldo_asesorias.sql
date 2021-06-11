@@ -38,7 +38,7 @@ CREATE TABLE `asesoria` (
   KEY `id_materia` (`id_materia`),
   CONSTRAINT `asesoria_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
   CONSTRAINT `asesoria_ibfk_2` FOREIGN KEY (`id_materia`) REFERENCES `materia` (`id_materia`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,6 +47,7 @@ CREATE TABLE `asesoria` (
 
 LOCK TABLES `asesoria` WRITE;
 /*!40000 ALTER TABLE `asesoria` DISABLE KEYS */;
+INSERT INTO `asesoria` VALUES (15,320054336,'1400','Hola','2021-07-11 00:30:00',1,3,1,'XD',1);
 /*!40000 ALTER TABLE `asesoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -329,7 +330,6 @@ CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `contrasena` varchar(64) NOT NULL,
   `sal` varchar(23) NOT NULL,
-  `num_cuenta` varchar(56) NOT NULL,
   `correo` varchar(64) NOT NULL,
   `grado` enum('4','5','6') NOT NULL,
   `telefono` varchar(56) NOT NULL,
@@ -341,16 +341,11 @@ CREATE TABLE `usuario` (
   `num_faltas` tinyint(4) NOT NULL DEFAULT 0,
   `es_admin` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_usuario`),
-  UNIQUE KEY `num_cuenta` (`num_cuenta`),
   UNIQUE KEY `correo` (`correo`),
-  UNIQUE KEY `num_cuenta_2` (`num_cuenta`),
   UNIQUE KEY `telefono` (`telefono`),
-  UNIQUE KEY `num_cuenta_3` (`num_cuenta`),
   UNIQUE KEY `telefono_2` (`telefono`),
   UNIQUE KEY `telefono_3` (`telefono`),
-  UNIQUE KEY `num_cuenta_4` (`num_cuenta`),
-  UNIQUE KEY `telefono_4` (`telefono`),
-  UNIQUE KEY `num_cuenta_5` (`num_cuenta`)
+  UNIQUE KEY `telefono_4` (`telefono`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -360,6 +355,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (320000001,'d07fc2722e5f9c64d823a109487e5d23c485a2a430cbcdd46bd6936d163b2fa3','60c2e12de283a0.35612206','sergio.dam@gmail.com','6','RVp4WEZiL0VmTkI3L0U4QWs5dmx6dz09OjqY0UIAu94Ldw6S2J3F6wgO','Sergio','Navarro','Juárez','2004-09-02','../statics/perfiles/perfil.png',0,1),(320000002,'76a0ec6e9ce2b5ae9d7fa809ec01742ade91798cb1ab4c1efea8aee2dc3f5819','60c2e5ae4f6380.94595083','vic.hola@gmail.com','6','SnpER0ZnSEhKaGZiOXkyZXI0RmUyZz09OjoCja/g0ZzmVIUx5NXOlCpX','Víctor','Fernández','Martínez','2004-06-15','../statics/perfiles/perfil.png',0,0),(320000003,'ad1ac4352da74710a51d61b1df1fb142c65cf73167a1e108a8f898e2d35b6511','60c2e6e2cc0f18.70122847','jaz_ram@hotmail.com','4','M0plekozZmtwWGZmcVFyZ1QvRi8xQT09Ojr+EwMjdLCqSPkju7VmSF6Q','Karla','Ramírez','Domínguez','2004-06-01','../statics/perfiles/perfil.png',0,0),(320000004,'4a45f96ddf6dbe746f3942c4e290e361bf318288951663864d7bab79cf044c2d','60c2ecbabee2f1.05267285','radon@gmail.com','6','bW42cDhUZjNoZ2xUUVlpbGo1bk4yUT09OjqHIcNMjFNjHxpox6E9e5dY','Carlos','García','García','2003-06-09','../statics/perfiles/perfil.png',0,0),(320000005,'7a68d32ad6af514479f5cb54c704ee1636d506b14236582a074ed44a0855953f','60c2ed089f1dc8.23545095','juanito@comunidad.unam.mx','5','QUtRMDVpeFgxcGVORlp1OEdqTlI2dz09OjqEZXB+QEdJXzFNC36zZFfT','Juan','Pérez','Pérez','2005-05-10','../statics/perfiles/perfil.png',0,0),(320000006,'141bcb2730421688caaa10ae67706864717ec298b785ce69f0491e716440ffcd','60c2ed90ecec55.47356810','peter_mar@outlook.com','4','Z3lRL1NGWElMRFJhRFg1cWRyMUt5dz09Ojq3jXDI+eRHajZG4kpOML15','Pedro','Martínez','Martínez','2006-06-05','../statics/perfiles/perfil.png',0,0),(320000007,'24cdf340769b19e00b99a7aa6bc77c8ce05ac4368b65eadd18961debb4a2c90c','60c2ee13d89c05.20274973','eri_san@gmail.com','5','aUJIOXJPcXE1QVJ4Q0dxMjMrTEdpZz09OjqmS84Z/bwupgS8a7/UMql2','Erick','Nava','Nava','2004-05-03','../statics/perfiles/perfil.png',0,0),(320000008,'838d54139ccb106a34fc6a8c998e771e45384c033f8d75bcc625e02f70be89bd','60c2ee98230d38.93439845','rolo_perez@hotmail.com','5','WjNyTE9yazN1RzRDMk9ONW50KzVEUT09OjrDxKqL3gs1bNZQ2HRBarbe','Rodrigo','López','López','2004-05-11','../statics/perfiles/perfil.png',0,0),(320000009,'929dec814e276d056bc85af6a24e8cdfb155acf32c02a8eacee29ba3d5a2b282','60c2eefa5e7e71.95803197','leo_mart@gmail.com','6','YmQ1c3Y3TU1GL09QblU4NmpoU2VVdz09Ojrkq1MTJL3BsXFZuGLYfhwL','Leonardo','Martínez','Martínez','2004-09-14','../statics/perfiles/perfil.png',0,0),(320054336,'fc377ef73234191b4f1ccb97b40a3b934ea4bdbd9b01f0081cea17abbfec469d','60c230c449fb54.34214459','paqui10718@gmail.com','4','NlJFV3RmZi84U3dtczMrcWdkcjdMQT09OjoUZIWTj1tgQO3wDEL0IWcH','Francisco','Galindo','Mena','2004-09-01','../../statics/img/perfiles/320054336.png',0,0);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -382,7 +378,7 @@ CREATE TABLE `usuario_has_horario` (
   CONSTRAINT `usuario_has_horario_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
   CONSTRAINT `usuario_has_horario_ibfk_2` FOREIGN KEY (`id_hora`) REFERENCES `hora` (`id_hora`),
   CONSTRAINT `usuario_has_horario_ibfk_3` FOREIGN KEY (`id_dia`) REFERENCES `dia` (`id_dia`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -391,6 +387,7 @@ CREATE TABLE `usuario_has_horario` (
 
 LOCK TABLES `usuario_has_horario` WRITE;
 /*!40000 ALTER TABLE `usuario_has_horario` DISABLE KEYS */;
+INSERT INTO `usuario_has_horario` VALUES (57,320054336,1,1),(58,320054336,2,1),(59,320000001,14,5),(60,320000001,15,5),(63,320000003,1,1),(64,320000003,7,3),(65,320000004,1,1),(66,320000004,13,2),(67,320000005,1,2),(68,320000005,2,2),(69,320000006,9,1),(70,320000006,10,1),(71,320000007,14,1),(72,320000007,15,1),(73,320000008,3,1),(74,320000008,7,1),(75,320000009,1,1),(76,320000009,6,3);
 /*!40000 ALTER TABLE `usuario_has_horario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -410,7 +407,7 @@ CREATE TABLE `usuario_has_materia` (
   KEY `id_materia` (`id_materia`),
   CONSTRAINT `usuario_has_materia_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
   CONSTRAINT `usuario_has_materia_ibfk_2` FOREIGN KEY (`id_materia`) REFERENCES `materia` (`id_materia`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -419,6 +416,7 @@ CREATE TABLE `usuario_has_materia` (
 
 LOCK TABLES `usuario_has_materia` WRITE;
 /*!40000 ALTER TABLE `usuario_has_materia` DISABLE KEYS */;
+INSERT INTO `usuario_has_materia` VALUES (30,320054336,'1400'),(31,320054336,'1401'),(32,320000001,'1412'),(33,320000001,'1502'),(34,320000003,'1400'),(35,320000003,'1401'),(36,320000004,'1400'),(37,320000004,'1401'),(38,320000005,'1400'),(39,320000005,'1401'),(40,320000006,'1401'),(41,320000006,'1406'),(42,320000007,'1400'),(43,320000007,'1401'),(44,320000008,'1400'),(45,320000008,'1401'),(46,320000009,'1502'),(47,320000009,'1505');
 /*!40000 ALTER TABLE `usuario_has_materia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -464,4 +462,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-10  8:14:08
+-- Dump completed on 2021-06-11  0:12:17
