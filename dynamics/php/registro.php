@@ -125,7 +125,6 @@ if ($error[0] === false) {
 			'$fecha_nacimiento');";
 	}
 
-
 	$resultado = mysqli_query($conexion, $consulta);
 	if ($resultado === false) {
 		$error[0] = true;

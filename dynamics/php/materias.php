@@ -17,7 +17,7 @@ function mostrar_opciones($conexion, $row)
 
         while ($row = mysqli_fetch_assoc($resultado)) {
                 echo '<label>' . $row['materia'] .
-                        '<input name=\'' . 'materias[]' .
+                        '<input class="materias" name=\'' . 'materias[]' .
                         '\' value=\'' . $row['id_materia'] . '\' type="checkbox">
                 </label>';
 
