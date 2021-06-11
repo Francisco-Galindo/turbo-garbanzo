@@ -22,6 +22,12 @@ button{
     text-align: center;
     cursor: pointer;
 }
+h5{
+    font-family:"LGeorgeB";
+    font-size: 28px;
+    background-color: var(--azul1);
+    color: var(--textwhite);
+}
 select{
     background-color: var(--azul2);
     color: var(--textwhite);
