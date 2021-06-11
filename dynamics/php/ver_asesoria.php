@@ -31,7 +31,7 @@ if(isset($_SESSION['id_usuario']))
         if($row[9] == $_SESSION['id_usuario']){
             echo '<div id="botones"><a><button>Eliminar asesoria</button></a></div>';
         }else{
-            echo '<div id="botones"><a><button>Regresar</button></a><a><button>Inscribirme</button></a></div>'
+            echo '<div id="botones"><a><button>Regresar</button></a><a><button>Inscribirme</button></a></div>';
         }
     }
 }
