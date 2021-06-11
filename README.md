@@ -2,7 +2,7 @@
 
 # PROYECTO FINAL.
 
-## SAMI_ARCADE
+## Asesorías P6
 
 ### Integrantes del equipo 
 
@@ -23,7 +23,7 @@
     * Una vez hecha la instalación de XAMPP, tendrás que abrirlo y activar la opción de Apache dandole click al botón junto a la palabra Apache y MySQL. 
     * Dirigirte a tus archivos en la dirección de la carpeta clonada que tendrá el nombre turbo_garbanzo.
     * En turbo_garbanzo, abre el archivo index dando doble click en ella.
-    * ¡Bienvenido a Asesorías P6! donde .
+    * ¡Bienvenido a Asesorías P6! donde puedes crear tus asesorías y acceder a distintas asesorías a tan solo un click de distancia.
 
 3. Características del proyecto
     * En primera instancia, quedarás impresionado con la animación de inicio, Asombroso ¿No? Dale click en jugar para conocernos más.
