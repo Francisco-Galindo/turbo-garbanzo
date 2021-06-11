@@ -117,15 +117,18 @@ function ver_horarios_cercanos(
 
 function ver_todos_horarios($conexion)
 {
-	$horas = array();
-	$consulta = 'SELECT id_hora, hora FROM hora;';
-	$resultado = mysqli_query($conexion, $consulta);
-	while ($row = mysqli_fetch_assoc($resultado)) {
-		array_push($horas, [$row['id_hora'], $row['hora']]);
-	}
+	// $horas = array();
+	// $consulta = 'SELECT id_hora, hora FROM hora;';
+	// $resultado = mysqli_query($conexion, $consulta);
+	// while ($row = mysqli_fetch_assoc($resultado)) {
+	// 	array_push($horas, [$row['id_hora'], $row['hora']]);
+	// }
+
+	$horas = json_decode(obtener_todos_horarios($conexion), true);
 
 	$consulta = 'SELECT id_dia, dia FROM dia ORDER BY id_dia;';
 	$resultado = mysqli_query($conexion, $consulta);
+
 	while ($row = mysqli_fetch_assoc($resultado)) {
 		echo '<br><strong>';
 		echo $row['dia'];
@@ -140,6 +143,17 @@ function ver_todos_horarios($conexion)
 	}
 }
 
+function obtener_todos_horarios($conexion)
+{
+
+	$horas = array();
+	$consulta = 'SELECT id_hora, hora FROM hora;';
+	$resultado = mysqli_query($conexion, $consulta);
+	while ($row = mysqli_fetch_assoc($resultado)) {
+		array_push($horas, [$row['id_hora'], $row['hora']]);
+	}
+	return json_encode($horas, JSON_UNESCAPED_UNICODE);
+}
 
 function elegir_horarios($conexion, $id_usuario, $horarios)
 {
@@ -202,7 +216,7 @@ if ($accion === 'ver_horario_usuario') {
 		$tiempo_a_comparar += UN_DIA;
 	}
 
-	echo json_encode($horarios_disponibles);
+	echo json_encode($horarios_disponibles, JSON_UNESCAPED_UNICODE);
 } elseif ($accion === 'ver_todos_los_horarios') {
 	echo '<br><br>';
 	ver_todos_horarios($conexion);	

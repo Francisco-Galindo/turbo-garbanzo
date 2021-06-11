@@ -3,15 +3,14 @@
 require 'config.php';
 require 'seguridad_y_cripto.php';
 
-define('ACCIONES', array('mostrar_opciones', 'elegir_materia', 'ver_elegidas'));
+define('ACCIONES', array('mostrar_todas', 'mostrar_opciones', 'elegir_materia', 'ver_elegidas'));
 
 /**
- * Devuelve un JSON de las materias que puede impartir alguien dependiendo de su grado
+ * Imprime checkboxes correspondientes a cada materia que puede dar el usuario
  */
-function mostrar_opciones($conexion, $row, $id_usuario)
+function mostrar_opciones($conexion, $row)
 {
         $grado = $row['grado'];
-        $grado = 6;
         $consulta = "SELECT id_materia, materia FROM materia
                 WHERE grado<='$grado';";
         $resultado = mysqli_query($conexion, $consulta);
@@ -26,6 +25,20 @@ function mostrar_opciones($conexion, $row, $id_usuario)
         }
 
         return true;
+}
+
+function obtener_todas($conexion)
+{
+        $consulta = "SELECT id_materia, materia FROM materia
+                WHERE grado<=6;";
+        $resultado = mysqli_query($conexion, $consulta);
+
+        $materias = array();
+        while ($row = mysqli_fetch_assoc($resultado)) {
+                $materias += [$row['id_materia'] => $row['materia']];
+        }
+
+        return json_encode($materias, JSON_UNESCAPED_UNICODE);;
 }
 
 /**
@@ -132,13 +145,15 @@ if (mysqli_num_rows($resultado) === 0) {
         } elseif ($accion == 'ver_elegidas') {
                 $exito = ver_materias_del_usuario($conexion, $id_usuario);
         }
+        elseif ($accion == 'ver_elegidas') {
+                $exito = obtener_todas($conexion);
+        }
 }
 
 
 mysqli_close($conexion);
 if ($error[0] === false) {
         if ($exito !== true) {
-                echo 'Advertencia: ';
                 echo $exito;
         } else if  ($exito && $accion === 'elegir_materia') {
                 echo 'Exito';
