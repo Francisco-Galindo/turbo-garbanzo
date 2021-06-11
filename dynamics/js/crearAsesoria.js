@@ -25,7 +25,7 @@ $(document).ready (function(){
             method:"POST",
             url: "../dynamics/php/horarios.php",
             data: {
-                accion:"ver_disponibilidad_cercana",
+                
             }
         });
         peticionHorario.done(function(resp) {

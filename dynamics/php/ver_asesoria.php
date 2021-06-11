@@ -1,7 +1,15 @@
 <?php
-
+session_start(); 
+if(!(isset($_SESSION['id_usuario']))){
+    header("location: ../../..");
+}
 require_once 'config.php';
 require 'seguridad_y_cripto.php';
+$conexion = conectar_base();
+date_default_timezone_set("America/Mexico_City");
+$id_asesoria = $_POST['asesoria'];
+
+
 $conexion = conectar_base();
 date_default_timezone_set("America/Mexico_City");
 $_POST = purgar_arreglo($_POST, $conexion);
