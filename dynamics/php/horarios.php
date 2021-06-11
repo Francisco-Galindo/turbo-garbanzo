@@ -180,8 +180,6 @@ function elegir_horarios($conexion, $id_usuario, $horarios)
 
 session_start();
 $conexion = conectar_base();
-// $_POST['horarios'] = ['1::2', '3::1', '3::3'];
-// $_POST['accion'] = 'ver_disponibilidad_cercana';
 
 $_POST = purgar_arreglo($_POST, $conexion);
 $_SESSION = purgar_arreglo($_SESSION, $conexion);

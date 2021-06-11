@@ -53,11 +53,12 @@ $(document).ready(function () {
         });
         peticion.done(function (resp) {
             let resultado = JSON.parse(resp);
-            for (let asesoria in resultado) {
+            for (let asesoria in resultado) 
+            {
                 console.log(resultado[asesoria])
             }
-
-        })
+            // console.log(resultado[asesoria]
+        });
         peticion.fail(function (resp) {
             console.log(resp);
             console.log("no")
