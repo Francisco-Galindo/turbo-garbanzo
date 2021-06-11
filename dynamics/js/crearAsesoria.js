@@ -37,8 +37,7 @@ $(document).ready (function(){
             }
         });
         peticionHorario.done(function(resp) {
-            console.log("funcionó");
-            console.log(resp)
+            
         });
 
         
