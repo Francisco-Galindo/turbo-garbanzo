@@ -1,5 +1,13 @@
 #principal{
+    display: flex;
     flex-grow: 1;
+}
+#cont{
+    display: flex;
+    flex-grow: 1;
+}
+footer{
+    position: fixed;
 }
 #cont{
     display: grid;
