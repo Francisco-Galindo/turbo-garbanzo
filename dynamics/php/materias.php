@@ -102,7 +102,7 @@ $_POST = purgar_arreglo($_POST, $conexion);
 $_SESSION = purgar_arreglo($_SESSION, $conexion);
 $error = array(false);
 
-$id_usuario = isset($_POST['id_usuario']) && strlen($_POST['id_usuario']) === 64 ?
+$id_usuario = isset($_POST['id_usuario']) ?
         $_POST['id_usuario'] : null;
 
 $accion = isset($_POST['accion']) && in_array($_POST['accion'], ACCIONES) ?
