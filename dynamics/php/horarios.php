@@ -3,7 +3,6 @@
 require 'config.php';
 require 'seguridad_y_cripto.php';
 date_default_timezone_set('America/Mexico_City');
-
 define('UN_DIA', 60 * 60 * 24);
 define('CUATRO_SEMANAS', UN_DIA * 28);
 define('ACCIONES', array(
