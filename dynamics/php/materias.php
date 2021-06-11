@@ -73,8 +73,9 @@ function ver_materias_del_usuario($conexion, $id_usuario)
                 // echo '<br>';
         }
 
-        echo json_encode($materias, JSON_UNESCAPED_UNICODE);
-        return true;
+        return json_encode($materias, JSON_UNESCAPED_UNICODE);
+        //echo json_encode($materias, JSON_UNESCAPED_UNICODE);
+        //return true;
 }
 /******************************************************************************/
 
