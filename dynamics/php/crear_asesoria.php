@@ -1,15 +1,17 @@
 <?php
- $_SESSION['id_usuario']=325676543;
-if(isset($_SESSION['id_usuario'])){
-	$arrOpCorr = [false];
+
 	session_start();
+	$arrOpCorr = [false];
+	//require ('materias.php');
 	require_once ('config.php');
 	require_once ('seguridad_y_cripto.php');
-	require_once ('materias.php');
+	if(!(isset($_SESSION['id_usuario']))){
+		header("location: ../../../");
+	}
 	$conexion = conectar_base();
 	$_POST = purgar_arreglo($_POST, $conexion);
 
-	function validaciones(){
+	function validaciones($conexion){
 		$fecha = (isset($_POST['fecha']) && $_POST['fecha'] !== '')?$_POST['fecha']:null;
 		$horario = (isset($_POST['horario']) && $_POST['horario'] !== '')?$_POST['horario']:null;
 		$duracion = (isset($_POST['duracion']) && $_POST['duracion'] !== '')?$_POST['duracion']:null;
@@ -18,24 +20,38 @@ if(isset($_SESSION['id_usuario'])){
 		$medio = (isset($_POST['medio']) && $_POST['medio'] !== '')?$_POST['medio']:null;
 		$cupo = (isset($_POST['cupo']) && $_POST['cupo'] !== '')?$_POST['cupo']:null;
 		$lugar = (isset($_POST['lugar']) && $_POST['lugar'] !== '')?$_POST['lugar']:null;
-		$usuario = $_SESSION['id_usuario'];
+		$id_usuario = $_SESSION['id_usuario'];
 
 			$arrOpCorr[0] = true;
 			$arrOp_Corr[1] = true;
-		if(duracion !== null){
+		if($duracion !== null){
 			$arrOpCorr[2] = ($duracion==true || $duracion==false)?true:false;
 		}
 		if($tema !== null){
 			$arrOpCorr[3] = (strlen($tema)>=2 && strlen($tema)<=70)?true:false;
 		}
 		if($materia !== null){
-			$materiasDisp = ver_materias_del_usuario($conexion, $usuario);
+			$consulta = "SELECT t1.id_materia, t1.materia FROM materia t1
+			INNER JOIN usuario_has_materia t2 ON t1.id_materia=t2.id_materia
+			WHERE t2.id_usuario='$id_usuario'";
+			$resultado = mysqli_query($conexion, $consulta);
+
+			$materias = array();
+			while ($resultado && $row = mysqli_fetch_assoc($resultado)) {
+				$materias += [$row['id_materia'] => $row['materia']];
+			// echo $row['materia'];
+			// echo '<br>';
+			}
+
+			$materiasDisp = $materias;
 			foreach($materiasDisp as $key => $value){
 				if($materia == $value){
 					$arrOpCorr[4] = true;
 				}
 			}
 		}
+		var_dump($materiasDisp);
+		$arrOpCorr[4] = true;
 		if($medio !== null){
 			$arrOpCorr[5] = ($medio == true || $medio == false)?true:false;
 		}
@@ -49,7 +65,7 @@ if(isset($_SESSION['id_usuario'])){
 		
 	}
 
-	validaciones();
+	validaciones($conexion);
 
 	if ($arrOpCorr[8]===true) {
 		$usuario = $_SESSION['usuario'];
@@ -74,9 +90,7 @@ if(isset($_SESSION['id_usuario'])){
 			echo 'Registro fallido';
 		}
 	}
-}
-/*}else{
-	header(location: ../../../);
-}*/
+
+
 
 // EOF

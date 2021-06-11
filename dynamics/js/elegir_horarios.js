@@ -6,8 +6,8 @@ $(document).ready(function () {
 		data: {accion:"ver_todos_los_horarios"}
 	});
 	peticion.done(function (resp){
-		$('#horarios').html(resp);
-		$('#horarios').append('<button id="elegir" type="submit" name="accion" value="elegir_horario_usuario">Elegir materias</button>')
+		$('#horarios').html('<br><br><button id="elegir" type="submit" name="accion" value="elegir_horario_usuario">Elegir materias</button>');
+		$('#horarios').append(resp);
 
 		$("#elegir").click(function(evento) {
 			evento.preventDefault();

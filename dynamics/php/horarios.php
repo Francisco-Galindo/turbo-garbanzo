@@ -132,7 +132,7 @@ function ver_todos_horarios($conexion)
 		foreach ($horas as $hora) {
 			echo '<label class="checkbox-inline">';
 			echo $hora[1];
-			echo '<input name="horarios[]" tabindex="0" value="' . $row['id_dia'] . '::' . $hora[0] . '" type="checkbox"> ';
+			echo '<input class="horario" name="horarios[]" tabindex="0" value="' . $row['id_dia'] . '::' . $hora[0] . '" type="checkbox"> ';
 			echo '</label>';
 		}
 	}
