@@ -136,9 +136,21 @@ function ver_todos_horarios($conexion)
 			echo '<input name="horarios[]" tabindex="0" value="' . $row['id_dia'] . '::' . $hora[0] . '" type="checkbox"> ';
 			echo '</label>';
 		}
-
 	}
 }
+
+function obtener_todos_horarios($conexion)
+{
+
+	$horas = array();
+	$consulta = 'SELECT id_hora, hora FROM hora;';
+	$resultado = mysqli_query($conexion, $consulta);
+	while ($row = mysqli_fetch_assoc($resultado)) {
+		array_push($horas, [$row['id_hora'], $row['hora']]);
+	}
+	return json_encode($horas, JSON_UNESCAPED_UNICODE);
+}
+
 
 
 function elegir_horarios($conexion, $id_usuario, $horarios)
@@ -146,7 +158,7 @@ function elegir_horarios($conexion, $id_usuario, $horarios)
 	$alerta = '';
 
 	$consulta = "DELETE FROM usuario_has_horario
-                WHERE id_usuario='$id_usuario';";
+				WHERE id_usuario='$id_usuario';";
 	$resultado = mysqli_query($conexion, $consulta);
 	foreach ($horarios as $horario) {
 		$horario = explode('::', $horario[0]);
@@ -177,7 +189,7 @@ $_SESSION = purgar_arreglo($_SESSION, $conexion);
 $id_usuario = $_SESSION['id_usuario'];
 
 $accion = isset($_POST['accion']) && in_array($_POST['accion'], ACCIONES) ?
-        $_POST['accion'] : null;
+		$_POST['accion'] : null;
 
 $horarios = isset($_POST['horarios']) && is_array($_POST['horarios']) ?
 	$_POST['horarios'] : null;
@@ -227,4 +239,5 @@ if (isset($alerta) && $alerta !== true) {
 } elseif (isset($alerta)) {
 	echo 'Exito';
 }
+
 // EOF

@@ -5,8 +5,11 @@ if(isset($_SESSION['id_usuario']))
     $conexion = conectar_base();
     date_default_timezone_set("America/Mexico_City");
     $id_asesoria = $_POST['asesoria'];
-    $consulta = "SELECT nombre, prim_ape, seg_ape, materia, tema, fecha_hora, duracion_simple, cupo, medio_vir, id_usuario FROM usuario INNER JOIN asesoria ON usuario.id_usuario=asesoria.id_usuario INNER JOIN materia ON asesoria.id_materia=materia.id_materia WHERE id_asesoria=$id_asesoria";
+
+
+    $consulta = "SELECT nombre, prim_ape, seg_ape, materia, tema, fecha_hora, duracion_simple, cupo, medio_vir FROM usuario INNER JOIN asesoria ON usuario.id_usuario=asesoria.id_usuario INNER JOIN materia ON asesoria.id_materia=materia.id_materia WHERE id_asesoria=$id_asesoria";
     $res = mysqli_query($conexion, $consulta);
+
 
     while ($row = mysqli_fetch_array($res)) {
         echo '<table border="1"><thead><tr><th colspan="2">' . $row[0] . ' ' . $row[1] . ' ' . $row[2] . '</th></tr></thead>';
@@ -34,6 +37,8 @@ if(isset($_SESSION['id_usuario']))
             echo '<div id="botones"><a><button>Regresar</button></a><a><button>Inscribirme</button></a></div>';
         }
     }
+}else{
+    header("location: ../../..");
 }
 
 //EOF

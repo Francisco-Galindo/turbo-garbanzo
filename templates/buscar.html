@@ -49,10 +49,10 @@
         <input id="buscador" type="text" class="carrera" name="carrera" placeholder="Buscar" value="" required>
 
         <select name="modoBusqueda" id="modoBusqueda">
-            <option value="0">Asesoría</option>
-            <option value="1">Asesor</option>
+            <option value="buscar_asesoria">Asesoría</option>
+            <option value="buscar_usuario">Asesor</option>
         </select>
-        <!-- <button type="button" class="submitcarr" name="button">Enviar</button> -->
+        <button id="buscar" type="button" class="submitcarr" name="button">Enviar</button>
     </div>
 
     <div id="cont">
@@ -61,21 +61,13 @@
             <div id="filt1">
                 <div class="ops">
                     <h1>Fecha:</h1>
-                    <select name="modalidad">
-                        <option value="0">Todas</option>
-                        <option value="1">A Distancia</option>
-                        <option value="2">Abierto</option>
-                        <option value="3">Escolarizado</option>
-                    </select>
+                    <input id="fecha" type="date">
                 </div>
                 
-                <div class="ops">
+                <div id="ops">
                     <h1>Horario:</h1>
-                    <select name="modalidad">
-                        <option value="0">Todas</option>
-                        <option value="1">A Distancia</option>
-                        <option value="2">Abierto</option>
-                        <option value="3">Escolarizado</option>
+                    <select id="horario">
+                        <option value="">Sin elección</option>
                     </select>
                 </div>
             </div>
@@ -83,21 +75,16 @@
             <div id="filt2">
                 <div  class="ops">
                     <h1>Materia:</h1>
-                    <select name="modalidad">
-                        <option value="0">Todas</option>
-                        <option value="1">A Distancia</option>
-                        <option value="2">Abierto</option>
-                        <option value="3">Escolarizado</option>
+                    <select id="materia">
+                        <option value="">Sin elección</option>
                     </select>
                 </div>
         
                 <div  class="ops">
                     <h1>Modalidad:</h1>
-                    <select name="modalidad">
-                        <option value="0">Todas</option>
-                        <option value="1">A Distancia</option>
-                        <option value="2">Abierto</option>
-                        <option value="3">Escolarizado</option>
+                    <select id="modalidad">
+                        <option value="true">Grupal</option>
+                        <option value="false">Individual</option>
                     </select>
                 </div>
             </div>
@@ -131,11 +118,9 @@
     
                     </div>
                 </div>
-                <form class="mas" href="">Ver más</form>
+                <a class="mas" href="">Ver más</a>
             </div>
             
-            
-
             <div id="tarjRes">
                 <div id="tarjCont">
                     <div class="nomAses">
@@ -162,7 +147,7 @@
     
                     </div>
                 </div>
-                <form class="mas" href="">Ver más</form>
+                <a class="mas" href="">Ver más</a>
             </div>
         </div>
     </div>
@@ -174,5 +159,7 @@
     <script src="../libs/jquery/jquery-3.6.0.min.js"></script>
     <script src="../dynamics/js/cambioPaleta.js"></script>
     <script src="../libs/bootstrap-5.0.1-dist/js/bootstrap.min.js"></script>
+      <script src="../libs/jquery/jquery-3.6.0.min.js"></script>
+      <script src="../dynamics/js/buscar_asesoria.js"></script>
 </body>
 </html>

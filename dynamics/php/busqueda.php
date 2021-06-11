@@ -1,38 +1,98 @@
 <?php
-require_once 'config.php';
 
-$conexion = conectar_base();
+require 'config.php';
+require 'seguridad_y_cripto.php';
+
+define('ACCIONES', array('buscar_usuario', 'buscar_asesoria', 'recibir_filtros'));
+
 date_default_timezone_set("America/Mexico_City");
-$filFech = (isset($_POST['fecha']))?$_POST['fecha']:null;
-$filMat = (isset($_POST['materia']))?$_POST['fecha']:null;
-$filMod = (isset($_POST['modalidad']))?$_POST['modalidad']:null;
-$busqueda = (isset($_POST['busqueda']) && $_POST['busqueda'] !== "") ? $_POST['busqueda'] : "No hay búsqueda";
 
-
-
-if(isset($filFech) && !(isset($filMat)) && !(isset($filMod))){
-	$cons = "SELECT (nombre, materia, tema, fecha_hora, duracion_simple, medio_vir, lugar) FROM usuario WHERE fecha_hora LIKE '$filFech'%";		
-}else if(!(isset($filFech)) && (isset($filMat)) && !(isset($filMod))){
-	$cons = "SELECT (nombre, materia, tema, fecha_hora, duracion_simple, medio_vir, lugar) FROM usuario WHERE materia LIKE '$filMat'";
-}else if(!(isset($filFech)) && !(isset($filMat)) && (isset($filMod))){
+function buscar_asesoria($conexion, $fecha, $horario, $materia, $modalidad)
+{
+	$ahora = date('Y-m-d H:i:s');
+	$condiciones_a_consulta = "fecha_hora>='$ahora' AND confirmada=true";
 	
-}
-$resFil = mysqli_query($conexion, $cons);
-
-if ($busqueda !== "No hay búsqueda") {
-	$consulta = 'SELECT (nombre, materia, tema, fecha_hora, duracion_simple, medio_vir, lugar) FROM usuario NATURAL JOIN asesoria_has_usuario NATURAL JOIN asesoria NATURAL JOIN materia WHERE nombre=' . $busqueda . ' OR materia=' . $busqueda;
-	$res = mysqli_query($conexion, $consulta);
-	while ($row = mysqli_fetch_array($res)) {
-		echo 'Nombre: ' . $row[1] . ' Materia: ' . $row[2] . '<br>';
-		echo 'Tema: ' . $row[3] . '<br>';
-		$fecha = date("d-m-Y h:i A", $row[4]);
-		echo 'Fecha: ' . $fecha . '<br>';
-		$duracion = ($row[6] === true) ? "50 min" : "100 min";
-		echo 'Duración: ' . $duracion . '        ';
-		$medio = ($row[7] === true) ? "Virtual" : "Presencial";
-		echo 'Medio: ' . $medio . '<br>';
-		echo 'Lugar: ' . $row[8];
+	if ($fecha !== null && $horario === null) {
+		echo  'FSGERG';
+		$fecha_date = date('Y-m-d H:i:s', strtotime($fecha));
+		$fecha_final_dia = date('Y-m-d H:i:s', strtotime($fecha) + (24 * 60 * 60));
+		$condiciones_a_consulta .= " AND 
+			(fecha_hora BETWEEN '$fecha_date' AND '$fecha_final_dia') ";
+	} elseif ($fecha != null && $horario !== null) {
+		$timestamp = strtotime($horario) + strtotime($fecha);
+		$fecha_date = date('Y-m-d H:i:s', $timestamp);
+		$condiciones_a_consulta .= " AND 
+			(fecha_hora='$fecha_date') ";
+	} elseif ($fecha == null && $horario !== null) {
+		$condiciones_a_consulta .= " AND 
+			(HOUR(fecha_hora)=HOUR('$horario') 
+			AND MINUTE(fecha_hora)=MINUTE('$horario')) ";
 	}
+	if ($materia !== null) {
+		$condiciones_a_consulta .= " AND 
+		(t2.id_materia=$materia) ";
+	}
+	if ($modalidad == 'true') {
+		$condiciones_a_consulta .= " AND 
+		(cupo>1) ";
+	} else if ($modalidad == 'false') {
+		$condiciones_a_consulta .= " AND 
+		(cupo=1) ";
+	}
+
+
+ 	$consulta = "SELECT t2.id_asesoria, t1.nombre, t1.prim_ape, t3.materia, t2.tema, t2.fecha_hora, 
+	 	t2.duracion_simple, t2.cupo, t2.medio_vir FROM usuario t1 
+		INNER JOIN asesoria t2 ON t1.id_usuario=t2.id_usuario 
+		INNER JOIN materia t3 ON t2.id_materia=t3.id_materia
+		WHERE $condiciones_a_consulta";
+
+	$resultado = mysqli_query($conexion, $consulta);
+	$asesorias = array();
+	while ($row = mysqli_fetch_assoc($resultado)) {
+		array_push($asesorias, $row);
+	}
+
+	return json_encode($asesorias, JSON_UNESCAPED_UNICODE);
 }
+
+function enviar_filtros($conexion)
+{
+	$materias = array();
+	$consulta = "SELECT id_materia, abreviacion FROM materia";
+	$resultado = mysqli_query($conexion, $consulta);
+	while ($row = mysqli_fetch_assoc($resultado)) {
+		array_push($materias, $row);
+	}
+
+	$horas = array();
+	$consulta = "SELECT id_hora, hora FROM hora";
+	$resultado = mysqli_query($conexion, $consulta);
+	while ($row = mysqli_fetch_assoc($resultado)) {
+		array_push($horas, $row);
+	}
+
+	return json_encode([$materias, $horas], JSON_FORCE_OBJECT);
+}
+
+session_start();
+$conexion = conectar_base();
+// Purgando el arreglo $_POST de posibles ataques
+$_POST = purgar_arreglo($_POST, $conexion);
+$_SESSION = purgar_arreglo($_SESSION, $conexion);
+
+$fecha = (isset($_POST['fecha'])) && $_POST['fecha'] !== "undefined" && $_POST['fecha'] !== ""? $_POST['fecha']:null;
+$horario = (isset($_POST['horario'])) && $_POST['horario'] !== "undefined" && $_POST['horario'] !== ""?$_POST['horario']:null;
+$materia = (isset($_POST['materia'])) && $_POST['materia'] !== "undefined" && $_POST['materia'] !== ""?$_POST['materia']:null;
+$modalidad = (isset($_POST['modalidad'])) && $_POST['modalidad'] !== "undefined" && $_POST['modalidad'] !== ""?$_POST['modalidad']:null;
+$modo = (isset($_POST['modo']) && $_POST['modo'] !== "") && $_POST['modo'] !== ""? $_POST['modo'] : null;
+
+
+if ($modo === 'buscar_asesoria') {
+	echo buscar_asesoria($conexion, $fecha, $horario, $materia, $modalidad);
+} else if ($modo === 'recibir_filtros') {
+	echo enviar_filtros($conexion);
+}
+
 
 // EOF
