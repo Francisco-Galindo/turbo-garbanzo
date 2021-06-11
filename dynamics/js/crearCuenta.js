@@ -25,10 +25,9 @@ $(document).ready(function () {
         console.log(img, "archivo");
         let y=0;
         //algunas validaciones para crear cuenta
-        let regexCorreo = /^[\w\.\-\ñ]{4,20}(\.([\w\.\-]))*@([\w\.\-]+)(\.[\w\.\-]+)/;
-        let regexCuenta = /^[1-3]\d{8}/;
-        let regexNames = /[A-Za-zñÑá-úÁ-Ú]{2,32}/;
-        let regexImg = /^[A-Za-zá-úÁ-Ú0-9_\-\(\)\/&%$#!¡¿?\:\\]{1,50}\.(jpg|png|jpeg)$/;
+        let regexCorreo = /^[\w\.\-\ñ]{4,20}(\.([\w\.\-]))*@([\w\.\-]+)(\.[\w\.\-]+)$/;
+        let regexCuenta = /^[1-3]\d{8}$/;
+        let regexNames = /^[A-Za-zñÑá-úÁ-Ú]{2,32}$/;
         let regexTel = /^[1-9][\d]{9}$/;
         let regexContrasena = /^(?=.*[A-ZÑ]+)(?=.*[\W_]+)(?=.*[\d]+)(?=.*[a-zñ]+).{8,}$/;
 
@@ -95,6 +94,7 @@ $(document).ready(function () {
         }
         console.log("contador", contador);
         if (contador === 0) {
+            $(".text-danger").remove();
             let formulario = new FormData();
             formulario.append('nombre', nombre);
             formulario.append('prim_ape', primApe);
@@ -105,7 +105,11 @@ $(document).ready(function () {
             formulario.append('fecha_nacimiento', nacimiento);
             formulario.append('grado', grado);
             formulario.append('contrasena', password);
-            formulario.append('imagen', arch);
+            if(arch!==null)
+            {
+                formulario.append('imagen', arch);
+            }
+            
     
     
     
