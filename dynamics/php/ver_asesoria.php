@@ -9,6 +9,7 @@ $id_asesoria = $_POST['asesoria'];
 $consulta = "SELECT nombre, prim_ape, seg_ape, materia, tema, fecha_hora, duracion_simple, cupo, medio_vir FROM usuario INNER JOIN asesoria ON usuario.id_usuario=asesoria.id_usuario INNER JOIN materia ON asesoria.id_materia=materia.id_materia WHERE id_asesoria=$id_asesoria";
 $res = mysqli_query($conexion, $consulta);
 
+
 while ($row = mysqli_fetch_array($res)) {
     echo '<table border="1"><thead><tr><th colspan="2">' . $row[0] . ' ' . $row[1] . ' ' . $row[2] . '</th></tr></thead>';
     echo '<tbody><tr><td>Materia</td><td>' . $row[3] . '</td></tr>';
@@ -29,6 +30,11 @@ while ($row = mysqli_fetch_array($res)) {
     $medio = ($row[8] == "true") ? 'Virtual' : 'Presencial';
     echo '<tr><td>Medio</td><td>' . $medio . '</td></tr>';
     echo '<tr><td>Cupo</td><td>' . $row[8] . '</td></tr></tbody></table><br><br>';
+    if($row[9] == $_SESSION['id_usuario']){
+        echo '<div id="botones"><a><button>Eliminar asesoria</button></a></div>';
+    }else{
+        echo '<div id="botones"><a><button>Regresar</button></a><a><button>Inscribirme</button></a></div>';
+    }
 }
 
 //EOF
