@@ -20,7 +20,8 @@ function notificar_inicio_asesoria(
 		array_push($tipos_notificacion, $row['id_tipo_notificacion']);
 	}
 
-	notificar_sobre_sesion($conexion, $id_asesoria, $id_usuario, 			$tipos_notificacion);
+	notificar_sobre_sesion($conexion, $id_asesoria, $id_usuario,
+		$tipos_notificacion);
 
 }
 
@@ -49,7 +50,8 @@ function notificar_final_asesoria(
 		array_push($tipos_notificacion, $row['id_tipo_notificacion']);
 	}
 
-	notificar_sobre_sesion($conexion, $id_asesoria, $id_usuario, 			$tipos_notificacion);
+	notificar_sobre_sesion($conexion, $id_asesoria, $id_usuario,
+		$tipos_notificacion);
 
 }
 

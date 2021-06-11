@@ -3,15 +3,6 @@
 require 'config.php';
 require 'seguridad_y_cripto.php';
 
-// $_POST['num_cuenta'] = '320054336';
-// $_POST['contrasena'] = 'popo';
-// $_POST['correo'] = 'paqui10718@gmail.com';
-// $_POST['grado'] = '6';
-// $_POST['telefono'] = '5522442070';
-// $_POST['nombre'] = 'Francisco';
-// $_POST['prim_ape'] = 'Galindo';
-// $_POST['seg_ape'] = 'Mena';
-// $_POST['fecha_nacimiento'] = '2004-09-01';
 $error = [false];
 
 $conexion = conectar_base();
