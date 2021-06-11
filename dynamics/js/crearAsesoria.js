@@ -1,14 +1,14 @@
 $(document).ready (function(){
     $("#crear").on("click", function(){
         console.log("click");
-        let fecha = $("#date").val();
+        let date = $("#date").val();
         let hora = $("#hora").val();
         let duracion = $("#duracion").val();
-        let tema = $("#tema").val();
-        let materia = $("#materia").val();
-        let lugar = $("#lugar").val();
-        let medio = $("#medio").val();
-        let cupo = $("#cupo").val();
+        let temaa = $("#tema").val();
+        let asignatura = $("#materia").val();
+        let place = $("#lugar").val();
+        let medioo = $("#medio").val();
+        let cupoo = $("#cupo").val();
 
 
         
@@ -25,6 +25,14 @@ $(document).ready (function(){
             method:"POST",
             url: "../dynamics/php/horarios.php",
             data: {
+                fecha: date,
+                horario: hora,
+                duracion: duracion,
+                tema: temaa,
+                materia: asignatura,
+                medio: medioo,
+                cupo: cupoo,
+                lugar: place
                 
             }
         });
