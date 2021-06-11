@@ -5,22 +5,17 @@ $(document).ready(function() {
         let cuenta = $("#nocuenta").val();
         let password = $("#password").val();
 
-        console.log(cuenta);
+        let regexCuenta = /^[\d]{9}$/;
+        let contra = password.replace(/<[^>]+>/g, '');
+        var verifica = regexCuenta.test(cuenta);
         
-        let reguexCuenta = /^[\d]{9}$/;
-
-        var verifica = reguexCuenta.test(cuenta);
-        console.log(verifica);
-        var verifica2 =  reguexContrasena.test(password);
-        console.log(verifica2);
-
-        if((verifica && verifica2 )===true)
+        if((verifica==true))
         {
             $(".text-danger").remove();
             let peticion= $.ajax({
                 url: "../dynamics/php/inicio_sesion.php",
                 data: {num_cuenta:cuenta, 
-                       contrasena:password},
+                       contrasena:contra},
                 method:"POST"
             });
             peticion.done(function (resp){
@@ -48,18 +43,7 @@ $(document).ready(function() {
                     $("#nocuenta").after('<p class="text-danger" class="text">Número de cuenta inválido</p>');
                 }
             }
-            if(verifica2!==true)
-            {
-                if(password==="")
-                {
-                    $("#password").after('<p class="text-danger" class="text">Este campo es obligatorio</p>');
-                }
-                else{ 
-                    $("#password").after('<p class="text-danger" class="text">Contraseña inválida</p>');
-                }
-            
-            }
-        z++;     
+                
                   
             
         }

@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    let arch;
+    let arch = null;
     $("#arch").change(function (event) {
         arch = this.files[0];
     
@@ -23,12 +23,13 @@ $(document).ready(function () {
         let password = $("#password").val();
 
         console.log(img, "archivo");
-
+        let y=0;
         //algunas validaciones para crear cuenta
         let regexCorreo = /^[\w\.\-\ñ]{4,20}(\.([\w\.\-]))*@([\w\.\-]+)(\.[\w\.\-]+)/;
-        let regexCuenta = /^[1-3]\d{9}/;
+        let regexCuenta = /^[1-3]\d{8}/;
         let regexNames = /[A-Za-zñÑá-úÁ-Ú]{2,32}/;
-        let regexTel = /^[1-9]\d{9}$/;
+        let regexImg = /^[A-Za-zá-úÁ-Ú0-9_\-\(\)\/&%$#!¡¿?\:\\]{1,50}\.(jpg|png|jpeg)$/;
+        let regexTel = /^[1-9][\d]{9}$/;
         let regexContrasena = /^(?=.*[A-ZÑ]+)(?=.*[\W_]+)(?=.*[\d]+)(?=.*[a-zñ]+).{8,}$/;
 
         let today = new Date();
@@ -43,11 +44,10 @@ $(document).ready(function () {
 
             if (arrayfecha[0] > arraynacimiento[0]) {
                 verifica.push(true);
-                console.log("año")
+               
             }
             else if(arrayfecha[1] > arraynacimiento[1]-1 && arrayfecha[0] >= arraynacimiento[0]){
                 verifica.push(true);
-                console.log(arrayfecha[1], arraynacimiento[1]-1, "mes");
             }
             /*else if(arrayfecha[2] > arraynacimiento[2] &&arrayfecha[1] == arraynacimiento[1]-1 && arrayfecha[0] >= arraynacimiento[0]){
                 verifica.push(true);
@@ -80,6 +80,10 @@ $(document).ready(function () {
                 console.log(ext);
                 console.log("archivo válido");
                 verifica.push(true);
+
+            }
+            else{
+                y=1;
             }
         }
 
@@ -161,6 +165,10 @@ $(document).ready(function () {
             if(regexContrasena.test(password)==false)
             {
                 $("#boton").after('<h5 class="text-danger" class="text">Contraseña inválida</h5>');
+            }
+            if(y==1)
+            {
+                $("#boton").after('<h5 class="text-danger" class="text">Fotorafía inválida</h5>');
             }
             
             
