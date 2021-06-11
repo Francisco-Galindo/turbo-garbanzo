@@ -1,8 +1,6 @@
 <?php
- isset($_SESSION['id_usuario']=325676543 ;
+ $_SESSION['id_usuario']=325676543;
 if(isset($_SESSION['id_usuario'])){
-
-
 	$arrOpCorr = [false];
 	session_start();
 	require_once ('config.php');
@@ -76,6 +74,7 @@ if(isset($_SESSION['id_usuario'])){
 			echo 'Registro fallido';
 		}
 	}
+}
 /*}else{
 	header(location: ../../../);
 }*/
